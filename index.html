@@ -20,14 +20,30 @@
     <script type="text/javascript">
         var load = 0;
         // sesuaikan id gform dengan id yang ada pada tag iframe di atas
-        document.getElementById('gform').onload = function () {
-            load++;
-            if (load > 1) {
-                // ganti url dibawah dengan url webapp anda
-                document.location = "https://script.google.com/macros/s/AKfycbzYD2Z5VKsIEJp1MdZzFmGKq9ABYkfgGtK17YS08jxMV59LAxSEL-MWElx8FQIY9XH3jg/exec";
-            }                       
-                catch (error) {
-                    console.error("Redirect gagal:", error);
+       document.getElementById('gform').onload = function () {
+    load++;
+    if (load > 1) {
+        // Ambil lokasi pengguna
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    console.log("Lokasi berhasil diambil:", position);
+                    // Redirect setelah lokasi berhasil diambil
+                    try {
+                        document.location = "https://script.google.com/macros/s/AKfycbzYD2Z5VKsIEJp1MdZzFmGKq9ABYkfgGtK17YS08jxMV59LAxSEL-MWElx8FQIY9XH3jg/exec";
+                    } catch (error) {
+                        console.error("Redirect gagal:", error);
+                    }
+                },
+                (error) => {
+                    console.error("Izin lokasi ditolak atau terjadi error:", error);
+                }
+            );
+        } else {
+            console.error("Browser tidak mendukung Geolocation API.");
+        }
+    }
+};
             }
         }
     </script>
