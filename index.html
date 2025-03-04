@@ -5,76 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presensi Pegawai Shahaba</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        #gform {
-            width: 100%;
-            height: 500px;
-            border: none;
-        }
-    </style>
+    <title>Absen</title>
 </head>
 
 <body>
-    <!-- Embed Google Form -->
+    <!-- ganti src url dengan url form anda -->
     <iframe id="gform"
-        src="https://docs.google.com/forms/d/e/1FAIpQLSerZfET2HxEegGgzjWVoR08Xwj6MDbUx70V7xP1WRfUTKksiQ/viewform?embedded=true"
-        width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" allow="geolocation">
-        Memuat…        
-    </iframe>
 
-    <script>
-        // Fungsi untuk mengambil lokasi pengguna
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        console.log("Lokasi berhasil diambil:", position);
-                        // Kirim lokasi ke Google Form (opsional)
-                        // Anda bisa menambahkan logika untuk mengirim lokasi ke Google Form menggunakan Google Apps Script.
-                    },
-                    (error) => {
-                        console.error("Izin lokasi ditolak atau terjadi error:", error);
-                        alert("Izin lokasi diperlukan untuk presensi. Silakan izinkan akses lokasi.");
-                    }
-                );
-            } else {
-                console.error("Browser tidak mendukung Geolocation API.");
-                alert("Browser Anda tidak mendukung fitur lokasi.");
+    src="https://docs.google.com/forms/d/e/1FAIpQLSerZfET2HxEegGgzjWVoR08Xwj6MDbUx70V7xP1WRfUTKksiQ/viewform?embedded=true"
+    width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
+
+    <script type="text/javascript">
+        var load = 0;
+        // sesuaikan id gform dengan id yang ada pada tag iframe di atas
+        document.getElementById('gform').onload = function () {
+            load++;
+            if (load > 1) {
+                // ganti url dibawah dengan url webapp anda
+                document.location = "https://script.google.com/macros/s/AKfycbzYD2Z5VKsIEJp1MdZzFmGKq9ABYkfgGtK17YS08jxMV59LAxSEL-MWElx8FQIY9XH3jg/exec";
+
             }
         }
-
-        // Fungsi untuk menangani pengiriman form
-        function handleFormSubmit() {
-            var load = 0;
-            document.getElementById('gform').onload = function () {
-                load++;
-                if (load > 1) {
-                    // Redirect setelah form berhasil dikirim
-                    try {
-                        window.location.href = "https://script.google.com/macros/s/AKfycbzYD2Z5VKsIEJp1MdZzFmGKq9ABYkfgGtK17YS08jxMV59LAxSEL-MWElx8FQIY9XH3jg/exec";
-                    } catch (error) {
-                        console.error("Redirect gagal:", error);
-                    }
-                }
-            };
-        }
-
-        // Ambil lokasi saat halaman dimuat
-        window.onload = function () {
-            getLocation(); // Ambil lokasi
-            handleFormSubmit(); // Siapkan penanganan form submit
-        };
     </script>
 </body>
 
