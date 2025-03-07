@@ -20,34 +20,8 @@ Sistem ini memungkinkan akses ke suatu link (misalnya Google Form) hanya jika pe
 3. Jika Anda berada dalam radius yang diizinkan, Anda akan diarahkan ke halaman yang ditentukan.
 4. Jika tidak, pesan error akan ditampilkan.
 
-## Konfigurasi
-- **Mengubah Lokasi yang Diizinkan:**
-  - Buka file `index.html`.
-  - Edit bagian berikut dengan koordinat lokasi yang diizinkan:
-    ```javascript
-    const locations = [
-        { lat: -6.4025, lng: 106.7942 }, // Lokasi 1
-        { lat: -6.4030, lng: 106.7950 }  // Lokasi 2
-    ];
-    ```
-- **Mengubah Radius:**
-  - Sesuaikan nilai `radius` dalam kilometer. Contoh:
-    ```javascript
-    const radius = 0.01; // 10 meter
-    ```
-- **Mengubah Link Tujuan:**
-  - Edit URL pada baris berikut:
-    ```javascript
-    window.location.href = "https:/linkanda";
-    ```
-
-## Troubleshooting
-- **GPS Tidak Aktif:** Pastikan perangkat memiliki GPS yang diaktifkan.
-- **Browser Tidak Memberikan Izin Lokasi:** Periksa pengaturan browser dan izinkan akses lokasi.
-- **Tidak Dialihkan Meskipun Berada di Lokasi yang Benar:** Coba refresh halaman atau gunakan perangkat lain.
-
 ## Kontribusi
-Jika ada perbaikan atau fitur tambahan yang ingin ditambahkan, silakan buat pull request atau hubungi tim pengembang.
+Jika ada perbaikan atau fitur tambahan yang ingin ditambahkan, silakan buat pull request atau hubungi pengembang.
 
 ## Lisensi
 Proyek ini dibuat untuk penggunaan internal dan tidak untuk didistribusikan secara bebas tanpa izin.
