@@ -82,10 +82,10 @@
         }
 
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-    enableHighAccuracy: true, 
-    timeout: 10000, // Timeout 10 detik
-    maximumAge: 0
-});
+        enableHighAccuracy: true, 
+        timeout: 5000, // Timeout 5 detik
+        maximumAge: 0
+        });
             let userLat = position.coords.latitude;
             let userLng = position.coords.longitude;
             let accessGranted = false;
