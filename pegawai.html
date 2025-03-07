@@ -31,32 +31,44 @@
             font-size: 18px;
             font-weight: normal;
         }
-        .button-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            max-width: 600px;
-        }
         .btn {
-            display: block;
-            width: 100%;
-            max-width: 250px;
-            background: #1d3c84;
-            color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s, transform 0.2s;
-        }
-        .btn:hover {
-            background: #294ea6;
-            transform: translateY(-2px);
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px; /* Sesuaikan tinggi */
+    min-height: 50px; /* Pastikan minimal segini */
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #1a3c80;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s, transform 0.2s;
+    flex: 1;
+}
+
+.btn:hover {
+    background-color: #142d66;
+    transform: translateY(-2px);
+}
+
+.button-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    width: 90%;
+    max-width: 400px;
+}
+
+@media (min-width: 600px) {
+    .button-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
     </style>
 </head>
 <body>
