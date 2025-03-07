@@ -1,32 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absen</title>
+    <title>Akses Terbatas</title>
 </head>
-
 <body>
-    <!-- ganti src url dengan url form anda -->
-    <iframe id="gform"
+    <h2>Cek Lokasi...</h2>
+    <script>
+        // Koordinat lokasi yang diizinkan
+        const allowedLat = -6.4025;  // Ganti dengan latitude lokasi Anda
+        const allowedLng = 106.7942; // Ganti dengan longitude lokasi Anda
+        const radius = 0.02; // 20 meter dalam km
 
-    src="https://docs.google.com/forms/d/e/1FAIpQLSerZfET2HxEegGgzjWVoR08Xwj6MDbUx70V7xP1WRfUTKksiQ/viewform?embedded=true"
-    width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
-
-    <script type="text/javascript">
-        var load = 0;
-        // sesuaikan id gform dengan id yang ada pada tag iframe di atas
-        document.getElementById('gform').onload = function () {
-            load++;
-            if (load > 1) {
-                // ganti url dibawah dengan url webapp anda
-                document.location = "https://script.google.com/macros/s/AKfycbzYD2Z5VKsIEJp1MdZzFmGKq9ABYkfgGtK17YS08jxMV59LAxSEL-MWElx8FQIY9XH3jg/exec";
-
-            }
+        // Fungsi untuk menghitung jarak menggunakan Haversine Formula
+        function getDistance(lat1, lon1, lat2, lon2) {
+            let R = 6371; // Radius bumi dalam km
+            let dLat = (lat2 - lat1) * Math.PI / 180;
+            let dLon = (lon2 - lon1) * Math.PI / 180;
+            let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c; // Jarak dalam km
         }
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+            let userLat = position.coords.latitude;
+            let userLng = position.coords.longitude;
+            let distance = getDistance(userLat, userLng, allowedLat, allowedLng);
+
+            if (distance <= radius) {
+                // Redirect ke Google Form jika dalam radius
+                window.location.href = "https://docs.google.com/forms/d/your-form-id"; // Ganti dengan link form Anda
+            } else {
+                document.body.innerHTML = "<h2>Akses Ditolak</h2><p>Anda harus berada dalam radius 20 meter untuk mengakses form ini.</p>";
+            }
+        }, function(error) {
+            document.body.innerHTML = "<h2>Gagal Mendapatkan Lokasi</h2><p>Pastikan GPS aktif dan izinkan akses lokasi.</p>";
+        });
     </script>
 </body>
-
 </html>
