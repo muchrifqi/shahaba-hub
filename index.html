@@ -81,7 +81,11 @@
             return R * c; // Jarak dalam km
         }
 
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
+    enableHighAccuracy: true, 
+    timeout: 10000, // Timeout 10 detik
+    maximumAge: 0
+});
             let userLat = position.coords.latitude;
             let userLng = position.coords.longitude;
             let accessGranted = false;
