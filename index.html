@@ -29,7 +29,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             max-width: 400px;
             width: 100%;
-            margin-bottom: 20px;
         }
         h2 {
             margin-bottom: 15px;
@@ -53,20 +52,6 @@
             font-weight: normal;
             margin-top: 15px;
         }
-        .iframe-container {
-            display: none;
-            width: 90%;
-            max-width: 600px;
-            height: 500px;
-            border: 2px solid white;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
     </style>
 </head>
 <body>
@@ -76,18 +61,14 @@
         <p id="status">Silakan tunggu, sedang memeriksa lokasi Anda...</p>
     </div>
 
-    <div class="iframe-container" id="iframeContainer">
-        <iframe id="bitlyFrame" src=""></iframe>
-    </div>
-
     <script>
         const locations = [
             { lat: -6.589108056587621, lng: 106.8218295143879 }, // Shahaba Ruko Tanah Baru Residence
             { lat: -6.519000, lng: 106.822581 },  // PWI
             { lat: -6.592279, lng: 106.822581 }  // Shahaba Jl. Swadaya
         ];
-        const radius = 100; // 100 kilo meter
-        const bitlyUrl = "https://bit.ly/m/PresensiPegawaiShahaba";
+        const radius = 100; // 100 kilo meter (0.02 km = 2 meter)
+        const redirectPage = "pegawai.html";
 
         function getDistance(lat1, lon1, lat2, lon2) {
             let R = 6371;
@@ -116,17 +97,15 @@
             if (accessGranted) {
                 document.getElementById("status").innerText = "Akses diizinkan!";
                 document.querySelector(".loader").style.display = "none";
-
-                // Tampilkan iframe dengan Bitly
-                document.getElementById("iframeContainer").style.display = "block";
-                document.getElementById("bitlyFrame").src = bitlyUrl;
-
-                // Simpan status akses di localStorage agar hanya bisa sekali akses
+                
+                // Simpan status akses agar hanya bisa diakses sekali
                 localStorage.setItem("accessGranted", "true");
-
+                
+                // Redirect ke halaman pegawai
+                window.location.href = redirectPage;
             } else {
                 document.querySelector(".loader").style.display = "none";
-                document.getElementById("status").innerHTML = "<span class='error'>Akses Ditolak! Anda harus berada dalam radius 10 meter dari lokasi yang diizinkan.</span>";
+                document.getElementById("status").innerHTML = "<span class='error'>Akses Ditolak! Anda harus berada dalam radius 20 meter dari lokasi yang diizinkan.</span>";
             }
         }
 
@@ -139,9 +118,8 @@
             if (localStorage.getItem("accessGranted") === "true") {
                 document.getElementById("status").innerText = "Akses diizinkan!";
                 document.querySelector(".loader").style.display = "none";
-
-                document.getElementById("iframeContainer").style.display = "block";
-                document.getElementById("bitlyFrame").src = bitlyUrl;
+                
+                window.location.href = redirectPage;
             } else {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(checkLocation, locationError, {
