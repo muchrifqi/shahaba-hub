@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
             display: flex;
@@ -20,6 +20,7 @@
             color: white;
             text-align: center;
             padding: 20px;
+            flex-direction: column;
         }
         .container {
             background: rgba(255, 255, 255, 0.1);
@@ -28,6 +29,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             max-width: 400px;
             width: 100%;
+            margin-bottom: 20px;
         }
         h2 {
             margin-bottom: 15px;
@@ -51,24 +53,19 @@
             font-weight: normal;
             margin-top: 15px;
         }
-        .link-container {
+        .iframe-container {
             display: none;
-            margin-top: 15px;
+            width: 90%;
+            max-width: 600px;
+            height: 500px;
+            border: 2px solid white;
+            border-radius: 10px;
+            overflow: hidden;
         }
-        .access-btn {
-            background: #4CAF50;
-            color: white;
+        iframe {
+            width: 100%;
+            height: 100%;
             border: none;
-            padding: 8px 12px;
-            margin-top: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            display: block;
-            text-decoration: none;
-        }
-        .access-btn:hover {
-            background: #45a049;
         }
     </style>
 </head>
@@ -77,11 +74,10 @@
         <h2>Memeriksa lokasi...</h2>
         <div class="loader"></div>
         <p id="status">Silakan tunggu, sedang memeriksa lokasi Anda...</p>
+    </div>
 
-        <div class="link-container" id="linkContainer">
-            <p>Anda bisa mengakses link berikut:</p>
-            <a href="#" id="accessLink" class="access-btn">Klik untuk Melanjutkan</a>
-        </div>
+    <div class="iframe-container" id="iframeContainer">
+        <iframe id="bitlyFrame" src=""></iframe>
     </div>
 
     <script>
@@ -90,8 +86,8 @@
             { lat: -6.519000, lng: 106.822581 },  // PWI
             { lat: -6.592279, lng: 106.822581 }  // Shahaba Jl. Swadaya
         ];
-        const radius = 20; // 20km radius
-        const accessUrl = "https://bit.ly/m/PresensiPegawaiShahaba?used=true";
+        const radius = 100; // 100 kilo meter
+        const bitlyUrl = "https://bit.ly/m/PresensiPegawaiShahaba";
 
         function getDistance(lat1, lon1, lat2, lon2) {
             let R = 6371;
@@ -120,18 +116,13 @@
             if (accessGranted) {
                 document.getElementById("status").innerText = "Akses diizinkan!";
                 document.querySelector(".loader").style.display = "none";
-                document.getElementById("linkContainer").style.display = "block";
 
-                // Simpan status akses di localStorage
+                // Tampilkan iframe dengan Bitly
+                document.getElementById("iframeContainer").style.display = "block";
+                document.getElementById("bitlyFrame").src = bitlyUrl;
+
+                // Simpan status akses di localStorage agar hanya bisa sekali akses
                 localStorage.setItem("accessGranted", "true");
-
-                // Tampilkan link
-                document.getElementById("accessLink").href = accessUrl;
-
-                // Tambahkan event listener untuk menghapus akses saat link diklik
-                document.getElementById("accessLink").addEventListener("click", function() {
-                    localStorage.removeItem("accessGranted"); // Hapus akses setelah klik
-                });
 
             } else {
                 document.querySelector(".loader").style.display = "none";
@@ -145,20 +136,12 @@
         }
 
         function checkStoredAccess() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has("used")) {
-                // Jika halaman dikunjungi kembali dari link tujuan, akses ditolak
-                localStorage.removeItem("accessGranted");
-                document.getElementById("status").innerHTML = "<span class='error'>Anda telah menggunakan akses ini. Silakan mulai ulang.</span>";
-                document.querySelector(".loader").style.display = "none";
-                return;
-            }
-
             if (localStorage.getItem("accessGranted") === "true") {
                 document.getElementById("status").innerText = "Akses diizinkan!";
                 document.querySelector(".loader").style.display = "none";
-                document.getElementById("linkContainer").style.display = "block";
-                document.getElementById("accessLink").href = accessUrl;
+
+                document.getElementById("iframeContainer").style.display = "block";
+                document.getElementById("bitlyFrame").src = bitlyUrl;
             } else {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(checkLocation, locationError, {
