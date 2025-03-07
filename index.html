@@ -51,6 +51,25 @@
             font-weight: normal;
             margin-top: 15px;
         }
+        .link-container {
+            display: none;
+            margin-top: 15px;
+        }
+        .access-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            display: block;
+            text-decoration: none;
+        }
+        .access-btn:hover {
+            background: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -58,71 +77,102 @@
         <h2>Memeriksa lokasi...</h2>
         <div class="loader"></div>
         <p id="status">Silakan tunggu, sedang memeriksa lokasi Anda...</p>
+
+        <div class="link-container" id="linkContainer">
+            <p>Anda bisa mengakses link berikut:</p>
+            <a href="#" id="accessLink" class="access-btn">Klik untuk Melanjutkan</a>
+        </div>
     </div>
 
     <script>
-        // Koordinat lokasi yang diizinkan
         const locations = [
-            { lat: -6.589108056587621, lng: 106.8218295143879 }, // Lokasi 1 (Shahaba Ruko Tanah Baru Residence)
-            { lat: -6.519000, lng: 106.822581 },  // Lokasi 2 (PWI)
-            { lat: -6.592279, lng: 106.822581 }  // Lokasi 3 (Shahaba Jl. Swadaya)
+            { lat: -6.589108056587621, lng: 106.8218295143879 }, // Shahaba Ruko Tanah Baru Residence
+            { lat: -6.519000, lng: 106.822581 },  // PWI
+            { lat: -6.592279, lng: 106.822581 }  // Shahaba Jl. Swadaya
         ];
-        const radius = 100; // 100 kilo meter dalam km
+        const radius = 0.01; // 10 meter dalam km
+        const accessUrl = "https://bit.ly/m/PresensiPegawaiShahaba?used=true";
 
-        // Fungsi untuk menghitung jarak menggunakan Haversine Formula
         function getDistance(lat1, lon1, lat2, lon2) {
-            let R = 6371; // Radius bumi dalam km
+            let R = 6371;
             let dLat = (lat2 - lat1) * Math.PI / 180;
             let dLon = (lon2 - lon1) * Math.PI / 180;
             let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                     Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
                     Math.sin(dLon / 2) * Math.sin(dLon / 2);
             let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            return R * c; // Jarak dalam km
+            return R * c;
         }
 
-        // Fungsi untuk memeriksa lokasi pengguna
         function checkLocation(position) {
             let userLat = position.coords.latitude;
             let userLng = position.coords.longitude;
             let accessGranted = false;
 
-            // Cek apakah user dalam radius dari salah satu lokasi yang diizinkan
             for (let i = 0; i < locations.length; i++) {
                 let distance = getDistance(userLat, userLng, locations[i].lat, locations[i].lng);
                 if (distance <= radius) {
                     accessGranted = true;
-                    break; // Jika sudah dalam radius, tidak perlu cek lokasi lain
+                    break;
                 }
             }
 
             if (accessGranted) {
-                document.getElementById("status").innerText = "Akses diizinkan! Mengarahkan ke pendataan presensi...";
-                setTimeout(() => {
-                    window.location.href = "https://bit.ly/m/PresensiPegawaiShahaba"; // Ganti link redirect
-                }, 2000);
+                document.getElementById("status").innerText = "Akses diizinkan!";
+                document.querySelector(".loader").style.display = "none";
+                document.getElementById("linkContainer").style.display = "block";
+
+                // Simpan status akses di localStorage
+                localStorage.setItem("accessGranted", "true");
+
+                // Tampilkan link
+                document.getElementById("accessLink").href = accessUrl;
+
+                // Tambahkan event listener untuk menghapus akses saat link diklik
+                document.getElementById("accessLink").addEventListener("click", function() {
+                    localStorage.removeItem("accessGranted"); // Hapus akses setelah klik
+                });
+
             } else {
                 document.querySelector(".loader").style.display = "none";
-                document.getElementById("status").innerHTML = "<span class='error'>Akses Ditolak! Anda harus berada dalam radius 10 meter dari Shahaba Prasekolah atau Shahaba SD</span>";
+                document.getElementById("status").innerHTML = "<span class='error'>Akses Ditolak! Anda harus berada dalam radius 10 meter dari lokasi yang diizinkan.</span>";
             }
         }
 
-        // Fungsi jika terjadi error saat mengambil lokasi
         function locationError(error) {
             document.querySelector(".loader").style.display = "none";
             document.getElementById("status").innerHTML = "<span class='error'>Gagal Mendapatkan Lokasi! Pastikan GPS aktif dan izinkan akses lokasi.</span>";
         }
 
-        // Memeriksa apakah browser mendukung Geolocation
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(checkLocation, locationError, {
-                enableHighAccuracy: true,
-                timeout: 5000, // Timeout 5 detik
-                maximumAge: 0
-            });
-        } else {
-            document.getElementById("status").innerHTML = "<span class='error'>Browser Anda tidak mendukung fitur lokasi.</span>";
+        function checkStoredAccess() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has("used")) {
+                // Jika halaman dikunjungi kembali dari link tujuan, akses ditolak
+                localStorage.removeItem("accessGranted");
+                document.getElementById("status").innerHTML = "<span class='error'>Anda telah menggunakan akses ini. Silakan mulai ulang.</span>";
+                document.querySelector(".loader").style.display = "none";
+                return;
+            }
+
+            if (localStorage.getItem("accessGranted") === "true") {
+                document.getElementById("status").innerText = "Akses diizinkan!";
+                document.querySelector(".loader").style.display = "none";
+                document.getElementById("linkContainer").style.display = "block";
+                document.getElementById("accessLink").href = accessUrl;
+            } else {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(checkLocation, locationError, {
+                        enableHighAccuracy: true,
+                        timeout: 5000,
+                        maximumAge: 0
+                    });
+                } else {
+                    document.getElementById("status").innerHTML = "<span class='error'>Browser Anda tidak mendukung fitur lokasi.</span>";
+                }
+            }
         }
+
+        checkStoredAccess();
     </script>
 </body>
 </html>
