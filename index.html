@@ -9,9 +9,11 @@
     <h2>Cek Lokasi...</h2>
     <script>
         // Koordinat lokasi yang diizinkan
-        const allowedLat = -6.4025;  // Ganti dengan latitude lokasi Anda
-        const allowedLng = 106.7942; // Ganti dengan longitude lokasi Anda
-        const radius = 0.02; // 20 meter dalam km
+        const locations = [
+            { lat: -6.4025, lng: 106.7942 }, // Lokasi 1 (Ganti dengan koordinat lokasi pertama)
+            { lat: -6.4030, lng: 106.7950 }  // Lokasi 2 (Ganti dengan koordinat lokasi kedua)
+        ];
+        const radius = 0.01; // 10 meter dalam km
 
         // Fungsi untuk menghitung jarak menggunakan Haversine Formula
         function getDistance(lat1, lon1, lat2, lon2) {
@@ -28,13 +30,21 @@
         navigator.geolocation.getCurrentPosition(function(position) {
             let userLat = position.coords.latitude;
             let userLng = position.coords.longitude;
-            let distance = getDistance(userLat, userLng, allowedLat, allowedLng);
+            let accessGranted = false;
 
-            if (distance <= radius) {
-                // Redirect ke Google Form jika dalam radius
+            // Cek apakah user dalam radius dari salah satu lokasi yang diizinkan
+            for (let i = 0; i < locations.length; i++) {
+                let distance = getDistance(userLat, userLng, locations[i].lat, locations[i].lng);
+                if (distance <= radius) {
+                    accessGranted = true;
+                    break; // Jika sudah dalam radius, tidak perlu cek lokasi lain
+                }
+            }
+
+            if (accessGranted) {
                 window.location.href = "https://docs.google.com/forms/d/your-form-id"; // Ganti dengan link form Anda
             } else {
-                document.body.innerHTML = "<h2>Akses Ditolak</h2><p>Anda harus berada dalam radius 20 meter untuk mengakses form ini.</p>";
+                document.body.innerHTML = "<h2>Akses Ditolak</h2><p>Anda harus berada dalam radius 10 meter dari lokasi yang diizinkan.</p>";
             }
         }, function(error) {
             document.body.innerHTML = "<h2>Gagal Mendapatkan Lokasi</h2><p>Pastikan GPS aktif dan izinkan akses lokasi.</p>";
