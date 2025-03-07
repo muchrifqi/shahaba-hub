@@ -4,14 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akses Terbatas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #172e69, #0b1632);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .error {
+            color: #ffbfbf;
+            font-weight:normal;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Cek Lokasi...</h2>
+    <div class="container">
+        <h2>Memeriksa lokasi...</h2>
+        <div class="loader"></div>
+        <p id="status">Silakan tunggu, sedang memeriksa lokasi Anda...</p>
+    </div>
+
     <script>
         // Koordinat lokasi yang diizinkan
         const locations = [
-            { lat: -6.4025, lng: 106.7942 }, // Lokasi 1 (Ganti dengan koordinat lokasi pertama)
-            { lat: -6.4030, lng: 106.7950 }  // Lokasi 2 (Ganti dengan koordinat lokasi kedua)
+            { lat: -6.589108056587621, lng: 106.8218295143879 }, // Lokasi 1 (Shahaba Ruko Tanah Baru REsidence)
+            { lat: -6.592279, lng: 106.822581 }  // Lokasi 2 (Shahaba Jl. Swadaya)
         ];
         const radius = 0.01; // 10 meter dalam km
 
@@ -42,12 +95,17 @@
             }
 
             if (accessGranted) {
-                window.location.href = "https://docs.google.com/forms/d/your-form-id"; // Ganti dengan link form Anda
+                document.getElementById("status").innerText = "Akses diizinkan! Mengarahkan ke pendataan presensi...";
+                setTimeout(() => {
+                    window.location.href = "https://bit.ly/m/PresensiPegawaiShahaba"; // Ganti link redirect
+                }, 2000);
             } else {
-                document.body.innerHTML = "<h2>Akses Ditolak</h2><p>Anda harus berada dalam radius 10 meter dari lokasi yang diizinkan.</p>";
+                document.querySelector(".loader").style.display = "none";
+                document.getElementById("status").innerHTML = "<span class='error'>Akses Ditolak! Anda harus berada dalam radius 10 meter dari Shahaba Prasekolah atau Shahaba SD</span>";
             }
         }, function(error) {
-            document.body.innerHTML = "<h2>Gagal Mendapatkan Lokasi</h2><p>Pastikan GPS aktif dan izinkan akses lokasi.</p>";
+            document.querySelector(".loader").style.display = "none";
+            document.getElementById("status").innerHTML = "<span class='error'>Gagal Mendapatkan Lokasi! Pastikan GPS aktif dan izinkan akses lokasi.</span>";
         });
     </script>
 </body>
