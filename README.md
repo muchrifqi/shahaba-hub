@@ -1,81 +1,56 @@
-# Presensi Pegawai Shahaba
+# Sistem Pembatasan Akses Berdasarkan Lokasi
 
-Repositori ini berisi halaman web untuk presensi pegawai (guru dan staf) Shahaba. Halaman ini menggunakan Google Form yang di-embed dan mengambil data nama serta lokasi terkini dari perangkat pengguna. Hanya pegawai Shahaba yang diizinkan mengakses sistem ini.
+## Deskripsi
+Sistem ini memungkinkan akses ke suatu link (misalnya Google Form) hanya jika pengguna berada dalam radius tertentu dari lokasi yang telah ditentukan. Jika pengguna berada di luar radius, mereka akan mendapatkan pesan akses ditolak.
 
 ## Fitur Utama
+- Membatasi akses berdasarkan lokasi GPS.
+- Mendukung lebih dari satu lokasi yang diizinkan.
+- Tampilan responsif dengan animasi loading.
+- Pesan error jika GPS tidak aktif atau pengguna berada di luar area.
 
-- **Google Form Embed**: Form presensi diambil dari Google Form yang di-embed ke dalam halaman web.
-- **Ambil Data Nama dan Lokasi**: Sistem secara otomatis mengambil nama pengguna dan lokasi terkini dari perangkat.
-- **Akses Terbatas**: Hanya pegawai Shahaba yang memiliki akses ke halaman ini.
-- **Redirect setelah Submit**: Setelah mengisi form, pengguna akan diarahkan ke halaman konfirmasi.
+## Persyaratan
+- Perangkat pengguna harus memiliki GPS yang aktif.
+- Browser harus memberikan izin akses lokasi.
+- Koneksi internet diperlukan untuk memverifikasi lokasi.
 
-## Cara Kerja
+## Cara Menggunakan
+1. **Buka file HTML** di browser.
+2. **Tunggu sistem memeriksa lokasi Anda**.
+3. Jika Anda berada dalam radius yang diizinkan, Anda akan diarahkan ke halaman yang ditentukan.
+4. Jika tidak, pesan error akan ditampilkan.
 
-1. Pengguna (guru atau staf) mengakses halaman presensi.
-2. Google Form yang di-embed akan dimuat.
-3. Sistem mengambil data nama dan lokasi terkini dari perangkat pengguna (jika diizinkan).
-4. Pengguna mengisi form presensi dan mengirimkannya.
-5. Setelah form berhasil dikirim, pengguna akan diarahkan ke halaman konfirmasi.
+## Konfigurasi
+- **Mengubah Lokasi yang Diizinkan:**
+  - Buka file `index.html`.
+  - Edit bagian berikut dengan koordinat lokasi yang diizinkan:
+    ```javascript
+    const locations = [
+        { lat: -6.4025, lng: 106.7942 }, // Lokasi 1
+        { lat: -6.4030, lng: 106.7950 }  // Lokasi 2
+    ];
+    ```
+- **Mengubah Radius:**
+  - Sesuaikan nilai `radius` dalam kilometer. Contoh:
+    ```javascript
+    const radius = 0.01; // 10 meter
+    ```
+- **Mengubah Link Tujuan:**
+  - Edit URL pada baris berikut:
+    ```javascript
+    window.location.href = "https:/linkanda";
+    ```
 
-## Struktur File
+## Troubleshooting
+- **GPS Tidak Aktif:** Pastikan perangkat memiliki GPS yang diaktifkan.
+- **Browser Tidak Memberikan Izin Lokasi:** Periksa pengaturan browser dan izinkan akses lokasi.
+- **Tidak Dialihkan Meskipun Berada di Lokasi yang Benar:** Coba refresh halaman atau gunakan perangkat lain.
 
-- **index.html**: File utama yang berisi embed Google Form dan script untuk redirect setelah submit.
-- **README.md**: Dokumentasi proyek (file ini).
+## Kontribusi
+Jika ada perbaikan atau fitur tambahan yang ingin ditambahkan, silakan buat pull request atau hubungi tim pengembang.
 
-## Instalasi dan Penggunaan
-
-1. Clone repositori ini:
-   ```bash
-   git clone https://github.com/username/repository-name.git
-   
-2. Masuk ke direktori proyek:
-bash
-cd repository-name
-
-3. Buka file index.html dan sesuaikan dengan link Google Form Anda:
-
-html
-<iframe id="gform"
-    src="https://docs.google.com/forms/d/e/your-google-form-id/viewform?embedded=true"
-    width="100%" height="407" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
-Run HTML
-
-4. Sesuaikan URL redirect setelah submit di bagian script:
-
-javascript
-document.location = "https://script.google.com/macros/s/your-google-apps-script-url/exec";
-
-5. Host halaman web ini di server yang dapat diakses oleh pegawai Shahaba.
-
-Cara Mengakses
-1. Buka browser dan akses halaman presensi.
-
-2. Izinkan akses lokasi saat diminta oleh browser.
-
-3. Isi form presensi dan kirim.
-
-Setelah berhasil dikirim, Anda akan diarahkan ke halaman konfirmasi.
-
-Kontribusi
-Kontribusi untuk proyek ini tidak dibuka untuk umum karena sifatnya yang internal. Jika Anda adalah pegawai Shahaba dan memiliki masukan, silakan hubungi tim IT.
-
-Lisensi
-Proyek ini adalah properti internal Shahaba dan tidak dilisensikan untuk penggunaan umum.
-
-Kontak
-Untuk bantuan atau pertanyaan lebih lanjut, silakan hubungi:
-
-Tim IT Shahaba:
-
-Email: mrifqi939@gmail.com
-
-© 2025 Shahaba. All rights reserved.
+## Lisensi
+Proyek ini dibuat untuk penggunaan internal dan tidak untuk didistribusikan secara bebas tanpa izin.
 
 ---
-
-### Penjelasan Tambahan:
-1. **Google Form Embed**: File `index.html` meng-embed Google Form menggunakan tag `<iframe>`. Pastikan link Google Form yang digunakan sudah disesuaikan.
-2. **Redirect setelah Submit**: Script JavaScript pada file `index.html` akan mengarahkan pengguna ke URL Google Apps Script setelah form berhasil dikirim. Pastikan URL tersebut sudah disesuaikan dengan skrip Google Apps Script Anda.
-3. **Akses Terbatas**: Pastikan halaman web ini di-host di lingkungan yang aman dan hanya dapat diakses oleh pegawai Shahaba (misalnya, menggunakan autentikasi dasar atau sistem login internal).
-
-Jika Anda memerlukan penyesuaian lebih lanjut, silakan beri tahu!
+Dikembangkan oleh Tim IT Muchamad Rifqi Hermawan
