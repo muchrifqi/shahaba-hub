@@ -51,16 +51,24 @@
             text-decoration: none;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
             transition: background 0.3s, transform 0.2s;
+            cursor: pointer;
         }
         .btn:hover {
             background-color: #142d66;
             transform: translateY(-2px);
         }
-        .footer {
-            margin-top: auto;
-            padding: 10px;
-            font-size: 14px;
-            opacity: 0.7;
+        .iframe-container {
+            width: 90%;
+            max-width: 800px;
+            height: 500px;
+            margin-top: 20px;
+            display: none;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -69,28 +77,23 @@
     <h2>Silakan pilih nama Anda untuk melakukan presensi</h2>
 
     <div class="button-container">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Deva%20Mandela" class="btn">Deva Mandela</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Dwi%20Indo" class="btn">Dwi Indo</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Muchamad%20Rifqi%20Hermawan" class="btn">Muchamad Rifqi Hermawan</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Salma%20Siti%20Saffiyah" class="btn">Salma Siti Saffiyah</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Nurhayati" class="btn">Nurhayati</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Muharrom%20Susetyo%20Nugroho" class="btn">Muharrom Susetyo Nugroho</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Nandar%20Sunandar" class="btn">Nandar Sunandar</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Salma%20Satira%20Askar" class="btn">Salma Satira Askar</a>
+        <a href="#" class="btn" onclick="showForm(event, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Deva%20Mandela')">Deva Mandela</a>
+        <a href="#" class="btn" onclick="showForm(event, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Dwi%20Indo')">Dwi Indo</a>
+        <a href="#" class="btn" onclick="showForm(event, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Muchamad%20Rifqi%20Hermawan')">Muchamad Rifqi Hermawan</a>
+        <a href="#" class="btn" onclick="showForm(event, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Salma%20Siti%20Saffiyah')">Salma Siti Saffiyah</a>
     </div>
 
-    <div class="footer">
-        &copy; 2025 Shahaba SD & Prasekolah
+    <div class="iframe-container" id="iframeContainer">
+        <iframe id="formIframe"></iframe>
     </div>
 
     <script>
-        function redirect(event) {
+        function showForm(event, url) {
             event.preventDefault();
-            const url = event.target.href;
-            window.open(url, "_blank");
-            setTimeout(() => {
-                window.location.href = "konfirmasi.html";
-            }, 2000);
+            const iframeContainer = document.getElementById("iframeContainer");
+            const iframe = document.getElementById("formIframe");
+            iframe.src = url;
+            iframeContainer.style.display = "block";
         }
     </script>
 </body>
