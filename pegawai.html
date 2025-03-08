@@ -57,18 +57,24 @@
             background-color: #142d66;
             transform: translateY(-2px);
         }
-        .iframe-container {
-            width: 90%;
-            max-width: 800px;
-            height: 500px;
-            margin-top: 20px;
-            display: none;
+        .btn:disabled {
+            background-color: gray;
+            cursor: not-allowed;
         }
         iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+            display: none;
+            width: 90%;
+            max-width: 600px;
+            height: 400px;
+            margin-top: 20px;
             border-radius: 8px;
+            border: none;
+        }
+        .footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 14px;
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -77,23 +83,26 @@
     <h2>Silakan pilih nama Anda untuk melakukan presensi</h2>
 
     <div class="button-container">
-        <a href="#" class="btn" onclick="showForm(event, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Deva%20Mandela')">Deva Mandela</a>
-        <a href="#" class="btn" onclick="showForm(event, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Dwi%20Indo')">Dwi Indo</a>
-        <a href="#" class="btn" onclick="showForm(event, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Muchamad%20Rifqi%20Hermawan')">Muchamad Rifqi Hermawan</a>
-        <a href="#" class="btn" onclick="showForm(event, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Salma%20Siti%20Saffiyah')">Salma Siti Saffiyah</a>
+        <button class="btn" onclick="showForm(this, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Deva%20Mandela')">Deva Mandela</button>
+        <button class="btn" onclick="showForm(this, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Dwi%20Indo')">Dwi Indo</button>
+        <button class="btn" onclick="showForm(this, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Muchamad%20Rifqi%20Hermawan')">Muchamad Rifqi Hermawan</button>
     </div>
+    
+    <iframe id="presensiFrame"></iframe>
 
-    <div class="iframe-container" id="iframeContainer">
-        <iframe id="formIframe"></iframe>
+    <div class="footer">
+        &copy; 2025 Shahaba SD & Prasekolah
     </div>
 
     <script>
-        function showForm(event, url) {
-            event.preventDefault();
-            const iframeContainer = document.getElementById("iframeContainer");
-            const iframe = document.getElementById("formIframe");
-            iframe.src = url;
-            iframeContainer.style.display = "block";
+        function showForm(button, url) {
+            button.disabled = true;
+            document.getElementById('presensiFrame').src = url;
+            document.getElementById('presensiFrame').style.display = 'block';
+            
+            setTimeout(() => {
+                window.location.href = 'konfirmasi.html';
+            }, 2000);
         }
     </script>
 </body>
