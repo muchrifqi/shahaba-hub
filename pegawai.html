@@ -21,6 +21,14 @@
             align-items: center;
             min-height: 100vh;
         }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
         .button-container {
             display: grid;
             grid-template-columns: 1fr;
@@ -43,60 +51,49 @@
             text-decoration: none;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
             transition: background 0.3s, transform 0.2s;
+            cursor: pointer;
         }
-        .btn:disabled {
-            background-color: #555;
-            cursor: not-allowed;
+        .btn:hover {
+            background-color: #142d66;
+            transform: translateY(-2px);
+        }
+        .iframe-container {
+            width: 90%;
+            max-width: 800px;
+            height: 500px;
+            margin-top: 20px;
+            display: none;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
         }
     </style>
 </head>
 <body>
     <h1>Presensi Pegawai Shahaba</h1>
     <h2>Silakan pilih nama Anda untuk melakukan presensi</h2>
-   <div class="button-container">
-        <button class="btn" data-url="https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Deva%20Mandela">Deva Mandela</button>
-        <button class="btn" data-url="https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Dwi%20Indo">Dwi Indo</button>
-        <button class="btn" data-url="https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Muchamad%20Rifqi%20Hermawan">Muchamad Rifqi Hermawan</button>
+
+    <div class="button-container">
+        <a href="#" class="btn" onclick="showForm(event, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Deva%20Mandela')">Deva Mandela</a>
+        <a href="#" class="btn" onclick="showForm(event, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Dwi%20Indo')">Dwi Indo</a>
+        <a href="#" class="btn" onclick="showForm(event, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Muchamad%20Rifqi%20Hermawan')">Muchamad Rifqi Hermawan</a>
+        <a href="#" class="btn" onclick="showForm(event, 'https://docs.google.com/forms/d/e/1FAIpQLSf9DWWS4iAFr055tV_QLRsnqS8kTDMAurWcXegwZB00SSSLrA/formResponse?usp=pp_url&entry.1378834565=Salma%20Siti%20Saffiyah')">Salma Siti Saffiyah</a>
     </div>
-    
+
+    <div class="iframe-container" id="iframeContainer">
+        <iframe id="formIframe"></iframe>
+    </div>
+
     <script>
-        const allowedLocations = [
-            { lat: -6.589108056587621, lng: 106.8218295143879 },
-            { lat: -6.519000, lng: 106.822581 },
-            { lat: -6.592279, lng: 106.822581 }
-        ];
-        
-        function isWithinAllowedLocation(lat, lng) {
-            return allowedLocations.some(loc => {
-                const distance = Math.sqrt((loc.lat - lat) ** 2 + (loc.lng - lng) ** 2);
-                return distance < 100000; // Sesuaikan toleransi jarak
-            });
-        }
-        
-        function checkLocation() {
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    const { latitude, longitude } = position.coords;
-                    const isAllowed = isWithinAllowedLocation(latitude, longitude);
-                    document.querySelectorAll('.btn').forEach(btn => btn.disabled = !isAllowed);
-                },
-                () => {
-                    document.querySelectorAll('.btn').forEach(btn => btn.disabled = true);
-                }
-            );
-        }
-        
-        setInterval(checkLocation, 5000);
-        
-        function submitPresensi(button, url) {
-            button.disabled = true;
-            localStorage.setItem('presensiDone', 'true');
-            window.open(url, '_blank');
-            setTimeout(() => window.location.href = 'konfirmasi.html', 2000);
-        }
-        
-        if (localStorage.getItem('presensiDone')) {
-            document.querySelectorAll('.btn').forEach(btn => btn.disabled = true);
+        function showForm(event, url) {
+            event.preventDefault();
+            const iframeContainer = document.getElementById("iframeContainer");
+            const iframe = document.getElementById("formIframe");
+            iframe.src = url;
+            iframeContainer.style.display = "block";
         }
     </script>
 </body>
