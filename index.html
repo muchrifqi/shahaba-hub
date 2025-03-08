@@ -13,6 +13,7 @@
         }
         body {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
@@ -20,7 +21,6 @@
             color: white;
             text-align: center;
             padding: 20px;
-            flex-direction: column;
         }
         .container {
             background: rgba(255, 255, 255, 0.1);
@@ -52,6 +52,16 @@
             font-weight: normal;
             margin-top: 15px;
         }
+        .footer {
+            background: #0b1632;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -65,14 +75,13 @@
         &copy; 2025 Shahaba SD & Prasekolah
     </div>
 
-    
     <script>
         const locations = [
             { lat: -6.589108056587621, lng: 106.8218295143879 }, // Shahaba Ruko Tanah Baru Residence
             { lat: -6.519000, lng: 106.822581 },  // PWI
             { lat: -6.592279, lng: 106.822581 }  // Shahaba Jl. Swadaya
         ];
-        const radius = 0.20; // 20 meter (0.02 km = 2 meter)
+        const radius = 0.02; // 20 meter
         const redirectPage = "pegawai.html";
 
         function getDistance(lat1, lon1, lat2, lon2) {
@@ -89,24 +98,12 @@
         function checkLocation(position) {
             let userLat = position.coords.latitude;
             let userLng = position.coords.longitude;
-            let accessGranted = false;
-
-            for (let i = 0; i < locations.length; i++) {
-                let distance = getDistance(userLat, userLng, locations[i].lat, locations[i].lng);
-                if (distance <= radius) {
-                    accessGranted = true;
-                    break;
-                }
-            }
+            let accessGranted = locations.some(loc => getDistance(userLat, userLng, loc.lat, loc.lng) <= radius);
 
             if (accessGranted) {
                 document.getElementById("status").innerText = "Akses diizinkan!";
                 document.querySelector(".loader").style.display = "none";
-                
-                // Simpan status akses agar hanya bisa diakses sekali
                 localStorage.setItem("accessGranted", "true");
-                
-                // Redirect ke halaman pegawai
                 window.location.href = redirectPage;
             } else {
                 document.querySelector(".loader").style.display = "none";
@@ -123,7 +120,6 @@
             if (localStorage.getItem("accessGranted") === "true") {
                 document.getElementById("status").innerText = "Akses diizinkan!";
                 document.querySelector(".loader").style.display = "none";
-                
                 window.location.href = redirectPage;
             } else {
                 if (navigator.geolocation) {
