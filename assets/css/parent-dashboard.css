@@ -610,7 +610,7 @@
     transform: translateY(-2px);
 }
 
-/* Tambahkan margin bottom ke konten utama */
+/* Tambahkan marginbottom ke konten utama */
 .parent-dashboard {
     margin-bottom: 70px !important;
 }
