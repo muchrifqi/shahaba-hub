@@ -249,7 +249,7 @@ window.addEventListener('beforeunload', () => {
     }
 });
 
-// Tambahkan di parent-dashboard.js
+// navbar
 document.querySelectorAll('.mobile-navbar .nav-item').forEach(item => {
     item.addEventListener('click', function() {
         document.querySelectorAll('.mobile-navbar .nav-item').forEach(nav => nav.classList.remove('active'));
