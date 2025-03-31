@@ -1,22 +1,28 @@
-const CACHE_NAME = 'presensi-app-v2';
+const CACHE_NAME = 'shahaba-hub-v2';
 const ASSETS_TO_CACHE = [
   '/index.html',
   '/pages/offline.html',
-  '/pages/pesertadidik.html',
-  '/pages/landing.html',
-  '/pages/landingpegawai.html',
-  '/pages/about.html',
-  '/pages/laporan.html',
+  '/pages/parent-dashboard.html',
+  '/pages/jadwal.html',
+  '/pages/info-gmeet.html',
+  '/pages/kegiatan.html',
+  '/pages/landing-ortu.html',
+  '/pages/input-izin.html',
   '/assets/css/styles.css',
-  '/assets/js/script.js',
-  '/assets/icons/logopresensi72.png',
-  '/assets/icons/logopresensi144.png',
-  '/assets/icons/logopresensi167.png',
-  '/assets/icons/logopresensi180.png',
-  '/assets/icons/logopresensi192.png',
-  '/assets/icons/logopresensi256.png',
-  '/assets/icons/logopresensi384.png',
-  '/assets/icons/logopresensi512.png'
+  '/assets/js/info.js',
+  '/assets/js/install.js',
+  '/assets/js/izin-pd.js',
+  '/assets/js/jadwal.js',
+  '/assets/js/kegiatan.js',
+  '/assets/js/offline-checker.js',
+  '/assets/js/parent-dashboard.js',
+  '/assets/js/whatsapp.js',
+  '/assets/icons/logoshahabahub.png',
+  '/assets/icons/logoshahabahub.svg',
+  '/assets/images/prasekolah_belajar1.png',
+  '/assets/images/prasekolah_outing1.png',
+  '/assets/images/sd_karya1.png',
+  '/assets/images/sd_outing1.png',
 ];
 
 // Install service worker

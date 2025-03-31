@@ -1,7 +1,7 @@
 {
-  "short_name": "Presensi",
-  "name": "Aplikasi Presensi by Shahaba",
-  "description": "Aplikasi untuk mendata presensi peserta didik dan pegawai di Shahaba.",
+  "short_name": "Shahaba",
+  "name": "Shahaba Hub",
+  "description": "Aplikasi portal orang tua peserta didik Shahaba.",
   "icons": [
     {
       "src": "../shahaba-kepegawaian-presensi/assets/icons/logopresensi192.png",
