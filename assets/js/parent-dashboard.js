@@ -249,3 +249,10 @@ window.addEventListener('beforeunload', () => {
     }
 });
 
+// navbar
+document.querySelectorAll('.mobile-navbar .nav-item').forEach(item => {
+    item.addEventListener('click', function() {
+        document.querySelectorAll('.mobile-navbar .nav-item').forEach(nav => nav.classList.remove('active'));
+        this.classList.add('active');
+    });
+});
