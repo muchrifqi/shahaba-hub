@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header Konsisten -->
+    <div class="curve">
+        <h1>Shahaba</h1>
+        <h2>Aplikasi Presensi</h2>
+    </div>
+
+    <!-- Container Offline -->
+            <h3><i class="fas fa-unlink"></i> Mode Offline</h3>
+            <div id="offlineContent">
+                <p style="font-size: 2rem; margin: 40px 0;">
+                    <div class="offline-icon material-icons" style="font-size: 80px;">wifi_off</div>
+                    Koneksi internet terputus
+                </p>
+                
+                <div class="button-container">
+                    <button class="admin-button" onclick="window.location.href = 'https://muchrifqi.github.io/shahaba-kepegawaian-presensi/'">>
+                        <i class="fas fa-sync-alt"></i> Coba Lagi
+                    </button>
+                </div>
+            </div>
+
+    <script>
+        // Blokir notifikasi browser
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.ready.then(reg => {
+            reg.active.postMessage('force-offline');
+          });
+        }
+        
+        // Auto retry connection
+        let retryCount = 0;
+        function checkConnection() {
+          if (navigator.onLine) {
+            window.location.href = '/';
+          } else if (retryCount < 5) {
+            retryCount++;
+            setTimeout(checkConnection, 3000);
+          }
+        }
+        checkConnection();
+        </script>
+</body>
+</html>

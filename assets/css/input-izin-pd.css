@@ -1,0 +1,334 @@
+/* ================ VARIABLES ================ */
+:root {
+    /* Warna utama */
+    --primary-color: #172e69;
+    --secondary-color: #2b2b2b;
+    --accent-color: #e15f0e;
+    --background-gradient: linear-gradient(-45deg, #3693cc, #172e69, #3693cc);
+    --text-color: white;
+    
+    /* Warna status */
+    --error-color: #b82f25;
+    --success-color: #006c04;
+    --warning-color: #ee9d15;
+    
+    /* Warna komponen */
+    --button-hover-color: #1e7637;
+    --input-bg: rgba(255, 255, 255, 0.1);
+    --input-border: rgba(255, 255, 255, 0.2);
+    --card-bg: rgba(255, 255, 255, 0.1);
+    
+    /* Ukuran */
+    --border-radius: 25px;
+    --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s ease;
+  }
+  
+  /* ================ BASE STYLES ================ */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background-gradient);
+    background-size: 400% 400%;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+  
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* ================ HEADER CURVE ================ */
+  .curve {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: white;
+    border-radius: 0 0 50% 50%;
+    transform: scaleX(1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  
+  .curve h1 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .curve h2 {
+    color: var(--secondary-color);
+    font-size: 1rem;
+    margin: 0;
+    font-weight: normal;
+    text-align: center;
+  }
+  
+  /* ================ MAIN CONTAINER ================ */
+  .container {
+    background: var(--card-bg) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: var(--border-radius) !important;
+    border: 1px solid var(--input-border) !important;
+    box-shadow: var(--box-shadow) !important;
+    margin: 120px auto 80px !important;
+    padding: 2rem !important;
+    width: 90%!important;
+    max-width: 600px!important;
+    box-sizing: border-box !important;
+    animation: fadeIn 1s ease-in-out !important;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .container h1 {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* ================ FORM STYLES ================ */
+  #keteranganForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .nama-group {
+    flex: 3; /* 75% width */
+  }
+  
+  .kelas-group {
+    flex: 1; /* 25% width */
+  }
+  
+  label {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+  
+  .form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--input-border);
+    border-radius: var(--border-radius);
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: var(--transition);
+    box-sizing: border-box;
+  }
+
+  .form-input option{
+    background: var(--primary-color);
+    color: var(--text-color);
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(225, 95, 14, 0.3);
+  }
+  
+  .form-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  textarea.form-input {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  /* Dropdown untuk pencarian nama */
+  .dropdown {
+    position: relative;
+    background-color: var(--primary-color);
+    border: 1px solid var(--input-border);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    width: calc(100% - 20px);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    display: none;
+    text-align: left;
+  }
+  
+  .dropdown-item {
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  
+  .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Button Styles */
+  .landing-button {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1rem;
+  }
+  
+  .landing-button:hover {
+    background: #d35400;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* ================ FOOTER ================ */
+  .footer {
+    position:fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    color: white !important;
+    text-align: center !important;
+    padding: 10px 0 !important;
+    font-size: 14px !important;
+    backdrop-filter: blur(5px) !important;
+    z-index: 1000 !important;
+    line-height: 0 !important;
+}
+  
+  /* ================ RESPONSIVE DESIGN ================ */
+  @media (max-width: 768px) {
+    .container {
+      margin-top: 100px;
+      padding: 1.5rem;
+    }
+    
+    .form-row {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .nama-group, .kelas-group {
+      flex: 1;
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      margin-top: 90px;
+      padding: 1.2rem;
+    }
+    
+    .container h1 {
+      font-size: 1.3rem;
+    }
+    
+    .form-input {
+      padding: 10px 12px;
+    }
+    
+    .landing-button {
+      padding: 10px;
+      font-size: 15px;
+    }
+  }
+  /* Gaya khusus untuk input tanggal */
+input[type="date"] {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Sesuaikan dengan font body */
+    color: var(--text-color);
+  }
+  
+  /* Untuk browser WebKit (Chrome, Safari) */
+  input[type="date"]::-webkit-datetime-edit {
+    font-family: inherit;
+    color: inherit;
+  }
+  
+  input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+    font-family: inherit;
+  }
+  
+  input[type="date"]::-webkit-datetime-edit-text {
+    color: inherit;
+    padding: 0 0.2em;
+  }
+  
+  /* Untuk Firefox */
+  input[type="date"]::-moz-focus-inner {
+    font-family: inherit;
+    color: inherit;
+  }
+  
+  /* Untuk IE/Edge */
+  input[type="date"]::-ms-clear {
+    font-family: inherit;
+  }
+  /* ================ TEXTAREA STYLES ================ */
+textarea.form-input {
+    font-family: inherit; /* Menggunakan font yang sama dengan body */
+    font-size: inherit; /* Ukuran font sama dengan elemen lain */
+    color: inherit; /* Warna teks sama */
+    min-height: 100px;
+    resize: vertical;
+    padding: 12px 15px;
+    border: 2px solid var(--input-border);
+    border-radius: var(--border-radius);
+    background: var(--input-bg);
+    transition: var(--transition);
+  }
+  
+  textarea.form-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(225, 95, 14, 0.3);
+  }
+  
+  textarea.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-family: inherit;
+    font-size: 0.9em;
+  }
