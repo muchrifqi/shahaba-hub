@@ -398,89 +398,6 @@ galleryItems.forEach(item => {
 });
 });
 
-        function replaceMingguToAhad() {
-        // Dapatkan semua elemen dalam body
-        const allElements = document.body.getElementsByTagName('*');
-        
-        // Iterasi melalui semua elemen
-        for (let element of allElements) {
-            // Proses node teks langsung
-            for (let node of element.childNodes) {
-                if (node.nodeType === Node.TEXT_NODE) {
-                    node.nodeValue = node.nodeValue.replace(/Minggu/g, 'Ahad');
-                }
-            }
-            
-            // Proses atribut yang mungkin mengandung teks (title, alt, placeholder, dll)
-            const attributes = ['title', 'alt', 'placeholder', 'value'];
-            for (let attr of attributes) {
-                if (element.hasAttribute(attr)) {
-                    const value = element.getAttribute(attr);
-                    element.setAttribute(attr, value.replace(/Minggu/g, 'Ahad'));
-                }
-            }
-        }
-        
-        // Perbarui juga konten yang mungkin dihasilkan oleh JavaScript
-        updateDateTimeWithAhad();
-    }
-    // Ganti Minggu ke Ahad
-    // Fungsi pembantu untuk memperbarui tanggal dengan "Ahad"
-    function updateDateTimeWithAhad() {
-        const dateElements = document.querySelectorAll('#current-date, [id*="date"]');
-        dateElements.forEach(el => {
-            el.textContent = el.textContent.replace(/Minggu/g, 'Ahad');
-        });
-    }
-
-    // Panggil fungsi saat halaman dimuat
-    document.addEventListener('DOMContentLoaded', function() {
-        replaceMingguToAhad();
-        
-        // Juga jalankan pada konten yang mungkin dimuat kemudian
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.addedNodes) {
-                    replaceMingguToAhad();
-                }
-            });
-        });
-        
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-            characterData: true
-        });
-    });
-
-    // Ganti juga fungsi updateDateTime sebelumnya
-    function updateDateTime() {
-        const now = new Date();
-        const dateOptions = { 
-            weekday: 'long', 
-            day: 'numeric', 
-            month: 'long', 
-            year: 'numeric' 
-        };
-        
-        let dateString = now.toLocaleDateString('id-ID', dateOptions);
-        dateString = dateString.replace(/Minggu/g, 'Ahad');
-        
-        document.getElementById('current-date').textContent = dateString;
-        
-        const timeOptions = { 
-            hour: '2-digit', 
-            minute: '2-digit', 
-            hour12: false 
-        };
-        const timeElement = document.getElementById('current-time');
-        timeElement.textContent = now.toLocaleTimeString('id-ID', timeOptions) + ' WIB';
-    }
-
-    // Jalankan setiap detik
-    setInterval(updateDateTime, 1000);
-    updateDateTime();
-
 // Navbar
 function navigateToPage(pageId, btn) {
     showPage(pageId);
@@ -489,3 +406,33 @@ function navigateToPage(pageId, btn) {
     });
     btn.classList.add('active');
 }
+const floatBtn = document.getElementById('announcement-float-btn');
+
+// Step 1: Initial attention grab
+floatBtn.classList.add('animate');
+setTimeout(() => {
+  floatBtn.classList.remove('animate');
+  
+  // Step 2: Show text after animation
+  setTimeout(() => {
+    floatBtn.classList.add('show-text');
+    
+    // Step 3: Hide text after 3 seconds
+    setTimeout(() => {
+      floatBtn.classList.remove('show-text');
+      floatBtn.classList.add('hide-text');
+      
+      // Reset for hover state
+      setTimeout(() => {
+        floatBtn.classList.remove('hide-text');
+      }, 300);
+    }, 3000);
+  }, 500);
+}, 1000);
+
+// Scroll function
+floatBtn.addEventListener('click', () => {
+  document.getElementById('announcement-container').scrollIntoView({ 
+    behavior: 'smooth' 
+  });
+});

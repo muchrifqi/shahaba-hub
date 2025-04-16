@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shahaba Hub - Portal Orang Tua</title>
-    <link rel="manifest" href="v2/manifest.json">
-    <link rel="icon" href="v2/assets/icons/logoshahabahub.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="v2/assets/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shahaba Hub - Portal Orang Tua</title>
+        
+        <!-- Manifest & Icons -->
+        <link rel="manifest" href="v2/manifest.json">
+        <link rel="icon" href="icons/logoshahabahub.svg">
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+        
+        <!-- CSS Prioritas Tinggi -->
+        <link rel="stylesheet" href="css/styles.css">
+        
+        <!-- Tailwind CSS (Produksi) -->
+        <link href="../src/output.css" rel="stylesheet">
+        
+        <!-- Script Eksternal -->
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </head>
 <body>
     <!-- Header -->
     <div class="header">
@@ -22,24 +34,6 @@
     
     <!-- Main Content Container -->
     <div class="main-container">
-                <!-- Letakkan ini tepat setelah .header dan sebelum .dashboard-card -->
-               <div class="datetime-container">
-                   <div class="datetime-card">
-                       <div class="datetime-item">
-                           <i class="fas fa-calendar-day datetime-icon"></i>                               <div>
-                               <div class="datetime-label"></div>
-                               <div id="current-date" class="datetime-value">Senin, 20 Maret 2024</div>
-                           </div>
-                       </div>
-                       <div class="datetime-item">
-                           <i class="fas fa-clock datetime-icon"></i>
-                           <div>
-                               <div class="datetime-label"></div>
-                            <div id="current-time" class="datetime-value">08:45 WIB</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         <!-- Dashboard Page -->
         <div id="dashboard-page" class="page active">
             <div class="dashboard-card">
@@ -56,17 +50,17 @@
             <div class="featured-slider relative overflow-hidden rounded-lg shadow-md" style="height: 200px;">
                 <!-- Foto 1 -->
                 <div class="featured-slide active">
-                    <img src="v2/assets/images/prasekolah_belajar1.jpg" alt="Kegiatan Sekolah" class="w-full h-full object-cover">
+                    <img src="images/prasekolah_belajar1.jpg" alt="Kegiatan Sekolah" class="w-full h-full object-cover">
                     <div class="slide-caption">Field Trip ke Museum Nasional</div>
                 </div>
                 <!-- Foto 2 -->
                 <div class="featured-slide">
-                    <img src="v2/assets/images/sd_outing1.jpg" alt="Kegiatan Olahraga" class="w-full h-full object-cover">
+                    <img src="images/sd_outing1.jpg" alt="Kegiatan Olahraga" class="w-full h-full object-cover">
                     <div class="slide-caption">Lomba Olahraga Antar Kelas</div>
                 </div>
                 <!-- Foto 3 -->
                 <div class="featured-slide">
-                    <img src="v2/assets/images/sd_karya1.jpg" alt="Kegiatan Sains" class="w-full h-full object-cover">
+                    <img src="images/sd_karya1.jpg" alt="Kegiatan Sains" class="w-full h-full object-cover">
                     <div class="slide-caption">Praktikum Sains Kelas 5</div>
                 </div>
             </div>
@@ -81,29 +75,29 @@
         <div class="small-photos-container">
             <div class="small-photos-slider">
                 <div class="small-photo">
-                    <img src="v2/assets/images/sd_karya2.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
+                    <img src="images/sd_karya2.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
                 </div>
                 <div class="small-photo">
-                    <img src="v2/assets/images/prasekolah_outing2.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
+                    <img src="images/prasekolah_outing2.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
                 </div>
                 <div class="small-photo">
-                    <img src="v2/assets/images/sd_karya3.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
+                    <img src="images/sd_karya3.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
                 </div>
                 <div class="small-photo">
-                    <img src="v2/assets/images/prasekolah_outing3.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
+                    <img src="images/prasekolah_outing3.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
                 </div>
                 <!-- Duplikat foto untuk efek loop tanpa jeda -->
                 <div class="small-photo">
-                    <img src="v2/assets/images/sd_karya2.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
+                    <img src="images/sd_karya2.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
                 </div>
                 <div class="small-photo">
-                    <img src="v2/assets/images/prasekolah_outing2.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
+                    <img src="images/prasekolah_outing2.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
                 </div>
                 <div class="small-photo">
-                    <img src="v2/assets/images/sd_karya3.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
+                    <img src="images/sd_karya3.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
                 </div>
                 <div class="small-photo">
-                    <img src="v2/assets/images/prasekolah_outing3.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
+                    <img src="images/prasekolah_outing3.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
                 </div>
             </div>
         </div>
@@ -112,31 +106,31 @@
         <!-- Menu Grid -->
             <div class="menu-grid">
                 <a href="#" class="menu-item" onclick="showPage('schedule-page')">
-                    <i class="fas fa-calendar-days" style="color: #76adff;"></i>
+                    <i class="fas fa-calendar-days" style="color: #A8D0FF;"></i>
                     <span>Jadwal</span>
                   </a>
                 <a href="#" class="menu-item" onclick="showPage('activities-page')">
-                    <i class="fas fa-photo-film" style="color: #ece75d ;"></i>
+                    <i class="fas fa-photo-film" style="color: #FFD166;"></i>
                     <span>Kegiatan</span>
                 </a>
                 <a href="#" class="menu-item" onclick="showBankAccountInfo()">
-                    <i class="fas fa-landmark" style="color: #8fb9aa ;"></i>
+                    <i class="fas fa-landmark" style="color: #7BDFF2;"></i>
                     <span>Rekening</span>
                 </a>
                 <a href="#" class="menu-item" onclick="showPage('konsultasi-page')">
-                    <i class="fas fa-comments" style="color: #ee9d15 ;"></i>
+                    <i class="fas fa-comments" style="color: #FFB86B;"></i>
                     <span>Konsultasi</span>
                 </a>
                 <a href="#" class="menu-item" onclick="showPage('attendance-page')">
-                    <i class="fas fa-user-check" style="color: #27ae60 ;"></i>
+                    <i class="fas fa-user-check" style="color: #72D672;"></i>
                     <span>Absensi</span>
                 </a>
                 <a href="#" class="menu-item" onclick="showPage('gmeet-page')">
-                    <i class="fas fa-video" style="color: #e74c3c  ;"></i>
+                    <i class="fas fa-video" style="color: #FF6B6B;"></i>
                     <span>Info GMeet</span>
                 </a>
                 <a href="#" class="menu-item" onclick="showPage('articles-page')">
-                    <i class="fas fa-newspaper" style="color: #9b59b6;"></i>
+                    <i class="fas fa-newspaper" style="color: #C792EA;"></i>
                     <span>Artikel</span>
                 </a>
                 <a href="#" class="menu-item" onclick="showWhatsAppModal(); return false;">
@@ -144,7 +138,7 @@
                     <span>WhatsApp</span>
                 </a>
                 <a href="#" class="menu-item" onclick="showPage('calendar-page')">
-                    <i class="fas fa-calendar-check" style="color: #f39c12;"></i>
+                    <i class="fas fa-calendar-check" style="color: #FBC02D;"></i>
                     <span>Kalender</span>
                 </a>
                 
@@ -253,57 +247,57 @@
                 <div class="iphone-gallery">
                     <!-- Item dengan rasio aspek berbeda (landscape, portrait, square) -->
                     <div class="gallery-item" data-category="prasekolah">
-                    <img src="v2/assets/images/prasekolah_belajar1.jpg" alt="Kegiatan 1" loading="lazy">
+                    <img src="images/prasekolah_belajar1.jpg" alt="Kegiatan 1" loading="lazy">
                     <div class="caption">Field Trip</div>
                     </div>
                     
                     <div class="gallery-item" data-category="prasekolah">
-                    <img src="v2/assets/images/prasekolah_karya1.jpg" alt="Kegiatan 2" loading="lazy">
+                    <img src="images/prasekolah_karya1.jpg" alt="Kegiatan 2" loading="lazy">
                     <div class="caption">Praktikum Sains</div>
                     </div>
                     
                     <div class="gallery-item" data-category="prasekolah">
-                        <img src="v2/assets/images/prasekolah_belajar2.jpg" alt="Kegiatan 1" loading="lazy">
+                        <img src="images/prasekolah_belajar2.jpg" alt="Kegiatan 1" loading="lazy">
                         <div class="caption">Field Trip</div>
                     </div>
                     
                     <div class="gallery-item" data-category="prasekolah">
-                        <img src="v2/assets/images/prasekolah_outing1.jpg" alt="Kegiatan 2" loading="lazy">
+                        <img src="images/prasekolah_outing1.jpg" alt="Kegiatan 2" loading="lazy">
                         <div class="caption">Praktikum Sains</div>
                     </div>
 
                     <div class="gallery-item" data-category="prasekolah">
-                        <img src="v2/assets/images/prasekolah_outing2.jpg" alt="Kegiatan 1" loading="lazy">
+                        <img src="images/prasekolah_outing2.jpg" alt="Kegiatan 1" loading="lazy">
                         <div class="caption">Field Trip</div>
                     </div>
                     
                     <div class="gallery-item">
-                        <img src="v2/assets/images/sd_karya2.jpg" alt="Kegiatan 2" loading="lazy">
+                        <img src="images/sd_karya2.jpg" alt="Kegiatan 2" loading="lazy">
                         <div class="caption">Praktikum Sains</div>
                     </div>
 
                     <div class="gallery-item" data-category="prasekolah">
-                        <img src="v2/assets/images/prasekolah_outing3.jpg" alt="Kegiatan 1" loading="lazy">
+                        <img src="images/prasekolah_outing3.jpg" alt="Kegiatan 1" loading="lazy">
                         <div class="caption">Field Trip</div>
                     </div>
                     
                     <div class="gallery-item" data-category="sd">
-                        <img src="v2/assets/images/sd_karya1.jpg" alt="Kegiatan 2" loading="lazy">
+                        <img src="images/sd_karya1.jpg" alt="Kegiatan 2" loading="lazy">
                         <div class="caption">Praktikum Sains</div>
                     </div>
 
                     <div class="gallery-item" data-category="sd">
-                        <img src="v2/assets/images/sd_karya2.jpg" alt="Kegiatan 1" loading="lazy">
+                        <img src="images/sd_karya2.jpg" alt="Kegiatan 1" loading="lazy">
                         <div class="caption">Field Trip</div>
                     </div>
                     
                     <div class="gallery-item" data-category="sd">
-                        <img src="v2/assets/images/sd_outing1.jpg" alt="Kegiatan 2" loading="lazy">
+                        <img src="images/sd_outing1.jpg" alt="Kegiatan 2" loading="lazy">
                         <div class="caption">Praktikum Sains</div>
                     </div>
 
                     <div class="gallery-item" data-category="sd">
-                        <img src="v2/assets/images/sd_karya3.jpg" alt="Kegiatan 2" loading="lazy">
+                        <img src="images/sd_karya3.jpg" alt="Kegiatan 2" loading="lazy">
                         <div class="caption">Praktikum Sains</div>
                     </div>
                     <!-- Tambahkan lebih banyak item -->
@@ -330,7 +324,7 @@
                     <div class="flex gap-4 mb-4">
                         <div class="form-group flex-1">
                             <label for="nama"><i class="fas fa-user-graduate"></i> Nama Peserta Didik</label>
-                            <input type="text" id="nama" name="nama" placeholder="Cari nama..." required class="form-input">
+                            <input type="text" id="nama" name="nama" placeholder="Cari namav2." required class="form-input">
                             <div id="namaDropdown" class="dropdown"></div>
                         </div>
                         
@@ -352,7 +346,7 @@
                     
                     <div class="form-group">
                         <label for="catatan"><i class="fas fa-comment-alt"></i> Catatan (Opsional)</label>
-                        <textarea id="catatan" name="catatan" placeholder="Tambahkan catatan jika perlu..." class="form-input"></textarea>
+                        <textarea id="catatan" name="catatan" placeholder="Tambahkan catatan jika perluv2." class="form-input"></textarea>
                     </div>
                     
                     <button type="submit" class="submit-btn">
@@ -375,7 +369,7 @@
                 
                 <div class="form-group mb-4">
                     <label for="guruFilter"><i class="fas fa-filter"></i> Filter Guru/Kelas:</label>
-                    <input type="text" id="guruFilter" placeholder="Cari guru/mapel/kelas..." class="form-input">
+                    <input type="text" id="guruFilter" placeholder="Cari guru/mapel/kelasv2." class="form-input">
                 </div>
                 
                 <div id="guru-list" class="space-y-4">
@@ -585,30 +579,33 @@
             </button>
 
             <div class="dashboard-card">
-                <h3 class="flex items-center gap-2 text-white text-base font-semibold mb-3">
+                <h3 class="flex items-center gap-2 text-base font-semibold mb-3">
                     <i class="fas fa-calendar-check"></i>
                     Kalender Kegiatan Sekolah
                 </h3>
 
                 <ul id="calendar-list" class="text-white space-y-3 text-sm">
-                    <!-- Konten akan diisi lewat JavaScript -->
+                    <!-- Konten akan diisi lewat JavaScript | Style di js baris 20 -->
                 </ul>
             </div>
         </div>
-
-
+        <!--Floating-->
+        <button id="announcement-float-btn">
+            <i class="fas fa-info-circle icon"></i>
+            <span class="btn-text">Pengumuman</span>
+          </button>
     <!-- Footer -->
     <div class="footer">
         <p>© 2025 Shahaba Hub - Portal Orang Tua</p>
     </div>
 
     <!-- WhatsApp Modal -->
-    <div id="whatsapp-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div id="whatsapp-modal" class="fixed inset-0 bg-black bg-opacity-10 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg w-full max-w-md mx-4">
             <div class="bg-green-500 text-white p-4 rounded-t-lg flex justify-between items-center">
                 <div class="flex items-center gap-3">
                     <div class="bg-white bg-opacity-20 p-2 rounded-full">
-                        <i class="fab fa-whatsapp text-white"></i>
+                        <i class="fab fa-whatsapp text-green-500"></i>
                     </div>
                     <div>
                         <h3 class="font-bold">Kirim Pesan ke Shahaba</h3>
@@ -624,7 +621,7 @@
                 <div class="mb-4">
                     <label for="whatsapp-message" class="block text-gray-700 mb-2">Isi Pesan:</label>
                     <textarea id="whatsapp-message" style="color: #4a4a4a;" class="w-full border border-gray-300 rounded p-2 h-32" 
-                              placeholder="Contoh: Assalamu'alaikum, saya orang tua dari [Nama Siswa]..."></textarea>
+                              placeholder="Contoh: Assalamu'alaikum, saya orang tua dari [Nama Siswa]v2."></textarea>
                     <p class="text-xs text-gray-500 mt-1 text-right">
                         <span id="char-count">0</span>/500 karakter
                     </p>
@@ -653,7 +650,7 @@
     </div>
 
 <!-- Bottom Navbar -->
-<nav class="fixed bottom-0 left-0 right-0 bg-white text-gray-700 shadow-md z-50 flex justify-around items-center py-2 border-t border-gray-200 rounded-t-xl">
+<nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-white text-gray-700 shadow-md z-50 flex justify-around items-center py-2 border-t border-gray-200 rounded-t-xl">
     <button id="nav-dashboard" onclick="navigateToPage('dashboard-page', this)" class="navbar-button flex flex-col items-center text-xs">
         <i class="fas fa-home text-lg"></i>
         <span>Beranda</span>
@@ -675,10 +672,11 @@
         <span>Artikel</span>
     </button>
 </nav>
-<script src="v2/assets/js/jadwal.js"></script>
-<script src="v2/assets/js/izin-pd.js"></script>
-<script src="v2/assets/js/gmeet.js"></script>
-<script src="v2/assets/js/kal-kegiatan.js"></script>
+<script src="js/script.js"></script> <!--Ubah pengumuman di sini-->
+<script src="js/jadwal.js"></script>
+<script src="js/izin-pd.js"></script>
+<script src="js/gmeet.js"></script>
+<script src="js/kal-kegiatan.js"></script>
         
 </body>
 </html>
