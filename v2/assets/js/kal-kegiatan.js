@@ -17,7 +17,7 @@
         kegiatanKalender.forEach(event => {
             const item = document.createElement("li");
             item.innerHTML = `
-                <div class="bg-white bg-opacity-10 p-3 rounded-md border border-white border-opacity-20">
+                <div>
                     <strong>${formatTanggal(event.tanggal)}</strong><br>
                     <span>${event.judul}</span>
                 </div>
