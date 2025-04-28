@@ -62,7 +62,7 @@ function showBankAccountInfo() {
         title: 'Informasi Rekening Shahaba',
         html: `
             <div class="bank-info">
-                <div class="bank-card" onclick="copyToClipboard('1234567890', 'BNI')">
+                <div class="bank-card" onclick="copyToClipboard('1234567890', 'Muamalat')">
                    <img src="https://www.bankmuamalat.co.id/assets/frontend/images/logo.jpg" alt="Bank Muamalat" class="bank-logo">
                     <div class="bank-details">
                         <p class="account-number">1234567890</p>
@@ -393,19 +393,11 @@ galleryItems.forEach(item => {
     } else if (aspectRatio < 0.8) {
         item.style.gridRow = 'span 2'; // Gambar portrait (tinggi)
     }
-    // Gambar square tetap 1x1
     };
 });
 });
 
-// Navbar
-function navigateToPage(pageId, btn) {
-    showPage(pageId);
-    document.querySelectorAll('.navbar-button').forEach(button => {
-        button.classList.remove('active');
-    });
-    btn.classList.add('active');
-}
+// Float
 const floatBtn = document.getElementById('announcement-float-btn');
 
 // Step 1: Initial attention grab
@@ -470,3 +462,171 @@ function setFixedPosition() {
   
   window.addEventListener('load', setFixedPosition);
   window.addEventListener('resize', setFixedPosition);
+
+  //lazy loading menu item
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuItems = document.querySelectorAll('.menu-item');
+  
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+  
+    menuItems.forEach((item, i) => {
+      item.style.transitionDelay = `${i * 100}ms`;
+      observer.observe(item);
+    });
+  });
+  
+  // Fungsi untuk mendeteksi iOS secara akurat
+  function isIOSDevice() {
+    return (
+      // Deteksi iPhone, iPad, iPod
+      /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      // Deteksi iPad pada iOS 13+ (yang memiliki userAgent seperti Mac)
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+    ) && !window.MSStream; // Exclude Windows devices
+  }
+  
+  // Fungsi untuk mengatur background khusus iOS
+  function setIOSBackground() {
+    if (isIOSDevice()) {
+      document.documentElement.classList.add('ios-device');
+      
+      // Deteksi PWA standalone
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        document.documentElement.classList.add('ios-pwa-standalone');
+        
+        // Tambahkan style dinamis untuk PWA
+        const style = document.createElement('style');
+        style.textContent = `
+          .ios-pwa-standalone html {
+            background: url(../images/background-ios-vertical-lg.png) no-repeat center center fixed;
+            background-size: cover;
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    }
+  }
+  
+  // Fungsi khusus untuk iOS
+  function iOSSpecificFunction() {
+    console.log('Perangkat iOS terdeteksi, menjalankan fungsi khusus...');
+  
+    // Tampilkan instruksi install ke layar utama
+    if (!localStorage.getItem('hideiOSInstallPrompt')) {
+      const prompt = document.createElement('div');
+      prompt.innerHTML = `
+        <div id="ios-install-prompt" class="ios-prompt">
+          <div class="prompt-container">
+            <div class="prompt-header">
+              <h2 class="prompt-title">Tambahkan ke Layar Utama</h2>
+              <p class="prompt-subtitle">Untuk pengalaman seperti aplikasi native dengan akses instan</p>
+            </div>
+  
+            <div class="icon-flow">
+              <svg viewBox="0 0 24 24" class="ios-share-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                <path d="M12 12V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M8 8l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <path d="M5 12v6a2 2 0 002 2h10a2 2 0 002-2v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+              <span class="ios-arrow">→</span>
+              <svg viewBox="0 0 24 24" class="ios-add-icon" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                <line x1="12" y1="7" x2="12" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="7" y1="12" x2="17" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+  
+            <div class="steps-container">
+              <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <div class="step-text">Tekan ikon <strong>Bagikan</strong> di bilah menu</div>
+                  <div class="step-note">Di bagian bawah layar Safari</div>
+                </div>
+              </div>
+  
+              <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <div class="step-text">Pilih <strong>"Tambahkan ke Layar Utama"</strong></div>
+                </div>
+              </div>
+  
+              <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <div class="step-text">Konfirmasi dengan menekan <strong>Tambah</strong></div>
+                </div>
+              </div>
+            </div>
+  
+            <button id="understand-btn" class="understand-btn">
+              <svg class="check-icon" viewBox="0 0 24 24">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="currentColor"/>
+              </svg>
+              Mengerti
+            </button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(prompt);
+  
+      const style = document.createElement('style');
+      style.textContent = `
+        /* Styles for your pop-up */
+        .ios-prompt { ... }
+        /* Add your custom CSS here */
+      `;
+      document.head.appendChild(style);
+  
+      document.getElementById('understand-btn').addEventListener('click', function () {
+        const prompt = document.getElementById('ios-install-prompt');
+        prompt.style.opacity = '0';
+        setTimeout(() => {
+          prompt.style.display = 'none';
+        }, 300);
+        localStorage.setItem('hideiOSInstallPrompt', 'true');
+      });
+    }
+  }
+  
+  // Jalankan saat DOM sudah siap
+  window.addEventListener('DOMContentLoaded', () => {
+    if (isIOSDevice()) {
+      setTimeout(() => {
+        setIOSBackground();  // Mengatur background untuk iOS
+        iOSSpecificFunction();  // Menampilkan popup
+      }, 3000);
+    }
+  });
+  
+// Navbar
+function navigateToPage(pageId, button) {
+  // Sembunyikan semua halaman
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+
+  // Tampilkan halaman yang dituju
+  const targetPage = document.getElementById(pageId);
+  if (targetPage) {
+    targetPage.classList.add('active');
+  }
+
+  // Reset semua tombol navbar
+  document.querySelectorAll('.navbar-button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  // Tandai tombol aktif
+  button.classList.add('active');
+}
