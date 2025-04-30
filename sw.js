@@ -1,11 +1,12 @@
 const CACHE_NAME = 'shahaba-app-v2';
 const ASSETS_TO_CACHE = [
-  '/index.html',
-  '/assets/css/styles.css',
-  '/assets/js/script.js',
-  '/assets/images/background-ios-vertical-lg.png',
-  '/assets/images/background-vertical-lg.png',
-  '/assets/icons/logoshahabahub.svg'
+  'index.html',
+  'content.html',
+  'assets/css/styles.css',
+  'assets/js/script.js',
+  'assets/images/background-ios-vertical-lg.png',
+  'assets/images/background-vertical-lg.png',
+  'assets/icons/logoshahabahub.svg'
 ];
 
 // Install service worker

@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shahaba Hub - Portal Orang Tua</title>
+        
+        <!-- Manifest & Icons -->
+        <link rel="manifest" href="./manifest.json">
+        <link rel="icon" href="./assets/icons/logoshahabahub.svg">
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+        
+        <!-- CSS Prioritas Tinggi -->
+        <link rel="stylesheet" href="./assets/css/styles.css">
+        
+        <!-- Tailwind CSS (Produksi) -->
+        <link href="./src/output.css" rel="stylesheet">
+        
+        <!-- Script Eksternal -->
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+        <script>
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(async function(OneSignal) {
+            await OneSignal.init({
+            appId: "7671df32-41ca-4a59-9a3e-a2e36da5bcda",
+            });
+        });
+        </script>         -->
+    </head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1 style="position: relative; z-index: 2;">Shahaba</h1>
+        <h2>Portal Orang Tua</h2>
+    </div>
+    <!-- Main Content Container -->
+    <div class="main-container">
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page active">
+            <div class="dashboard-card">
+                <div class="flex items-center gap-3 mb-3">
+                    <i class="fas fa-school text-white text-2xl"></i>
+                    <h3 class="text-white text-lg font-semibold">Assalamu'alaykum!</h3>
+                </div>
+                <p class="text-white text-sm opacity-80">Selamat datang di portal orang tua Shahaba. Pilih menu di bawah untuk mengakses fitur.</p>
+            </div>
+
+        <!-- Tambahkan setelah dashboard-card pertama dan sebelum menu-grid -->
+        <div class="gallery-container mb-4">
+            <!-- Slider Foto Besar -->
+            <div class="featured-slider relative overflow-hidden rounded-lg shadow-md" style="height: 200px;">
+                <!-- Foto 1 -->
+                <div class="featured-slide active">
+                    <img src="./assets/images/prasekolah_belajar1.jpg" alt="Kegiatan Sekolah" class="w-full h-full object-cover">
+                    <div class="slide-caption">Field Trip ke Museum Nasional</div>
+                </div>
+                <!-- Foto 2 -->
+                <div class="featured-slide">
+                    <img src="./assets/images/sd_outing1.jpg" alt="Kegiatan Olahraga" class="w-full h-full object-cover">
+                    <div class="slide-caption">Lomba Olahraga Antar Kelas</div>
+                </div>
+                <!-- Foto 3 -->
+                <div class="featured-slide">
+                    <img src="./assets/images/sd_karya1.jpg" alt="Kegiatan Sains" class="w-full h-full object-cover">
+                    <div class="slide-caption">Praktikum Sains Kelas 5</div>
+                </div>
+            </div>
+            
+            <!-- Deskripsi Kegiatan -->
+            <div class="activity-description bg-white bg-opacity-90 rounded-lg p-3 mt-2 text-gray-800 text-sm">
+                <p><span class="font-semibold">Kegiatan Terkini:</span> <span id="current-activity">Field Trip ke Museum Nasional</span></p>
+                <p class="mt-1 text-xs text-gray-600">Lihat lebih banyak foto di menu <strong>Kegiatan</strong></p>
+            </div>
+
+        <!-- Foto Kecil -->
+        <div class="small-photos-container">
+            <div class="small-photos-slider">
+                <div class="small-photo">
+                    <img src="./assets/images/sd_karya2.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
+                </div>
+                <div class="small-photo">
+                    <img src="./assets/images/prasekolah_outing2.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
+                </div>
+                <div class="small-photo">
+                    <img src="./assets/images/sd_karya3.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
+                </div>
+                <div class="small-photo">
+                    <img src="./assets/images/prasekolah_outing3.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
+                </div>
+                <!-- Duplikat foto untuk efek loop tanpa jeda -->
+                <div class="small-photo">
+                    <img src="./assets/images/sd_karya2.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
+                </div>
+                <div class="small-photo">
+                    <img src="./assets/images/prasekolah_outing2.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
+                </div>
+                <div class="small-photo">
+                    <img src="./assets/images/sd_karya3.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
+                </div>
+                <div class="small-photo">
+                    <img src="./assets/images/prasekolah_outing3.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
+                </div>
+            </div>
+        </div>
+        <!-- Tip slider foto kecil -->
+        <p class="mt-4 text-center text-sm text-white mb-2 md:mb-4">
+            Sentuh atau arahkan mouse untuk menjeda slide foto.
+        </p>
+    </div>
+    <!-- Tiga titik pembatas foto dan menu -->
+    <div class="relative flex items-center justify-center my-6">
+        <span class="absolute px-4 bg-[#1e3a8a] text-white text-3xl rounded shadow">
+            <i class="fas fa-ellipsis-h"></i>
+        </span>
+    </div>
+    <br>  
+    <!-- Judul Menu -->  
+    <div class="dashboard-card text-center">
+        <h2 class="flex items-center justify-center gap-2 text-white text-base font-semibold">
+            <i class="	fas fa-compass text-white text-lg"></i>
+            Menu Aplikasi
+        </h2>
+    </div>
+     
+        <!-- Menu Grid -->
+            <div class="menu-grid">
+                <a href="#" class="menu-item" onclick="showPage('schedule-page')">
+                    <i class="fas fa-calendar-days" style="color: #A8D0FF;"></i>
+                    <span>Jadwal</span>
+                  </a>
+                <a href="#" class="menu-item" onclick="showPage('activities-page')">
+                    <i class="fas fa-photo-film" style="color: #FFD166;"></i>
+                    <span>Kegiatan</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showBankAccountInfo()">
+                    <i class="fas fa-landmark" style="color: #7BDFF2;"></i>
+                    <span>Rekening</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showPage('konsultasi-page')">
+                    <i class="fas fa-comments" style="color: #FFB86B;"></i>
+                    <span>Konsultasi</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showPage('attendance-page')">
+                    <i class="fas fa-user-check" style="color: #72D672;"></i>
+                    <span>Absensi</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showPage('gmeet-page')">
+                    <i class="fas fa-video" style="color: #FF6B6B;"></i>
+                    <span>Info GMeet</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showPage('articles-page')">
+                    <i class="fas fa-newspaper" style="color: #C792EA;"></i>
+                    <span>Artikel</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showWhatsAppModal(); return false;">
+                    <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showPage('calendar-page')">
+                    <i class="fas fa-calendar-check" style="color: #FBC02D;"></i>
+                    <span>Kalender</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showPage('feedback-page')">
+                    <i class="fas fa-lightbulb" style="color: #FFB400;"></i>
+                    <span>Kritik & Saran</span>
+                </a>
+                <a href="#" class="menu-item" onclick="showPage('catatan-page')">
+                    <i class="fas fa-id-card" style="color: #00BCD4;"></i>
+                    <span>Laporan</span>
+                </a>   
+                <a href="#" class="menu-item" onclick="showPage('transaksi-page')">
+                    <i class="fas fa-receipt" style="color: #10B981;"></i>
+                    <span>Transaksi</span>
+                  </a>          
+                       
+            </div>
+                <!-- Announcements -->
+            <div class="dashboard-card">
+                    <h3 class="flex items-center gap-2 text-white text-base font-semibold mb-3">
+                        <i class="fas fa-bullhorn"></i>
+                        Pengumuman Terkini
+                    </h3>
+            <div id="announcement-container" class="shimmer" style="min-height: 150px;"></div>
+            </div>
+                 <!--Floating-->
+                 <button id="announcement-float-btn">
+                        <i class="fas fa-info-circle icon"></i>
+                    <span class="btn-text">Pengumuman</span>
+                </button>
+        </div> <!--penutup halaman awal-->
+
+        <!-- Schedule Page -->
+        <div id="schedule-page" class="page">
+            <button class="back-btn" onclick="showPage('dashboard-page')">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+            
+            <div class="dashboard-card">
+                <div class="form-group">
+                    <label for="levelSelector">Pilih Jenjang Pendidikan:</label>
+                    <select id="levelSelector" class="form-input">
+                    <option value="prasekolah">Prasekolah</option>
+                    <option value="sd1">SD Kelas 1</option>
+                    <option value="sd2">SD Kelas 2</option>
+                    <option value="sd3">SD Kelas 3</option>
+                    <option value="sd5">SD Kelas 5</option>
+                    <option value="sd6">SD Kelas 6</option>
+                    <option value="smp9">SMP Kelas 9</option>
+                </select>
+            </div>
+    
+            <!-- Jadwal Harian Accordion -->
+            <div class="accordion">
+                <div class="accordion-header">
+                    <i class="fas fa-calendar-day"></i>
+                    <h3>Jadwal Harian</h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                  </div>
+                <div class="accordion-content" id="daily-schedule">
+                    <!-- Konten akan diisi oleh JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Jadwal Ujian Accordion -->
+            <div class="accordion">
+                <div class="accordion-header">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>Jadwal Ujian</h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-content" id="exam-schedule">
+                    <!-- Konten akan diisi oleh JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Jadwal Seragam Accordion -->
+            <div class="accordion">
+                <div class="accordion-header">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>Jadwal Seragam</h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-content" id="uniform-schedule">
+                    <!-- Konten akan diisi oleh JavaScript -->
+                </div>
+            </div>
+                    <!-- Important Notes -->
+                    <div class="dashboard-card-catatan mt-4">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fas fa-exclamation-circle text-white text-xl"></i>
+                            <h3 class="text-white text-base font-semibold">Catatan Penting</h3>
+                        </div>
+                        <ul class="list-disc pl-5 text-white text-sm space-y-2">
+                            <li>Jadwal bersifat tetap kecuali ada pemberitahuan perubahan</li>
+                            <li>Hadir 15 menit sebelum ujian dimulai</li>
+                            <li>Seragam lengkap selama ujian berlangsung</li>
+                        </ul>
+                    </div>
+                    </div>
+        </div>
+        <!-- Activities Page -->
+        <div id="activities-page" class="page">
+            <button class="back-btn" onclick="showPage('dashboard-page')">
+              <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+            
+            <div class="dashboard-card">
+              <h3 class="flex items-center gap-2 text-white text-base font-semibold mb-3">
+                <i class="fas fa-images"></i>
+                Album Kegiatan
+              </h3>
+              
+              <!-- Filter Album -->
+              <div class="flex gap-2 mb-4 overflow-x-auto py-2">
+                <button class="album-filter-btn active" data-category="all">Semua</button>
+                <button class="album-filter-btn" data-category="prasekolah">Prasekolah</button>
+                <button class="album-filter-btn" data-category="sd">SD</button>
+                <button class="album-filter-btn" data-category="smp">SMP</button>
+                <button class="album-filter-btn" data-category="event">Event</button>
+              </div>
+              
+              <!-- Grid Galeri -->
+                <div class="iphone-gallery">
+                    <!-- Item dengan rasio aspek berbeda (landscape, portrait, square) -->
+                    <div class="gallery-item" data-category="prasekolah">
+                    <img src="./assets/images/prasekolah_belajar1.jpg" alt="Kegiatan 1" loading="lazy">
+                    <div class="caption">Field Trip</div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="prasekolah">
+                    <img src="./assets/images/prasekolah_karya1.jpg" alt="Kegiatan 2" loading="lazy">
+                    <div class="caption">Praktikum Sains</div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="prasekolah">
+                        <img src="./assets/images/prasekolah_belajar2.jpg" alt="Kegiatan 1" loading="lazy">
+                        <div class="caption">Field Trip</div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="prasekolah">
+                        <img src="./assets/images/prasekolah_outing1.jpg" alt="Kegiatan 2" loading="lazy">
+                        <div class="caption">Praktikum Sains</div>
+                    </div>
+
+                    <div class="gallery-item" data-category="prasekolah">
+                        <img src="./assets/images/prasekolah_outing2.jpg" alt="Kegiatan 1" loading="lazy">
+                        <div class="caption">Field Trip</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="./assets/images/sd_karya2.jpg" alt="Kegiatan 2" loading="lazy">
+                        <div class="caption">Praktikum Sains</div>
+                    </div>
+
+                    <div class="gallery-item" data-category="prasekolah">
+                        <img src="./assets/images/prasekolah_outing3.jpg" alt="Kegiatan 1" loading="lazy">
+                        <div class="caption">Field Trip</div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="sd">
+                        <img src="./assets/images/sd_karya1.jpg" alt="Kegiatan 2" loading="lazy">
+                        <div class="caption">Praktikum Sains</div>
+                    </div>
+
+                    <div class="gallery-item" data-category="sd">
+                        <img src="./assets/images/sd_karya2.jpg" alt="Kegiatan 1" loading="lazy">
+                        <div class="caption">Field Trip</div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="sd">
+                        <img src="./assets/images/sd_outing1.jpg" alt="Kegiatan 2" loading="lazy">
+                        <div class="caption">Praktikum Sains</div>
+                    </div>
+
+                    <div class="gallery-item" data-category="sd">
+                        <img src="./assets/images/sd_karya3.jpg" alt="Kegiatan 2" loading="lazy">
+                        <div class="caption">Praktikum Sains</div>
+                    </div>
+                    <!-- Tambahkan lebih banyak item -->
+                </div>
+            </div>
+        </div>
+        <!-- Attendance Page -->
+        <div id="attendance-page" class="page">
+            <button class="back-btn" onclick="showPage('dashboard-page')">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+            
+            <div class="dashboard-card">
+                <h1 class="flex items-center gap-2 text-white text-xl font-semibold mb-4">
+                    <i class="fas fa-clipboard-list"></i> Absensi Peserta Didik
+                </h1>
+                
+                <form id="keteranganForm">
+                    <div class="form-group">
+                        <label for="tanggal"><i class="fas fa-calendar-alt"></i> Tanggal</label>
+                        <input type="date" id="tanggal" name="tanggal" required class="form-input">
+                    </div>
+                    
+                    <div class="flex gap-4 mb-4">
+                        <div class="form-group flex-1">
+                            <label for="nama"><i class="fas fa-user-graduate"></i> Nama Peserta Didik</label>
+                            <input type="text" id="nama" name="nama" placeholder="Cari nama..." required class="form-input">
+                            <div id="namaDropdown" class="dropdown"></div>
+                        </div>
+                        
+                        <div class="form-group w-1/4">
+                            <label for="kelas"><i class="fas fa-chalkboard"></i> Kelas</label>
+                            <input type="text" id="kelas" name="kelas" readonly class="form-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="keterangan"><i class="fas fa-sticky-note"></i> Keterangan</label>
+                        <select id="keterangan" name="keterangan" required class="form-input">
+                            <option value="">Pilih Keterangan</option>
+                            <option value="Izin">Izin</option>
+                            <option value="Sakit">Sakit</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="catatan"><i class="fas fa-comment-alt"></i> Catatan (Opsional)</label>
+                        <textarea id="catatan" name="catatan" placeholder="Tambahkan catatan jika perlu..." class="form-input"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Kirim
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- GMeet Info Page -->
+        <div id="gmeet-page" class="page">
+            <button class="back-btn" onclick="showPage('dashboard-page')">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+            
+            <div class="dashboard-card">
+                <h3 class="flex items-center gap-2 text-white text-base font-semibold mb-3">
+                    <i class="fas fa-video"></i>
+                    Daftar Guru & Google Meet
+                </h3>
+                
+                <div class="form-group mb-4">
+                    <label for="guruFilter"><i class="fas fa-filter"></i> Filter Guru/Kelas:</label>
+                    <input type="text" id="guruFilter" placeholder="Cari guru/mapel/kelas..." class="form-input">
+                </div>
+                
+                <div id="guru-list" class="space-y-4">
+                    <!-- Daftar guru akan diisi oleh JavaScript -->
+                </div>
+            </div>
+        </div>
+        <!-- Konsultasi Page -->
+        <div id="konsultasi-page" class="page">
+            <button class="back-btn" onclick="showPage('dashboard-page')">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+            
+            <div class="dashboard-card">
+                <h1 class="flex items-center gap-2 text-white text-xl font-semibold mb-4">
+                    <i class="fas fa-comments"></i> Form Konsultasi Orang Tua
+                </h1>
+                
+                <form id="konsultasiForm" onsubmit="handleSubmit(event)">
+                    <!-- 1. Orang Tua Dari -->
+                    <div class="form-group">
+                        <label for="orangtuaDari"><i class="fas fa-user-friends"></i> Orang Tua Dari</label>
+                        <input 
+                          type="text" 
+                          id="orangtuaDari" 
+                          name="orangtuaDari" 
+                          placeholder="Nama anak dan Jenjang" 
+                          required 
+                          class="form-input"
+                          pattern=".+ - .+"
+                          title="Format: Nama Anak - Jenjang Pendidikan"
+                        >
+                        <small class="form-hint">Contoh: Ahmad - Prasekolah</small>
+                      </div>
+                    
+                    <!-- 2. Topik Konsultasi -->
+                    <div class="form-group">
+                        <label><i class="fas fa-clipboard-list"></i> Topik Konsultasi/Diskusi</label>
+                        <div class="topik-options">
+                            <!-- Kategori A: Perkembangan & Pembelajaran -->
+                            <div class="topik-category">
+                                <h3 class="category-title">A. Perkembangan & Pembelajaran</h3>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Perkembangan motorik/kognitif anak">
+                                    <span>Perkembangan motorik/kognitif anak</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Kemampuan sosial-emosional">
+                                    <span>Kemampuan sosial-emosional (interaksi, kepercayaan diri)</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Kesiapan belajar">
+                                    <span>Kesiapan belajar (baca-tulis-hitung)</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Kesulitan belajar">
+                                    <span>Kesulitan belajar</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Penyesuaian metode belajar">
+                                    <span>Penyesuaian metode belajar di sekolah vs rumah</span>
+                                </label>
+                            </div>
+                            
+                            <!-- Kategori B: Perilaku & Kesehatan -->
+                            <div class="topik-category">
+                                <h3 class="category-title">B. Perilaku & Kesehatan</h3>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Pola disiplin dan aturan sekolah">
+                                    <span>Pola disiplin dan aturan sekolah</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Penanganan tantrum/agresivitas atau bullying">
+                                    <span>Penanganan tantrum/agresivitas (TK) atau bullying (SD)</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Kesehatan, nutrisi, dan kebiasaan makan">
+                                    <span>Kesehatan, nutrisi, dan kebiasaan makan di sekolah</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Manajemen screen time">
+                                    <span>Manajemen screen time & aktivitas fisik</span>
+                                </label>
+                            </div>
+                            
+                            <!-- Kategori C: Kebijakan & Fasilitas Sekolah -->
+                            <div class="topik-category">
+                                <h3 class="category-title">C. Kebijakan & Fasilitas Sekolah</h3>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Kurikulum dan sistem evaluasi">
+                                    <span>Kurikulum dan sistem evaluasi (PR, ujian, laporan)</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Biaya sekolah dan transparansi">
+                                    <span>Biaya sekolah dan transparansi administrasi</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Fasilitas pendukung">
+                                    <span>Fasilitas pendukung (perpustakaan, lab, taman bermain)</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Program ekstrakurikuler">
+                                    <span>Program ekstrakurikuler/pengayaan</span>
+                                </label>
+                            </div>
+                            
+                            <!-- Kategori D: Komunikasi & Kolaborasi -->
+                            <div class="topik-category">
+                                <h3 class="category-title">D. Komunikasi & Kolaborasi</h3>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Laporan perkembangan anak">
+                                    <span>Laporan perkembangan anak (harian/mingguan/bulanan)</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Media komunikasi">
+                                    <span>Media komunikasi sekolah-orang tua (grup WA, portal)</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Peran orang tua">
+                                    <span>Peran orang tua dalam kegiatan sekolah</span>
+                                </label>
+                            </div>
+                            
+                            <!-- Kategori E: Transisi & Lainnya -->
+                            <div class="topik-category">
+                                <h3 class="category-title">E. Transisi & Lainnya</h3>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Persiapan transisi">
+                                    <span>Persiapan transisi TK-SD atau kenaikan kelas</span>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" name="topik" value="Lainnya">
+                                    <span>Lainnya (sebutkan di deskripsi)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Deskripsi Singkat -->
+                    <div class="form-group">
+                        <label for="deskripsi"><i class="fas fa-align-left"></i> Deskripsi Singkat</label>
+                        <textarea id="deskripsi" name="deskripsi" placeholder="Jelaskan secara singkat pertanyaan/konsultasi Anda (maks. 500 karakter)" class="form-input" maxlength="500"></textarea>
+                        <div class="char-counter"><span id="charCount">0</span>/500 karakter</div>
+                    </div>
+                    
+                    <!-- 3. Tanggal dan Jam -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tanggal"><i class="fas fa-calendar-day"></i> Tanggal</label>
+                            <input type="date" id="tanggal" name="tanggal" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="jam"><i class="fas fa-clock"></i> Jam</label>
+                            <input type="time" id="jam" name="jam" required class="form-input">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> Kirim
+                      </button>
+                </form>
+            </div>
+        </div>
+        <!-- Articles Page -->
+        <div id="articles-page" class="page">
+            <button class="back-btn" onclick="showPage('dashboard-page')">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+            
+            <div class="dashboard-card">
+                <h3 class="flex items-center gap-2 text-white text-base font-semibold mb-3">
+                    <i class="fas fa-newspaper"></i>
+                    Artikel Pendidikan
+                </h3>
+                
+                <div class="space-y-4">
+                    <a href="https://shahaba.com/persiapan-jelang-masuk-sekolah-langkah-awal-menuju-aktivitas-yang-produktif" target="_blank" 
+                    class="article-item bg-white bg-opacity-10 rounded-lg p-4 block cursor-pointer hover:bg-opacity-20 transition">
+                     <h4 class="font-semibold text-white">Persiapan Jelang Masuk Sekolah</h4>
+                     <p class="text-sm text-white text-opacity-80 mt-1">Langkah awal menuju aktivitas yang produktif</p>
+                 </a>
+                 
+                 <a href="https://shahaba.com/sekolah-sd-dengan-kelas-intensif" target="_blank" 
+                    class="article-item bg-white bg-opacity-10 rounded-lg p-4 block cursor-pointer hover:bg-opacity-20 transition">
+                     <h4 class="font-semibold text-white">Sekolah SD dengan Kelas Intensif</h4>
+                     <p class="text-sm text-white text-opacity-80 mt-1">Pendekatan pembelajaran yang lebih fokus</p>
+                 </a>
+                 
+                </div>
+                
+                <div id="article-container" class="mt-6 hidden">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 id="article-title" class="font-semibold text-white"></h4>
+                        <button onclick="closeArticle()" class="text-white text-opacity-70 hover:text-opacity-100">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <iframe id="article-frame" class="w-full h-96 bg-white rounded-lg" 
+                            frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <!-- Calendar Page -->
+        <div id="calendar-page" class="page">
+            <button class="back-btn" onclick="showPage('dashboard-page')">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+
+            <div class="dashboard-card">
+                <h3 class="flex items-center gap-2 text-base font-semibold mb-3">
+                    <i class="fas fa-calendar-check"></i>
+                    Kalender Kegiatan Sekolah
+                </h3>
+
+                <ul id="calendar-list" class="text-white space-y-3 text-sm">
+                    <!-- Konten akan diisi lewat JavaScript | Style di js baris 20 -->
+                </ul>
+            </div>
+        </div>
+        <!-- Feedback Page -->
+        <div id="feedback-page" class="page">
+            <button class="back-btn" onclick="showPage('dashboard-page')">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+
+            <div class="dashboard-card">
+                <h1 class="flex items-center gap-2 text-white text-xl font-semibold mb-4">
+                    <i class="fas fa-lightbulb"></i> Kritik & Saran
+                </h1>
+
+                <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                    <div class="form-group">
+                        <label for="namaFeedback"><i class="fas fa-user"></i> Nama (Opsional)</label>
+                        <input type="text" id="namaFeedback" name="nama" placeholder="Boleh dikosongkan" class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kategoriFeedback"><i class="fas fa-tags"></i> Kategori</label>
+                        <select id="kategoriFeedback" name="kategori" class="form-input" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="Fasilitas">Fasilitas</option>
+                            <option value="Guru / Staff">Guru / Staff</option>
+                            <option value="Kegiatan / Program">Kegiatan / Program</option>
+                            <option value="Administrasi / Keuangan">Administrasi / Keuangan</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="isiFeedback"><i class="fas fa-comment-alt"></i> Pesan / Masukan</label>
+                        <textarea id="isiFeedback" name="pesan" class="form-input" rows="5" placeholder="Tulis saran atau kritik Anda di sini..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Kirim Masukan
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- Catatan Page -->
+        <div id="catatan-page" class="page">
+            <button class="back-btn" onclick="showPage('dashboard-page')">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+        
+            <div class="dashboard-card">
+                <h1 class="flex items-center gap-2 text-white text-xl font-semibold mb-4">
+                    <i class="fas fa-id-card"></i> Laporan Peserta Didik
+                </h1>
+        
+                <!-- Kamera Preview -->
+                <div id="qr-reader" style="width: 100%; max-width: 400px; margin: auto; min-height: 300px; background: #222; display: none;"></div>
+                
+                <!-- Status Kamera -->
+                <div id="camera-status" class="text-center text-sm text-gray-400 my-2">
+                    Scan kode QR pada kartu siswa
+                </div>
+                <div class="text-center mt-4">
+                    <button id="refresh-scan-btn" onclick="resetScannerPage()" class="px-4 py-2 bg-blue-600 text-white rounded text-sm font-semibold hidden">
+                        <i class="fas fa-undo"></i> Ulangi scan
+                    </button>
+                </div>
+                <!-- Tombol refresh -->
+                <div id="loading-indicator" class="text-center my-4 hidden">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
+                    <p class="form-status">Memproses data...</p>
+                </div>
+                <!-- Tombol Kontrol -->
+                <div class="text-center mt-4 space-x-2">
+                    <button id="start-scan-btn" class="px-4 py-2 bg-green-600 text-white rounded text-sm font-semibold">
+                        <i class="fas fa-camera"></i> Scan
+                    </button>
+                    <button id="stop-scan-btn" class="px-4 py-2 bg-red-600 text-white rounded text-sm font-semibold hidden">
+                        <i class="fas fa-stop"></i> Matikan Kamera
+                    </button>
+                </div>
+        
+                <!-- Hasil Scan -->
+                <div id="catatan-result" class="mt-6 text-white text-sm space-y-3 hidden">
+                    <div id="info-siswa" class="bg-opacity-10 rounded p-3"></div>
+                    <div id="list-catatan" class="space-y-2"></div>
+                    <p class="text-gray-400 text-xs italic">Data lainnya: in syaaa ALLAH segera hadir</p>
+                </div>
+        
+                <!-- Error Message -->
+                <div id="scan-error" class="mt-4 text-red-400 text-sm text-center hidden"></div>
+            </div>
+        </div>
+        <!-- Transaksi Page -->
+        <div id="transaksi-page" class="page">
+            <button class="back-btn" onclick="showPage('dashboard-page')">
+              <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+          
+            <div class="dashboard-card">
+              <h1 class="flex items-center gap-2 text-xl font-semibold mb-4 text-white">
+                <i class="fas fa-wallet"></i> Riwayat Pembayaran
+              </h1>
+          
+              <!-- Form Input -->
+              <label for="siswa-id" class="form-label">
+                <i class="fas fa-id-card mr-1"></i> Masukkan ID Siswa
+              </label>
+              <div class="form-row mt-2 mb-4" style="display: flex; gap: 10px;">
+                <input id="siswa-id" type="text" class="form-input" placeholder="Contoh: 123456789" style="flex:1;">
+                <button onclick="loadTransaksi()" class="btn-primary">
+                  <i class="fas fa-search"></i> Cari
+                </button>
+              </div>
+              <!-- Feedback Status -->
+                <div id="transaksi-status" class="form-status text-sm text-gray-500 hidden">
+                    <!-- Status info ditampilkan oleh JS -->
+                </div>
+          
+              <!-- Hasil -->
+              <div id="transaksi-result" class="hidden">
+                <!-- Info Siswa -->
+                <div class="student-info-card">
+                  <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+                  <div class="student-details">
+                    <h3 id="siswa-nama">Nama Siswa</h3>
+                    <p><i class="fas fa-school mr-1"></i>
+                      <span id="siswa-jenjang-text"></span> - 
+                      <span id="siswa-kelas-text"></span>
+                    </p>
+                  </div>
+                </div>
+          
+                <!-- Tunggakan -->
+                <div id="tunggakan-container" class="hidden">
+                  <h3 class="section-title"><i class="fas fa-exclamation-circle text-yellow-500"></i> Tunggakan</h3>
+                  <ul id="tunggakan-list" class="transaksi-list"></ul>
+                </div>
+          
+                <!-- Riwayat Transaksi -->
+                <h3 id="transaksi-title" class="section-title">
+                  <i class="fas fa-history"></i> Riwayat Transaksi
+                </h3>
+                <div id="transaksi-list" class="transaksi-list"></div>
+              </div>
+          
+              <!-- Template Transaksi -->
+              <script type="text/template" id="transaksi-template">
+                <div class="note-card">
+                  <div class="note-header">
+                    <div>
+                      <div class="transaksi-id"><i class="fas fa-hashtag"></i> #ID_TRANSAKSI#</div>
+                      <div class="transaksi-date"><i class="fas fa-calendar-day"></i> #TANGGAL#</div>
+                    </div>
+                    <div class="transaksi-status status-#STATUS#">#STATUS#</div>
+                  </div>
+                  <div class="transaksi-nominal">
+                    <i class="fas fa-money-bill-wave"></i> #NOMINAL#
+                  </div>
+                  <div class="transaksi-ket"><i class="fas fa-file-alt"></i> #KETERANGAN#</div>
+                  <!-- <div class="transaksi-btn-container mt-2">
+                    <button class="btn-secondary" onclick="downloadKwitansi('#ID_TRANSAKSI#')">
+                      <i class="fas fa-file-download"></i> Unduh Kwitansi
+                    </button>
+                  </div> -->
+                </div>
+              </script>
+            </div>
+          </div>  
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 Shahaba Hub - Portal Orang Tua</p>
+    </div>
+
+    <!-- WhatsApp Modal -->
+    <div id="whatsapp-modal" class="fixed inset-0 bg-black bg-opacity-10 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg w-full max-w-md mx-4">
+            <div class="bg-green-500 text-white p-4 rounded-t-lg flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="bg-white bg-opacity-20 p-2 rounded-full">
+                        <i class="fab fa-whatsapp text-green-500"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold">Kirim Pesan ke Shahaba</h3>
+                        <p class="text-sm opacity-90">Pesan akan dikirim via WhatsApp</p>
+                    </div>
+                </div>
+                <button onclick="hideWhatsAppModal()" class="text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="p-4">
+                <div class="mb-4">
+                    <label for="whatsapp-message" class="block text-gray-700 mb-2">Isi Pesan:</label>
+                    <textarea id="whatsapp-message" style="color: #4a4a4a;" class="w-full border border-gray-300 rounded p-2 h-32" 
+                              placeholder="Contoh: Assalamu'alaikum, saya orang tua dari [Nama Siswa]..."></textarea>
+                    <p class="text-xs text-gray-500 mt-1 text-right">
+                        <span id="char-count">0</span>/500 karakter
+                    </p>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="recipient" class="block text-gray-700 mb-2">Pilih Tujuan:</label>
+                    <select id="recipient" class="w-full border border-gray-300 rounded p-2">
+                        <option value="6285951589760">Admin Utama</option>
+                        <option value="6285921101260">Admin Keuangan</option>
+                        <option value="6285710006577">Prasekolah (Ibu Nurhayati)</option>
+                        <option value="6281227122410">SD (Pak Dwi Indo)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 p-4 flex justify-end gap-2">
+                <button onclick="hideWhatsAppModal()" class="px-4 py-2 text-gray-600 rounded">
+                    Batal
+                </button>
+                <button onclick="sendWhatsAppMessage()" class="px-4 py-2 bg-green-500 text-white rounded flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Buka WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+<!-- Bottom Navbar Gaya iOS 18 -->
+<nav class="ios-navbar">
+    <button id="nav-schedule" onclick="navigateToPage('schedule-page', this)" class="navbar-button">
+      <i class="fas fa-calendar-alt"></i>
+      <span>Jadwal</span>
+    </button>
+    <button id="nav-activities" onclick="navigateToPage('activities-page', this)" class="navbar-button">
+      <i class="fas fa-photo-film"></i>
+      <span>Kegiatan</span>
+    </button>
+  
+    <button id="nav-dashboard" onclick="navigateToPage('dashboard-page', this)" class="navbar-button">
+      <i class="fas fa-home"></i>
+      <span>Beranda</span>
+    </button>
+  
+    <button id="nav-attendance" onclick="navigateToPage('attendance-page', this)" class="navbar-button">
+      <i class="fas fa-user-check"></i>
+      <span>Absensi</span>
+    </button>
+    <button id="nav-articles" onclick="navigateToPage('catatan-page', this)" class="navbar-button">
+      <i class="fas fa-id-card"></i>
+      <span>Laporan</span>
+    </button>
+  </nav>
+  
+  
+
+<script>
+// Auto tampil jika ada ?id=A001
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const siswaId = params.get("id");
+
+  if (siswaId) {
+    document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+    const page = document.getElementById('transaksi-page');
+    if (page) page.classList.add('active');
+
+    const input = document.getElementById('siswa-id');
+    if (input) {
+      input.value = siswaId;
+      loadTransaksi();
+    }
+
+    window.scrollTo(0, 0);
+  }
+});
+</script>
+<script src="./assets/js/script.js"></script> <!--Ubah pengumuman di sini-->
+<script src="./assets/js/jadwal.js"></script>
+<script src="./assets/js/izin-pd.js"></script>
+<script src="./assets/js/gmeet.js"></script>
+<script src="./assets/js/kal-kegiatan.js"></script>
+<script src="./assets/js/kritiksaran.js"></script>
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="./assets/js/cat-pesdik.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
+<script src="./assets/js/transaksi.js"></script>
+<!-- <script>
+  window.jsPDF = window.jspdf.jsPDF;
+  // Inisialisasi lainnya
+</script> -->
+<!-- <div id="notif-status" style="color: green; font-size: 0.9rem; padding: 8px;"></div>
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+      OneSignal.init({
+        appId: "7671df32-41ca-4a59-9a3e-a2e36da5bcda",
+        serviceWorkerPath: "./OneSignalSDKWorker.js",
+        serviceWorkerUpdaterPath: "./OneSignalSDKUpdaterWorker.js",
+        notifyButton: {
+          enable: true,
+        },
+        promptOptions: {
+          actionMessage: "Izinkan notifikasi agar tidak ketinggalan info penting.",
+          acceptButtonText: "Izinkan",
+          cancelButtonText: "Nanti saja"
+        }
+      });
+    });
+  </script> -->
+</body>
+</html>
