@@ -4,8 +4,8 @@
   "description": "Aplikasi penghubung orang tua dan Shahaba.",
   "icons": [
     {
-      "src": "../shahaba-kepegawaian-presensi/assets/icons/logopresensi192.png",
-      "sizes": "192x192",
+      "src": "./assets/icons/logoshahabahub.svg",
+      "sizes": "72x72",
       "type": "image/png"
     },
     {
