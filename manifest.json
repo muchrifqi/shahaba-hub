@@ -4,47 +4,47 @@
   "description": "Aplikasi penghubung orang tua dan Shahaba.",
   "icons": [
     {
-      "src": "./assets/icons/logoshahabahub.svg",
+      "src": "./assets/icons/logoshahabahub32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icons/logoshahabahub72.png",
       "sizes": "72x72",
       "type": "image/png"
     },
     {
-      "src": "../shahaba-kepegawaian-presensi/assets/icons/logopresensi72.png",
-      "sizes": "72x72",
-      "type": "image/png"
-    },
-    {
-      "src": "../shahaba-kepegawaian-presensi/assets/icons/logopresensi512.png",
+      "src": "./assets/icons/logoshahabahub512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "../shahaba-kepegawaian-presensi/assets/icons/logopresensi144.png",
+      "src": "./assets/icons/logoshahabahub144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "../shahaba-kepegawaian-presensi/assets/icons/logopresensi152.png",
+      "src": "./assets/icons/logoshahabahub152.png",
       "sizes": "152x152",
       "type": "image/png"
     },
     {
-      "src": "../shahaba-kepegawaian-presensi/assets/icons/logopresensi167.png",
+      "src": "./assets/icons/logoshahabahub167.png",
       "sizes": "167x167",
       "type": "image/png"
     },
     {
-      "src": "../shahaba-kepegawaian-presensi/assets/icons/logopresensi180.png",
+      "src": "./assets/icons/logoshahabahub180.png",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "../shahaba-kepegawaian-presensi/assets/icons/logopresensi256.png",
+      "src": "./assets/icons/logoshahabahub256.png",
       "sizes": "256x256",
       "type": "image/png"
     },
     {
-      "src": "../shahaba-kepegawaian-presensi/assets/icons/logopresensi384.png",
+      "src": "./assets/icons/logoshahabahub384.png",
       "sizes": "384x384",
       "type": "image/png"
     }
