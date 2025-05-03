@@ -48,6 +48,31 @@
             });
         });
         </script>-->
+        <script type="module">
+            import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+            import { FCM } from '../assets/js/fcm.js';
+    
+            // Inisialisasi saat DOM ready
+            document.addEventListener('DOMContentLoaded', async () => {
+              try {
+                const initialized = await FCM.init();
+                if (initialized) {
+                  console.log('FCM ready');
+                } else {
+                  const notifButton = document.getElementById('enable-notifications');
+                  if (notifButton) {
+                    notifButton.style.display = 'none';
+                  }
+                }
+              } catch (error) {
+                console.error('Initialization error:', error);
+                const notifButton = document.getElementById('enable-notifications');
+                if (notifButton) {
+                  notifButton.style.display = 'none';
+                }
+              }
+            });
+          </script>
     </head>
 <body>
     <!-- Header -->
@@ -55,6 +80,8 @@
         <h1 style="position: relative; z-index: 2;">Shahaba</h1>
         <h2>Portal Orang Tua</h2>
     </div>
+    <button id="enable-notifications">Aktifkan Notifikasi</button>
+
     <!-- Main Content Container -->
     <div class="main-container">
         <!-- Dashboard Page -->
@@ -959,6 +986,15 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log('Aplikasi berhasil diinstall, syukran');
     });
   </script>
+  <!-- Load FCM Service -->
+  <!-- Load Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js"></script>
+
+<!-- Load konfigurasi -->
+<script src="../assets/js/firebase-config.js" type="module"></script>
+<script type="module" src="../assets/js/fcm.js"></script>
+<script type="module" src="../assets/js/notif.js"></script>
   
 <script src="../assets/js/script.js"></script> <!--Ubah pengumuman di sini-->
 <script src="../assets/js/jadwal.js"></script>
