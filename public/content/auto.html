@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portal Orang Tua</title>
+  <meta name="description" content="Portal orang tua - memantau perkembangan anak di sekolah">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"/>
+  <style>
+    :root {
+      --item-min-width: 220px;
+      --icon-size: 2.5rem;
+      --icon-radius: 0.75rem;
+    }
+
+    body {
+      background: #f8fafc;
+      color: #0f172a;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 2rem 1rem;
+      overflow-x: hidden;
+      right: 0;
+      background: linear-gradient(90deg, transparent, #f8fafc);
+      left: 0;
+      background: linear-gradient(90deg, #f8fafc, transparent);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #0f172a;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .row {
+      display: flex;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .inner-scroll {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .menu-item {
+      background-color: white;
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      min-width: var(--item-min-width);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+        cursor: pointer;
+        user-select: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .menu-item:hover {
+      transform: scale(1.03);
+    }
+
+    .menu-item:active {
+    transform: scale(0.98);
+    }
+    /* Fallback jika JS dinonaktifkan */
+    .no-js .row {
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    }
+    .no-js .inner-scroll {
+    flex-wrap: nowrap;
+    }
+
+    .icon-box {
+      width: var(--icon-size);
+      height: var(--icon-size);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--icon-radius);
+      color: white;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .row {
+      mask: linear-gradient(90deg, 
+        transparent 0, 
+        #000 20px, 
+        #000 calc(100% - 20px), 
+        transparent
+      );
+    }
+    
+
+
+    .blue    { background-color: #3b82f6; }
+    .green   { background-color: #10b981; }
+    .yellow  { background-color: #facc15; color: #1f2937; }
+    .red     { background-color: #ef4444; }
+    .teal    { background-color: #14b8a6; }
+    .indigo  { background-color: #6366f1; }
+    .orange  { background-color: #f97316; }
+    .gray    { background-color: #6b7280; }
+    .lime    { background-color: #84cc16; color: #1f2937; }
+    .pink    { background-color: #ec4899; }
+
+    @media (max-width: 600px) {
+      :root {
+        --item-min-width: 160px;
+        --icon-size: 2.2rem;
+      }
+
+      .menu-item {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Portal Orang Tua - Versi Beta 🎉</h1>
+
+  <div class="container">
+    <div class="row" data-direction="right">
+      <div class="inner-scroll">
+        <div class="menu-item"><div class="icon-box green"><i class="fas fa-user-check"></i></div> Cek Kehadiran Anak</div>
+        <div class="menu-item"><div class="icon-box blue"><i class="fas fa-file-alt"></i></div> Lihat Nilai & Rapor</div>
+        <div class="menu-item"><div class="icon-box red"><i class="fas fa-heart"></i></div> Catatan Sikap</div>
+        <div class="menu-item"><div class="icon-box yellow"><i class="fas fa-coins"></i></div> Info Pembayaran</div>
+      </div>
+    </div>
+
+    <div class="row" data-direction="left">
+      <div class="inner-scroll">
+        <div class="menu-item"><div class="icon-box teal"><i class="fas fa-comments"></i></div> Konsultasi dengan Guru</div>
+        <div class="menu-item"><div class="icon-box indigo"><i class="fas fa-bell"></i></div> Notifikasi Sekolah</div>
+        <div class="menu-item"><div class="icon-box orange"><i class="fas fa-qrcode"></i></div> Akses QR Siswa</div>
+        <div class="menu-item"><div class="icon-box gray"><i class="fas fa-calendar-alt"></i></div> Jadwal Pelajaran</div>
+      </div>
+    </div>
+
+    <div class="row" data-direction="right">
+      <div class="inner-scroll">
+        <div class="menu-item"><div class="icon-box lime"><i class="fas fa-file-download"></i></div> Unduh Dokumen</div>
+        <div class="menu-item"><div class="icon-box pink"><i class="fas fa-bug"></i></div> Laporan Masalah</div>
+        <div class="menu-item"><div class="icon-box blue"><i class="fas fa-shield-alt"></i></div> Keamanan Data</div>
+        <div class="menu-item"><div class="icon-box green"><i class="fas fa-lock"></i></div> Kontrol Orang Tua</div>
+      </div>
+    </div>
+
+    <div class="row" data-direction="left">
+      <div class="inner-scroll">
+        <div class="menu-item"><div class="icon-box red"><i class="fas fa-envelope-open-text"></i></div> Pesan dari Sekolah</div>
+        <div class="menu-item"><div class="icon-box indigo"><i class="fas fa-bolt"></i></div> Aktivitas Harian</div>
+        <div class="menu-item"><div class="icon-box teal"><i class="fas fa-chart-line"></i></div> Perkembangan Anak</div>
+        <div class="menu-item"><div class="icon-box gray"><i class="fas fa-hands-helping"></i></div> Bantuan & Dukungan</div>
+      </div>
+    </div>
+
+    <div class="row" data-direction="right">
+      <div class="inner-scroll">
+        <div class="menu-item"><div class="icon-box lime"><i class="fas fa-info-circle"></i></div> Tentang Aplikasi</div>
+        <div class="menu-item"><div class="icon-box pink"><i class="fas fa-book-reader"></i></div> Panduan Pengguna</div>
+        <div class="menu-item"><div class="icon-box yellow"><i class="fas fa-mobile-alt"></i></div> Download Versi Mobile</div>
+        <div class="menu-item"><div class="icon-box orange"><i class="fas fa-star"></i></div> Fitur Favorit</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      class InfiniteScroll {
+        constructor(row) {
+          this.row = row;
+          this.scrollContainer = row.querySelector('.inner-scroll');
+          this.direction = row.dataset.direction === 'left' ? -1 : 1;
+          this.speed = 0.6;
+          this.isPaused = false;
+          this.animationId = null;
+          this.originalContent = this.scrollContainer.innerHTML;
+          
+          this.init();
+        }
+
+        init() {
+          // Duplicate content untuk infinite scroll
+          this.scrollContainer.innerHTML += this.originalContent;
+          
+          // Simpan width asli sebelum di-duplicate
+          this.originalWidth = this.scrollContainer.scrollWidth / 2;
+          
+          // Set initial scroll position
+          this.row.scrollLeft = this.direction === -1 ? this.originalWidth : 0;
+
+          this.addEventListeners();
+          this.startAnimation();
+        }
+
+        addEventListeners() {
+          this.row.addEventListener('mouseenter', () => this.isPaused = true);
+          this.row.addEventListener('mouseleave', () => this.isPaused = false);
+        }
+
+        startAnimation() {
+          const animate = () => {
+            if (!this.isPaused) {
+              const currentScroll = this.row.scrollLeft;
+              let newScroll = currentScroll + (this.speed * this.direction);
+
+              // Reset scroll position saat mencapai setengah konten
+              if (this.direction === 1 && newScroll >= this.originalWidth) {
+                newScroll = 0;
+              } else if (this.direction === -1 && newScroll <= 0) {
+                newScroll = this.originalWidth;
+              }
+
+              this.row.scrollLeft = newScroll;
+            }
+            this.animationId = requestAnimationFrame(animate.bind(this));
+          }
+          animate();
+        }
+      }
+
+      // Inisialisasi semua row
+      document.querySelectorAll('.row').forEach(row => {
+        new InfiniteScroll(row);
+      });
+    });
+  </script>
+</body>
+</html>
