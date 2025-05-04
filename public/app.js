@@ -17,7 +17,7 @@ const firebaseConfig = {
 };
 
 // 2. URL Google Apps Script (Ganti dengan URL deploy Anda)
-const SPREADSHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLC9Kjo6nLJUpYfqxZsyQayhD2s5po34mAArm3gCr4xOg1ceErqHbgvwccPMRguJkD/exec";
+const SPREADSHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpqsNl9IXgRHbdDvAu8Qn8gktsQp-Rnj5MUZRHUHcJ4zIWGz1xTd22TJOoHQntNCer/exec";
 
 // 3. VAPID Key (Ganti dengan key Anda)
 const VAPID_KEY = "BPBMSJHLsSwDASYDB00qO__5hp0FpKtwD0BDM_Gt1Vr-RC9dBvjHO5wxvrXz5EYTu8ZgcBtTt638WreJIGS_Ayc";
@@ -98,26 +98,27 @@ async function getFCMToken(messaging) {
 
 // Fungsi untuk mengirim token ke Google Spreadsheet
 async function sendTokenToSpreadsheet(token) {
-  try {
-    const response = await fetch(SPREADSHEET_SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        token: token,
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        platform: navigator.platform
-      })
-    });
-    
-    const result = await response.text();
-    console.log("Spreadsheet response:", result);
-    return result;
-  } catch (error) {
-    console.error("Error sending to spreadsheet:", error);
-    throw error;
+    try {
+      // Create form data to avoid CORS preflight
+      const formData = new FormData();
+      formData.append('token', token);
+      formData.append('timestamp', new Date().toISOString());
+      formData.append('userAgent', navigator.userAgent);
+  
+      const response = await fetch(`${SPREADSHEET_SCRIPT_URL}?nocache=${Date.now()}`, {
+        method: 'POST',
+        mode: 'no-cors', // Important for Google Apps Script
+        body: formData
+      });
+  
+      // Even with no-cors, the request will still complete
+      console.log('Token sent to spreadsheet');
+      return true;
+    } catch (error) {
+      console.error('Error sending token:', error);
+      throw error;
+    }
   }
-}
 
 // Fungsi untuk menampilkan notifikasi
 function showNotification({ title, body, icon }) {
