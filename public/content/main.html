@@ -39,15 +39,27 @@
         <!-- Script Eksternal -->
         <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
         <script>
-        window.OneSignalDeferred = window.OneSignalDeferred || [];
-        OneSignalDeferred.push(async function(OneSignal) {
-            await OneSignal.init({
-            appId: "7671df32-41ca-4a59-9a3e-a2e36da5bcda",
+            window.OneSignal = window.OneSignal || [];
+            OneSignal.push(function() {
+                OneSignal.init({
+                appId: "7671df32-41ca-4a59-9a3e-a2e36da5bcda",
+                safari_web_id: "YOUR_SAFARI_WEB_ID", // opsional untuk Safari
+                notifyButton: {
+                    enable: true // tampilkan tombol subscribe
+                },
+                promptOptions: {
+                    /* pengaturan prompt izin */
+                }
+                });
+                
+                // Untuk debugging
+                OneSignal.on('subscriptionChange', function(isSubscribed) {
+                console.log("Status subscription berubah:", isSubscribed);
+                });
             });
-        });
-        </script>-->
+        </script>
         <script type="module">
             import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
             import { FCM } from '../assets/js/fcm.js';

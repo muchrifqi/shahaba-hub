@@ -3,6 +3,8 @@
   "short_name": "Shahaba",
   "description": "Aplikasi untuk memantau perkembangan anak - lebih dekat dengan Shahaba",
   "start_url": "index.html",
+  "gcm_sender_id": "482941778795",
+  "gcm_sender_id_comment": "Ini adalah ID default OneSignal, tidak perlu diganti",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",

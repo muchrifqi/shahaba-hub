@@ -1,3 +1,4 @@
+importScripts('https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js');
 const CACHE_NAME = 'shahaba-app-v2';
 const ASSETS_TO_CACHE = [
     '/',
