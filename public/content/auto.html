@@ -3,245 +3,627 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portal Orang Tua</title>
-  <meta name="description" content="Portal orang tua - memantau perkembangan anak di sekolah">
+  <title>Shahaba - Portal Orang Tua</title>
+  <meta name="description" content="Portal orang tua modern untuk memantau perkembangan anak di sekolah">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         crossorigin="anonymous"
         referrerpolicy="no-referrer"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            },
+            secondary: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              200: '#ddd6fe',
+              300: '#c4b5fd',
+              400: '#a78bfa',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              800: '#5b21b6',
+              900: '#4c1d95',
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root {
-      --item-min-width: 220px;
-      --icon-size: 2.5rem;
-      --icon-radius: 0.75rem;
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
-
-    body {
-      background: #f8fafc;
-      color: #0f172a;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 2rem 1rem;
-      overflow-x: hidden;
-      right: 0;
-      background: linear-gradient(90deg, transparent, #f8fafc);
-      left: 0;
-      background: linear-gradient(90deg, #f8fafc, transparent);
+    
+    .floating {
+      animation: float 6s ease-in-out infinite;
     }
-
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      color: #0f172a;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .row {
-      display: flex;
-      overflow: hidden;
-      white-space: nowrap;
-      position: relative;
-    }
-
-    .inner-scroll {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .menu-item {
-      background-color: white;
-      border-radius: 12px;
-      padding: 0.8rem 1rem;
-      min-width: var(--item-min-width);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      font-size: 1rem;
-      font-weight: 500;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease;
-        cursor: pointer;
-        user-select: none;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .menu-item:hover {
-      transform: scale(1.03);
-    }
-
-    .menu-item:active {
-    transform: scale(0.98);
-    }
-    /* Fallback jika JS dinonaktifkan */
-    .no-js .row {
-    overflow-x: auto;
-    padding-bottom: 1rem;
-    }
-    .no-js .inner-scroll {
-    flex-wrap: nowrap;
-    }
-
-    .icon-box {
-      width: var(--icon-size);
-      height: var(--icon-size);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--icon-radius);
-      color: white;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-    .row {
-      mask: linear-gradient(90deg, 
-        transparent 0, 
-        #000 20px, 
-        #000 calc(100% - 20px), 
+    
+    .scroll-container {
+      mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 20%,
+        black 80%,
         transparent
       );
     }
     
-
-
-    .blue    { background-color: #3b82f6; }
-    .green   { background-color: #10b981; }
-    .yellow  { background-color: #facc15; color: #1f2937; }
-    .red     { background-color: #ef4444; }
-    .teal    { background-color: #14b8a6; }
-    .indigo  { background-color: #6366f1; }
-    .orange  { background-color: #f97316; }
-    .gray    { background-color: #6b7280; }
-    .lime    { background-color: #84cc16; color: #1f2937; }
-    .pink    { background-color: #ec4899; }
-
-    @media (max-width: 600px) {
-      :root {
-        --item-min-width: 160px;
-        --icon-size: 2.2rem;
-      }
-
-      .menu-item {
-        font-size: 0.9rem;
-        padding: 0.6rem 0.8rem;
-      }
+    .feature-card {
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .download-btn {
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3), 0 2px 4px -1px rgba(79, 70, 229, 0.2);
+    }
+    
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3), 0 4px 6px -2px rgba(79, 70, 229, 0.2);
+    }
+    
+    .scroll-animation {
+      animation: scroll 30s linear infinite;
+    }
+    
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    .scroll-container:hover .scroll-animation {
+      animation-play-state: paused;
     }
   </style>
 </head>
-<body>
-  <h1>🎉 Portal Orang Tua - Versi Beta 🎉</h1>
-
-  <div class="container">
-    <div class="row" data-direction="right">
-      <div class="inner-scroll">
-        <div class="menu-item"><div class="icon-box green"><i class="fas fa-user-check"></i></div> Cek Kehadiran Anak</div>
-        <div class="menu-item"><div class="icon-box blue"><i class="fas fa-file-alt"></i></div> Lihat Nilai & Rapor</div>
-        <div class="menu-item"><div class="icon-box red"><i class="fas fa-heart"></i></div> Catatan Sikap</div>
-        <div class="menu-item"><div class="icon-box yellow"><i class="fas fa-coins"></i></div> Info Pembayaran</div>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+  <!-- Hero Section -->
+  <div class="min-h-screen flex flex-col justify-center items-center px-6 py-16 sm:py-24 lg:px-8 bg-gradient-to-b from-primary-50 to-white">
+    <div class="max-w-7xl mx-auto text-center">
+      <div class="flex justify-center mb-6">
+        <div class="rounded-full bg-primary-100 p-3 floating">
+          <div class="rounded-full bg-primary-200 p-3">
+            <div class="rounded-full bg-primary-500 p-4 text-white">
+              <i class="fas fa-child-reaching text-3xl"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h1 class="text-4xl font-bold tracking-tight sm:text-6xl mb-6">
+        <span class="gradient-text">Shahaba</span> - Portal Orang Tua Modern
+      </h1>
+      <p class="text-lg leading-8 text-gray-600 max-w-3xl mx-auto">
+        Pantau perkembangan akademik dan sosial anak Anda dengan mudah, real-time, dan penuh makna. 
+        Kolaborasi yang lebih baik antara orang tua dan sekolah untuk masa depan anak yang lebih cerah.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button class="download-btn bg-primary-600 px-6 py-3 text-white font-medium rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all">
+          <i class="fas fa-download mr-2"></i> Unduh Aplikasi
+        </button>
+        <button class="bg-white px-6 py-3 text-primary-600 font-medium rounded-lg border border-primary-200 hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all">
+          <i class="fas fa-play-circle mr-2"></i> Lihat Demo
+        </button>
       </div>
     </div>
-
-    <div class="row" data-direction="left">
-      <div class="inner-scroll">
-        <div class="menu-item"><div class="icon-box teal"><i class="fas fa-comments"></i></div> Konsultasi dengan Guru</div>
-        <div class="menu-item"><div class="icon-box indigo"><i class="fas fa-bell"></i></div> Notifikasi Sekolah</div>
-        <div class="menu-item"><div class="icon-box orange"><i class="fas fa-qrcode"></i></div> Akses QR Siswa</div>
-        <div class="menu-item"><div class="icon-box gray"><i class="fas fa-calendar-alt"></i></div> Jadwal Pelajaran</div>
-      </div>
-    </div>
-
-    <div class="row" data-direction="right">
-      <div class="inner-scroll">
-        <div class="menu-item"><div class="icon-box lime"><i class="fas fa-file-download"></i></div> Unduh Dokumen</div>
-        <div class="menu-item"><div class="icon-box pink"><i class="fas fa-bug"></i></div> Laporan Masalah</div>
-        <div class="menu-item"><div class="icon-box blue"><i class="fas fa-shield-alt"></i></div> Keamanan Data</div>
-        <div class="menu-item"><div class="icon-box green"><i class="fas fa-lock"></i></div> Kontrol Orang Tua</div>
-      </div>
-    </div>
-
-    <div class="row" data-direction="left">
-      <div class="inner-scroll">
-        <div class="menu-item"><div class="icon-box red"><i class="fas fa-envelope-open-text"></i></div> Pesan dari Sekolah</div>
-        <div class="menu-item"><div class="icon-box indigo"><i class="fas fa-bolt"></i></div> Aktivitas Harian</div>
-        <div class="menu-item"><div class="icon-box teal"><i class="fas fa-chart-line"></i></div> Perkembangan Anak</div>
-        <div class="menu-item"><div class="icon-box gray"><i class="fas fa-hands-helping"></i></div> Bantuan & Dukungan</div>
-      </div>
-    </div>
-
-    <div class="row" data-direction="right">
-      <div class="inner-scroll">
-        <div class="menu-item"><div class="icon-box lime"><i class="fas fa-info-circle"></i></div> Tentang Aplikasi</div>
-        <div class="menu-item"><div class="icon-box pink"><i class="fas fa-book-reader"></i></div> Panduan Pengguna</div>
-        <div class="menu-item"><div class="icon-box yellow"><i class="fas fa-mobile-alt"></i></div> Download Versi Mobile</div>
-        <div class="menu-item"><div class="icon-box orange"><i class="fas fa-star"></i></div> Fitur Favorit</div>
+    
+    <!-- App Preview -->
+    <div class="mt-16 relative max-w-4xl mx-auto">
+      <div class="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-3xl opacity-20 blur-3xl -z-10"></div>
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+        <div class="flex">
+          <div class="hidden md:block w-1/3 bg-gradient-to-b from-primary-100 to-primary-50 p-8">
+            <div class="bg-white rounded-xl shadow-sm p-6 h-full flex flex-col">
+              <div class="flex items-center mb-6">
+                <div class="bg-primary-100 p-2 rounded-lg">
+                  <i class="fas fa-child text-primary-600 text-xl"></i>
+                </div>
+                <h3 class="ml-3 font-semibold text-gray-900">Profil Anak</h3>
+              </div>
+              <div class="space-y-4 flex-grow">
+                <div class="flex items-center">
+                  <div class="bg-primary-50 p-2 rounded-full">
+                    <i class="fas fa-calendar-day text-primary-500 text-sm"></i>
+                  </div>
+                  <span class="ml-3 text-sm text-gray-600">Kehadiran: 95%</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="bg-primary-50 p-2 rounded-full">
+                    <i class="fas fa-chart-line text-primary-500 text-sm"></i>
+                  </div>
+                  <span class="ml-3 text-sm text-gray-600">Nilai rata-rata: 87</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="bg-primary-50 p-2 rounded-full">
+                    <i class="fas fa-heart text-primary-500 text-sm"></i>
+                  </div>
+                  <span class="ml-3 text-sm text-gray-600">Sikap: Sangat Baik</span>
+                </div>
+              </div>
+              <div class="mt-6 pt-6 border-t border-gray-100">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-gray-500">Terakhir diperbarui</span>
+                  <span class="text-xs font-medium text-primary-600">2 menit lalu</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="w-full md:w-2/3 p-8">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-lg font-semibold text-gray-900">Aktivitas Terkini</h3>
+              <div class="flex space-x-2">
+                <button class="p-2 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200">
+                  <i class="fas fa-filter text-sm"></i>
+                </button>
+                <button class="p-2 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200">
+                  <i class="fas fa-ellipsis-vertical text-sm"></i>
+                </button>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-start p-4 rounded-lg bg-primary-50/50 border border-primary-100">
+                <div class="bg-primary-100 p-2 rounded-lg">
+                  <i class="fas fa-book text-primary-600"></i>
+                </div>
+                <div class="ml-4">
+                  <h4 class="text-sm font-medium text-gray-900">Tugas Matematika</h4>
+                  <p class="text-xs text-gray-500 mt-1">Tugas tentang aljabar telah dikumpulkan tepat waktu</p>
+                  <div class="flex items-center mt-2 text-xs text-gray-500">
+                    <i class="fas fa-clock mr-1"></i>
+                    <span>1 jam yang lalu</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-start p-4 rounded-lg bg-white border border-gray-100 shadow-sm">
+                <div class="bg-green-100 p-2 rounded-lg text-green-600">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="ml-4">
+                  <h4 class="text-sm font-medium text-gray-900">Kehadiran</h4>
+                  <p class="text-xs text-gray-500 mt-1">Anak hadir tepat waktu hari ini</p>
+                  <div class="flex items-center mt-2 text-xs text-gray-500">
+                    <i class="fas fa-clock mr-1"></i>
+                    <span>3 jam yang lalu</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-start p-4 rounded-lg bg-white border border-gray-100 shadow-sm">
+                <div class="bg-blue-100 p-2 rounded-lg text-blue-600">
+                  <i class="fas fa-comment-dots"></i>
+                </div>
+                <div class="ml-4">
+                  <h4 class="text-sm font-medium text-gray-900">Pesan dari Guru</h4>
+                  <p class="text-xs text-gray-500 mt-1">"Ananda menunjukkan peningkatan dalam partisipasi kelas"</p>
+                  <div class="flex items-center mt-2 text-xs text-gray-500">
+                    <i class="fas fa-clock mr-1"></i>
+                    <span>Kemarin</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Features Section -->
+  <div class="py-16 sm:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Fitur Unggulan <span class="gradient-text">Shahaba</span>
+        </h2>
+        <p class="mt-4 text-lg leading-8 text-gray-600 max-w-3xl mx-auto">
+          Semua yang Anda butuhkan untuk terlibat aktif dalam pendidikan anak Anda, dalam satu aplikasi yang mudah digunakan.
+        </p>
+      </div>
+      
+      <!-- Auto-scrolling Features -->
+      <div class="mt-16 overflow-hidden">
+        <div class="scroll-container">
+          <div class="flex w-max">
+            <div class="flex space-x-8 pr-8 scroll-animation">
+              <!-- Feature Cards -->
+              <div class="feature-card w-64 flex-shrink-0 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="p-6">
+                  <div class="bg-indigo-100 w-12 h-12 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
+                    <i class="fas fa-user-check text-xl"></i>
+                  </div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">Pantau Kehadiran</h3>
+                  <p class="text-sm text-gray-600">Lacak kehadiran anak secara real-time dengan notifikasi langsung.</p>
+                </div>
+              </div>
+              
+              <div class="feature-card w-64 flex-shrink-0 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="p-6">
+                  <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-blue-600 mb-4">
+                    <i class="fas fa-file-alt text-xl"></i>
+                  </div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">Nilai & Rapor Digital</h3>
+                  <p class="text-sm text-gray-600">Akses nilai dan rapor anak kapan saja, di mana saja.</p>
+                </div>
+              </div>
+              
+              <div class="feature-card w-64 flex-shrink-0 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="p-6">
+                  <div class="bg-red-100 w-12 h-12 rounded-lg flex items-center justify-center text-red-600 mb-4">
+                    <i class="fas fa-heart text-xl"></i>
+                  </div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">Catatan Sikap</h3>
+                  <p class="text-sm text-gray-600">Pantau perkembangan sikap dan karakter anak di sekolah.</p>
+                </div>
+              </div>
+              
+              <div class="feature-card w-64 flex-shrink-0 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="p-6">
+                  <div class="bg-yellow-100 w-12 h-12 rounded-lg flex items-center justify-center text-yellow-600 mb-4">
+                    <i class="fas fa-coins text-xl"></i>
+                  </div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">Pembayaran Digital</h3>
+                  <p class="text-sm text-gray-600">Info pembayaran SPP dan lainnya dalam satu tempat.</p>
+                </div>
+              </div>
+              
+              <div class="feature-card w-64 flex-shrink-0 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="p-6">
+                  <div class="bg-teal-100 w-12 h-12 rounded-lg flex items-center justify-center text-teal-600 mb-4">
+                    <i class="fas fa-comments text-xl"></i>
+                  </div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">Konsultasi Guru</h3>
+                  <p class="text-sm text-gray-600">Chat langsung dengan wali kelas dan guru mata pelajaran.</p>
+                </div>
+              </div>
+              
+              <div class="feature-card w-64 flex-shrink-0 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="p-6">
+                  <div class="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center text-purple-600 mb-4">
+                    <i class="fas fa-bell text-xl"></i>
+                  </div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">Notifikasi Real-time</h3>
+                  <p class="text-sm text-gray-600">Dapatkan pemberitahuan penting dari sekolah secara instan.</p>
+                </div>
+              </div>
+              
+              <div class="feature-card w-64 flex-shrink-0 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="p-6">
+                  <div class="bg-orange-100 w-12 h-12 rounded-lg flex items-center justify-center text-orange-600 mb-4">
+                    <i class="fas fa-qrcode text-xl"></i>
+                  </div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">QR Code Siswa</h3>
+                  <p class="text-sm text-gray-600">Akses semua info anak dengan scan QR code unik.</p>
+                </div>
+              </div>
+              
+              <div class="feature-card w-64 flex-shrink-0 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="p-6">
+                  <div class="bg-pink-100 w-12 h-12 rounded-lg flex items-center justify-center text-pink-600 mb-4">
+                    <i class="fas fa-chart-line text-xl"></i>
+                  </div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">Analisis Perkembangan</h3>
+                  <p class="text-sm text-gray-600">Grafik dan statistik perkembangan akademik anak.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How It Works -->
+  <div class="py-16 sm:py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Cara Menggunakan <span class="gradient-text">Shahaba</span>
+        </h2>
+        <p class="mt-4 text-lg leading-8 text-gray-600 max-w-3xl mx-auto">
+          Hanya dalam 3 langkah sederhana, Anda bisa mulai memantau perkembangan anak Anda.
+        </p>
+      </div>
+      
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-xl shadow-sm p-8 text-center border border-gray-100">
+          <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center text-primary-600 mx-auto mb-6">
+            <span class="text-2xl font-bold">1</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Unduh Aplikasi</h3>
+          <p class="text-gray-600">Install aplikasi Shahaba dari Play Store atau App Store, atau akses melalui browser.</p>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm p-8 text-center border border-gray-100">
+          <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center text-primary-600 mx-auto mb-6">
+            <span class="text-2xl font-bold">2</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Masuk dengan Akun</h3>
+          <p class="text-gray-600">Gunakan kredensial yang diberikan sekolah untuk login ke akun orang tua.</p>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm p-8 text-center border border-gray-100">
+          <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center text-primary-600 mx-auto mb-6">
+            <span class="text-2xl font-bold">3</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Pantau Perkembangan</h3>
+          <p class="text-gray-600">Akses semua informasi tentang anak Anda dalam satu dashboard yang mudah dipahami.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="py-16 sm:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Apa Kata <span class="gradient-text">Orang Tua</span>?
+        </h2>
+        <p class="mt-4 text-lg leading-8 text-gray-600 max-w-3xl mx-auto">
+          Dengar langsung dari orang tua yang telah menggunakan Shahaba untuk memantau anak-anak mereka.
+        </p>
+      </div>
+      
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-200">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 w-10 h-10 rounded-full flex items-center justify-center text-primary-600">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="ml-4">
+              <h4 class="font-medium text-gray-900">Budi Santoso</h4>
+              <p class="text-sm text-gray-500">Orang tua dari Ananda Rizki</p>
+            </div>
+          </div>
+          <p class="text-gray-600 italic">"Dengan Shahaba, saya bisa langsung tahu jika anak saya tidak masuk sekolah. Fitur notifikasinya sangat membantu!"</p>
+          <div class="mt-4 flex">
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+          </div>
+        </div>
+        
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-200">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 w-10 h-10 rounded-full flex items-center justify-center text-primary-600">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="ml-4">
+              <h4 class="font-medium text-gray-900">Dewi Lestari</h4>
+              <p class="text-sm text-gray-500">Orang tua dari Ananda Putri</p>
+            </div>
+          </div>
+          <p class="text-gray-600 italic">"Saya sangat senang bisa melihat perkembangan nilai anak saya melalui grafik yang mudah dipahami. Sangat membantu untuk mengetahui di mata pelajaran apa dia perlu bantuan."</p>
+          <div class="mt-4 flex">
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+          </div>
+        </div>
+        
+        <div class="bg-gray-50 rounded-xl p-8 border border-gray-200">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 w-10 h-10 rounded-full flex items-center justify-center text-primary-600">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="ml-4">
+              <h4 class="font-medium text-gray-900">Hendra Kurniawan</h4>
+              <p class="text-sm text-gray-500">Orang tua dari Ananda Bintang</p>
+            </div>
+          </div>
+          <p class="text-gray-600 italic">"Fitur chat dengan guru sangat membantu komunikasi. Sekarang tidak perlu menunggu pertemuan orang tua-guru untuk berdiskusi tentang perkembangan anak."</p>
+          <div class="mt-4 flex">
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star-half-alt text-yellow-400"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-secondary-600 py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-6">
+          Siap Memulai Perjalanan Pendidikan Anak Anda?
+        </h2>
+        <p class="text-lg leading-8 text-primary-100 max-w-3xl mx-auto">
+          Bergabunglah dengan ribuan orang tua yang telah mempercayakan pemantauan pendidikan anak mereka kepada Shahaba.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button class="download-btn bg-white px-8 py-4 text-primary-600 font-bold rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600 transition-all">
+            <i class="fas fa-download mr-2"></i> Unduh Sekarang
+          </button>
+          <button class="bg-transparent px-8 py-4 text-white font-bold rounded-lg border-2 border-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600 transition-all">
+            <i class="fas fa-info-circle mr-2"></i> Pelajari Lebih Lanjut
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Shahaba</h3>
+          <p class="text-gray-400 text-sm">Portal orang tua modern untuk memantau perkembangan anak di sekolah.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Tautan Cepat</h3>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-white transition">Beranda</a></li>
+            <li><a href="#" class="hover:text-white transition">Fitur</a></li>
+            <li><a href="#" class="hover:text-white transition">Tentang Kami</a></li>
+            <li><a href="#" class="hover:text-white transition">Kontak</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Dukungan</h3>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-white transition">Pusat Bantuan</a></li>
+            <li><a href="#" class="hover:text-white transition">Panduan Pengguna</a></li>
+            <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+            <li><a href="#" class="hover:text-white transition">Kebijakan Privasi</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Hubungi Kami</h3>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li class="flex items-center">
+              <i class="fas fa-envelope mr-2"></i>
+              <span>hello@shahaba.id</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-phone-alt mr-2"></i>
+              <span>+62 21 1234 5678</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-map-marker-alt mr-2"></i>
+              <span>Jakarta, Indonesia</span>
+            </li>
+          </ul>
+          <div class="mt-4 flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
+        <p>&copy; 2023 Shahaba. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PWA Install Prompt -->
+  <div id="installPrompt" class="hidden fixed bottom-4 right-4 bg-white rounded-lg shadow-xl p-4 max-w-xs border border-gray-200 z-50">
+    <div class="flex items-start">
+      <div class="bg-primary-100 p-2 rounded-lg mr-3">
+        <i class="fas fa-mobile-alt text-primary-600"></i>
+      </div>
+      <div>
+        <h4 class="font-medium text-gray-900 mb-1">Instal Shahaba</h4>
+        <p class="text-sm text-gray-600 mb-3">Tambahkan Shahaba ke layar utama untuk pengalaman yang lebih baik</p>
+        <div class="flex space-x-2">
+          <button id="cancelInstall" class="text-sm px-3 py-1 rounded border border-gray-300 text-gray-700 hover:bg-gray-50">Nanti</button>
+          <button id="installBtn" class="text-sm px-3 py-1 rounded bg-primary-600 text-white hover:bg-primary-700">Instal</button>
+        </div>
+      </div>
+      <button id="closePrompt" class="ml-2 text-gray-400 hover:text-gray-600">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      class InfiniteScroll {
-        constructor(row) {
-          this.row = row;
-          this.scrollContainer = row.querySelector('.inner-scroll');
-          this.direction = row.dataset.direction === 'left' ? -1 : 1;
-          this.speed = 0.6;
-          this.isPaused = false;
-          this.animationId = null;
-          this.originalContent = this.scrollContainer.innerHTML;
-          
-          this.init();
-        }
-
-        init() {
-          // Duplicate content untuk infinite scroll
-          this.scrollContainer.innerHTML += this.originalContent;
-          
-          // Simpan width asli sebelum di-duplicate
-          this.originalWidth = this.scrollContainer.scrollWidth / 2;
-          
-          // Set initial scroll position
-          this.row.scrollLeft = this.direction === -1 ? this.originalWidth : 0;
-
-          this.addEventListeners();
-          this.startAnimation();
-        }
-
-        addEventListeners() {
-          this.row.addEventListener('mouseenter', () => this.isPaused = true);
-          this.row.addEventListener('mouseleave', () => this.isPaused = false);
-        }
-
-        startAnimation() {
-          const animate = () => {
-            if (!this.isPaused) {
-              const currentScroll = this.row.scrollLeft;
-              let newScroll = currentScroll + (this.speed * this.direction);
-
-              // Reset scroll position saat mencapai setengah konten
-              if (this.direction === 1 && newScroll >= this.originalWidth) {
-                newScroll = 0;
-              } else if (this.direction === -1 && newScroll <= 0) {
-                newScroll = this.originalWidth;
-              }
-
-              this.row.scrollLeft = newScroll;
-            }
-            this.animationId = requestAnimationFrame(animate.bind(this));
-          }
-          animate();
-        }
-      }
-
-      // Inisialisasi semua row
-      document.querySelectorAll('.row').forEach(row => {
-        new InfiniteScroll(row);
+    // PWA Installation
+    let deferredPrompt;
+    const installPrompt = document.getElementById('installPrompt');
+    const installBtn = document.getElementById('installBtn');
+    const cancelInstall = document.getElementById('cancelInstall');
+    const closePrompt = document.getElementById('closePrompt');
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent the mini-infobar from appearing on mobile
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      deferredPrompt = e;
+      // Show the install prompt
+      setTimeout(() => {
+        installPrompt.classList.remove('hidden');
+      }, 3000);
+    });
+    
+    installBtn.addEventListener('click', async () => {
+      // Hide the app provided install promotion
+      installPrompt.classList.add('hidden');
+      // Show the install prompt
+      deferredPrompt.prompt();
+      // Wait for the user to respond to the prompt
+      const { outcome } = await deferredPrompt.userChoice;
+      // We've used the prompt, and can't use it again, throw it away
+      deferredPrompt = null;
+    });
+    
+    cancelInstall.addEventListener('click', () => {
+      installPrompt.classList.add('hidden');
+    });
+    
+    closePrompt.addEventListener('click', () => {
+      installPrompt.classList.add('hidden');
+    });
+    
+    // Auto-scrolling features
+    document.querySelectorAll('.scroll-animation').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        el.style.animationPlayState = 'paused';
+      });
+      
+      el.addEventListener('mouseleave', () => {
+        el.style.animationPlayState = 'running';
+      });
+    });
+    
+    // Floating animation for download buttons
+    document.querySelectorAll('.download-btn').forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        btn.style.transform = 'translateY(-2px)';
+      });
+      
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translateY(0)';
       });
     });
   </script>

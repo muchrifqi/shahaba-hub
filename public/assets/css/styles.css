@@ -1444,10 +1444,10 @@ border: 1px solid rgba(255, 255, 255, 0.1);
 
 /* Calendar page */
 #calendar-list li {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0);
     padding: 1rem;
     border-radius: var(--border-radius);
-    border: 1px solid rgba(255, 255, 255, 0.221);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 /* General Navbar Styling */
@@ -2202,3 +2202,255 @@ button:disabled {
       background-color: #007aff;
     }
   }
+  /* Kalender Modern */
+.fc .fc-toolbar {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.fc .fc-daygrid-day-frame {
+  min-height: 40px;
+}
+
+.fc .fc-daygrid-day-number {
+  font-weight: 500;
+  padding: 4px;
+}
+
+.fc .fc-col-header-cell-cushion {
+  padding: 8px 4px;
+  font-weight: 500;
+}
+
+/* Legend */
+.calendar-legend {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 0.75rem;
+  background: rgba(47, 47, 47, 0.03);
+  border-radius: 0 0 12px 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  margin-right: 6px;
+}
+/* Loading State */
+.calendar-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9rem;
+}
+
+/* Force Render */
+.fc .fc-view-harness {
+  min-height: 400px;
+  transition: opacity 0.3s;
+}
+
+.fc .fc-view-harness-active {
+  opacity: 1 !important;
+}
+/* Target header hari di kalender */
+.fc-theme-standard .fc-col-header-cell {
+  background: rgb(255, 255, 255) !important; /* Warna sesuai tema Anda */
+  backdrop-filter: blur(10px);
+  color: #172e69 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Target teks nama hari */
+.fc-theme-standard .fc-col-header-cell-cushion {
+  font-weight: 500;
+  padding: 8px 4px;
+}
+/* Atur tinggi semua sel tanggal */
+.fc .fc-daygrid-day-frame {
+  min-height: 80px; /* Tinggi minimum */
+  height: 85px; /* Tinggi tetap (opsional) */
+
+}
+
+/* Untuk tampilan bulan */
+.fc .fc-daygrid-day {
+  height: 100%; /* Pastikan mengisi parent */
+}
+
+/* Atur tinggi body */
+.fc .fc-daygrid-body {
+  height: auto !important;
+}
+/* Atur sudut tumpul untuk seluruh kalender */
+.fc .fc-scrollgrid {
+  border-radius: 12px 12px 0 0 !important;
+  overflow: hidden;
+}
+
+/* Header kolom hari */
+.fc .fc-col-header {
+  border-radius: 12px 12px 0 0;
+}
+
+/* Hari-hari di body kalender */
+.fc .fc-daygrid-day-frame {
+  border-radius: 6px;
+}
+
+/* Event item */
+.fc .fc-daygrid-event {
+  border-radius: 4px;
+}
+/* Warna dasar sel tanggal */
+.fc .fc-daygrid-day {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Warna hari ini */
+.fc .fc-day-today {
+  background: rgba(225, 231, 190, 0.2) !important; /* Ungu muda */
+  border: 1px solid rgba(198, 165, 225, 0.4) !important;
+}
+
+/* Warna weekend */
+.fc .fc-day-sat,
+.fc .fc-day-sun {
+  background: rgba(255, 65, 65, 0.135);
+}
+
+/* Warna header hari */
+.fc .fc-col-header-cell {
+  background: linear-gradient(to bottom, #3b82f6, #2563eb);
+  color: white;
+}
+
+/* Hover effect */
+.fc .fc-daygrid-day:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+/* Warna berbeda per jenjang */
+.event-sd .fc-daygrid-day {
+  background: rgba(59, 131, 246, 0.400);
+}
+.event-smp .fc-daygrid-day {
+  background: rgba(16, 185, 129, 0.400);
+}
+.event-prasekolah .fc-daygrid-day {
+  background: rgba(139, 92, 246, 0.4);
+}
+/* ================ BREAKPOINT MOBILE ================ */
+@media (max-width: 640px) {
+  /* 1. Penyesuaian Container Utama */
+  .fc .fc-toolbar {
+    gap: 0.3rem;
+    padding: 0.3rem;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 0.6rem;
+    margin: 0.5rem 0;
+  }
+
+  /* 2. Header Kolom Hari */
+  .fc .fc-col-header-cell {
+    padding: 4px 2px;
+  }
+
+  .fc .fc-col-header-cell-cushion {
+    font-size: 0.9rem;
+    padding: 2px;
+    white-space: nowrap;
+  }
+
+  /* 3. Sel Tanggal */
+  .fc .fc-daygrid-day {
+    min-height: 40px !important;
+  }
+
+  .fc .fc-daygrid-day-number {
+    font-size: 0.8rem;
+    padding: 2px;
+  }
+
+  /* 4. Event Items */
+  .fc-event {
+    font-size: 0.6rem !important;
+    margin: 1px 0;
+    padding: 0 2px;
+  }
+
+  .fc-event-title {
+    display: none; /* Sembunyikan judul di mobile */
+  }
+
+  /* 5. Tombol Navigasi */
+  .fc .fc-button {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  /* 6. Tampilan Bulanan Khusus Mobile */
+  .fc .fc-daygrid-day-frame {
+    flex-direction: column;
+  }
+
+  /* 7. Badge Event */
+  .fc-daygrid-event-dot {
+    margin: 0 auto;
+  }
+
+  /* 8. Today Highlight */
+  .fc .fc-day-today {
+    border-width: 1px !important;
+  }
+
+}
+
+/* ================ BREAKPOINT VERY SMALL (360px) ================ */
+@media (max-width: 360px) {
+  .fc .fc-col-header-cell-cushion {
+    font-size: 0.6rem;
+  }
+
+  .fc .fc-daygrid-day-number {
+    font-size: 0.6rem;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 1rem;
+  }
+}
+
+/* ================ ORIENTASI LANDSCAPE ================ */
+@media (max-width: 640px) and (orientation: landscape) {
+  .fc .fc-daygrid-day {
+    min-height: 30px !important;
+  }
+
+  .fc .fc-col-header-cell {
+    padding: 2px 1px;
+  }
+}
+.fc-theme-standard .fc-popover {
+  background-color: rgb(255, 255, 255) !important;
+  color: #172e69;
+  border-radius: var(--border-radius) !important;
+  position: fixed;
+}
+
+.fc-popover-header{
+  background-color:#cccccc !important;
+  border-radius: 12px 12px 0 0;
+}
