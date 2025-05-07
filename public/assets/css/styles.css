@@ -52,7 +52,7 @@ html {
 
 /* --- Khusus untuk iOS Device --- */
 .ios-device {
-  background: url('../images/background-ios-vertical-lg.png') no-repeat center center;
+  background: url('../images/safari.png') no-repeat center center;
   background-size: cover;
   background-attachment: scroll; /* scroll supaya tidak bug di Safari/PWA iOS */
 }
@@ -2320,8 +2320,8 @@ button:disabled {
 
 /* Warna hari ini */
 .fc .fc-day-today {
-  background: rgba(225, 231, 190, 0.2) !important; /* Ungu muda */
-  border: 1px solid rgba(198, 165, 225, 0.4) !important;
+  background: rgba(225, 231, 190, 0.2) !important; 
+  border: 1px solid rgba(225, 231, 190, 0.4) !important;
 }
 
 /* Warna weekend */
@@ -2392,7 +2392,7 @@ button:disabled {
   }
 
   .fc-event-title {
-    display: none; /* Sembunyikan judul di mobile */
+    display: none;
   }
 
   /* 5. Tombol Navigasi */
