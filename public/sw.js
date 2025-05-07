@@ -9,8 +9,8 @@ const ASSETS_TO_CACHE = [
     'assets/js/script.js',
     'assets/images/background-ios-vertical-lg.png',
     'assets/images/background-vertical-lg.png',
-    'assets/icons/logoshahabahub.svg',
-    'assets/icons/logoshahabahub144.png'
+    'assets/icons/icon.svg',
+    'assets/icons/icon144.png'
 ];
 
 // Install Service Worker
