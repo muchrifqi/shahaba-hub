@@ -38,24 +38,35 @@
 /* --- Style Umum untuk Semua Device --- */
 html, body {
   height: 100%;
-  min-height: 100%; /* Tambahan untuk keamanan di iOS */
+  min-height: 100%;
   margin: 0;
   padding: 0;
 }
 
+/* Default (Desktop) */
 html {
-  background: url('../images/background-vertical-lg.png') no-repeat center center fixed;
+  background: url('../images/bg_desktop.png') no-repeat center center fixed;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed !important;
 }
 
-/* --- Khusus untuk iOS Device --- */
+/* iOS khusus (PWA Safari) */
 .ios-device {
   background: url('../images/safari.png') no-repeat center center;
   background-size: cover;
-  background-attachment: scroll; /* scroll supaya tidak bug di Safari/PWA iOS */
+  background-attachment: scroll; /* Supaya tidak bug di Safari */
 }
+
+/* Mobile (lebar < 768px) */
+@media (max-width: 767px) {
+  html:not(.ios-device) {
+    background: url('../images/background-vertical-lg.png') no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed !important;
+  }
+}
+
 
 /* --- Opsional: responsive sedikit untuk layar kecil --- */
 @media (max-width: 768px) {
