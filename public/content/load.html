@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <!-- Meta tags for social media preview -->
+  <meta property="og:title" content="Shahaba App">
+  <meta property="og:description" content="Aplikasi portal orang tua Shahaba">
+  <meta property="og:image" content="https://shahaba-parents.web.app/assets/icons/icon144.png">
+  <meta property="og:url" content="https://shahaba-parents.web.app/">
+  <meta property="og:type" content="website">
+        
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shahaba App">
+  <meta name="twitter:description" content="Aplikasi portal orang tua Shahaba">
+  <meta name="twitter:image" content="https://shahaba-parents.web.app/assets/icons/icon144.png">
+        
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" href="../assets/icons/icon_round.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shahaba - Portal Orang Tua</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="../assets/icons/icon_round.svg" />
+  <link rel="apple-touch-icon" href="../assets/icons/icon_round.svg" />
+  <meta name="description" content="Aplikasi untuk memantau perkembangan anak - lebih dekat dengan Shahaba" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    html {
+      background: url('../assets/images/bg_desktop.png') no-repeat center center fixed;
+      background-size: cover;
+      background-attachment: fixed !important;
+    }
+
+    @media (max-width: 767px) {
+      html:not(.ios-device) {
+        background: url('../assets/images/background-vertical-lg-cover.png') no-repeat center center fixed;
+        background-size: cover;
+        background-attachment: fixed !important;
+      }
+    }
+
+    .splash-bg {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 28rem;
+      text-align: center;
+    }
+
+    .logo-text {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.125rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tagline-box {
+      backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+
+    .tagline-box p {
+      color: white;
+      font-size: 0.875rem;
+      line-height: 1.75;
+    }
+
+    .footer {
+      width: 100%;
+      text-align: center;
+      padding-top: 2rem;
+    }
+
+    .loading-dots {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .loading-dots span {
+      animation: bounce 1.5s infinite ease-in-out both;
+      background-color: white;
+      border-radius: 50%;
+      display: inline-block;
+      height: 8px;
+      width: 8px;
+      margin: 0 2px;
+    }
+
+    .loading-dots span:nth-child(1) { animation-delay: 0s; }
+    .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    .loading-text {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Animasi Masuk */
+    @keyframes fadeSlideUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-entry {
+      opacity: 0;
+      animation: fadeSlideUp 0.8s ease-out forwards;
+    }
+
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    .delay-4 { animation-delay: 0.8s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+
+    iframe {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="splash-bg" id="splash">
+    <div class="container">
+      <h1 class="logo-text animate-entry delay-1">Shahaba</h1>
+      <p class="subtitle animate-entry delay-2">Portal Orang Tua</p>
+
+      <div class="tagline-box animate-entry delay-3">
+        <p>"Menghubungkan orang tua dengan perkembangan anak — lebih dekat."</p>
+      </div>
+
+      <div class="footer animate-entry delay-4">
+        <div class="loading-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <p class="loading-text">Memuat aplikasi...</p>
+      </div>
+    </div>
+  </div>
+
+  <iframe id="preloadFrame" src="content/main.html"></iframe>
+
+  <script>
+    // Daftarkan service worker jika ada
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('Service Worker terdaftar:', reg.scope))
+          .catch(err => console.error('Gagal mendaftar SW:', err));
+      });
+    }
+
+    // Vibrasi saat disentuh pertama
+    document.addEventListener('touchstart', function() {
+      if (navigator.vibrate) {
+        navigator.vibrate(10);
+      }
+    }, { once: true });
+
+    // Setelah iframe dimuat, transisi keluar dan pindah ke halaman utama
+    const iframe = document.getElementById('preloadFrame');
+    const splash = document.getElementById('splash');
+
+    iframe.onload = () => {
+      setTimeout(() => {
+        splash.style.transition = 'opacity 1s ease';
+        splash.style.opacity = 0;
+        setTimeout(() => {
+          window.location.href = 'main.html';
+        }, 1000); // Waktu transisi sebelum redirect
+      }, 500); // Tunggu sedikit setelah iframe selesai
+    };
+  </script>
+</body>
+</html>

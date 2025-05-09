@@ -772,23 +772,31 @@ function iOSSpecificFunction() {
   });
   
 // Navbar
-function navigateToPage(pageId, button) {
-  // Sembunyikan semua halaman
+function navigateToPage(pageId, button = null) {
+  // Tampilkan hanya halaman yang dipilih
   document.querySelectorAll('.page').forEach(page => {
     page.classList.remove('active');
   });
-
-  // Tampilkan halaman yang dituju
   const targetPage = document.getElementById(pageId);
   if (targetPage) {
     targetPage.classList.add('active');
   }
 
-  // Reset semua tombol navbar
+  // Update tombol aktif
   document.querySelectorAll('.navbar-button').forEach(btn => {
     btn.classList.remove('active');
   });
+  if (button) {
+    button.classList.add('active');
+  } else {
+    // Auto-aktifkan tombol berdasarkan pageId
+    const targetButton = document.querySelector(`.navbar-button[data-target="${pageId}"]`);
+    if (targetButton) {
+      targetButton.classList.add('active');
+    }
+  }
 
-  // Tandai tombol aktif
-  button.classList.add('active');
+  // Optional: Ubah hash URL untuk tracking (jika butuh "back" support)
+  window.location.hash = pageId;
 }
+

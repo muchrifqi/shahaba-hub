@@ -74,7 +74,9 @@ html {
     background-position: center top;
   }
 }
-
+.main-content{
+  padding-bottom: 100px;
+}
 .install-banner {
   position: fixed;
   bottom: 0;
@@ -1462,77 +1464,106 @@ border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* General Navbar Styling */
+:root {
+  --accent-color: #2563eb;
+  --navbar-height: 75px;
+}
+
+/* Navbar Container */
 .ios-navbar {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  height: var(--navbar-height);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0.5rem 0;
-  background: linear-gradient(to top, #ffffff, #ffffff,#ffffff,#ffffff, #c1c1c1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(200, 200, 200, 0.5);
-  box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.2);
-  border-radius: 1rem 1rem 0 0;
-  z-index: 50;
-  padding-bottom: env(safe-area-inset-bottom);
-  overflow: hidden;
+  padding: 0 1rem;
+  border-top: 1px solid rgba(200, 200, 200, 0.3);
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 1.2rem 1.2rem 0 0;
+  z-index: 100;
 }
 
-.ios-navbar::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.7), transparent);
-  border-radius: 1rem 1rem 0 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
+/* Tombol navbar */
 .navbar-button {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
   color: #6b7280;
-  transition: all 0.3s ease;
-  padding: 0.25rem 0;
+  font-size: 0.7rem;
+  padding: 0.3rem 0;
+  transition: all 0.25s ease;
   position: relative;
   z-index: 10;
 }
 
-.navbar-button span {
-  font-size: 0.65rem;
-  margin-top: 2px;
+.navbar-button i {
+  font-size: 1.2rem;
+  margin-bottom: 0.15rem;
+  transition: transform 0.3s ease;
 }
 
 .navbar-button:hover,
 .navbar-button.active {
-  color: #2563eb;
-}
-
-.navbar-button i {
-  font-size: 1.25rem;
-  transition: transform 0.3s ease;
+  color: var(--accent-color);
 }
 
 .navbar-button:hover i {
   transform: scale(1.1);
 }
 
-/* Responsif: hide di layar besar */
+.navbar-button span {
+  font-size: 0.6rem;
+  letter-spacing: 0.3px;
+}
+
+/* Tombol tengah (beranda) */
+.floating-center {
+  position: relative;
+  top: -30px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.center-button {
+  background: white;
+  padding: 0.7rem 1rem;
+  border-radius: 9999px;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25);
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+  pointer-events: auto;
+  border: 2px solid #e2e8f0;
+}
+
+.center-button:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+
+.center-button i {
+  font-size: 1.4rem;
+  margin-bottom: 0.1rem;
+}
+
+/* Untuk konten agar tidak tertutup navbar */
+.main-content {
+  padding-bottom: calc(var(--navbar-height) + 30px);
+}
+
+/* Sembunyikan di layar besar */
 @media (min-width: 1024px) {
   .ios-navbar {
     display: none !important;
   }
 }
+
+
 
 /* Efek Transisi Konten */
 .page {
