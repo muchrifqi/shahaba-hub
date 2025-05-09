@@ -145,11 +145,11 @@
      
         <!-- Menu Grid -->
             <div class="menu-grid">
-                <a href="#" class="menu-item" onclick="showPage('schedule-page')">
+                <a href="#" class="menu-item" onclick="navigateToPage('schedule-page')">
                     <i class="fas fa-calendar-days" style="color: #A8D0FF;"></i>
                     <span>Jadwal</span>
                   </a>
-                <a href="#" class="menu-item" onclick="showPage('activities-page')">
+                <a href="#" class="menu-item" onclick="navigateToPage('activities-page')">
                     <i class="fas fa-photo-film" style="color: #FFD166;"></i>
                     <span>Kegiatan</span>
                 </a>
@@ -157,19 +157,19 @@
                     <i class="fas fa-landmark" style="color: #7BDFF2;"></i>
                     <span>Rekening</span>
                 </a>
-                <a href="#" class="menu-item" onclick="showPage('konsultasi-page')">
+                <a href="#" class="menu-item" onclick="navigateToPage('konsultasi-page')">
                     <i class="fas fa-comments" style="color: #FFB86B;"></i>
                     <span>Konsultasi</span>
                 </a>
-                <a href="#" class="menu-item" onclick="showPage('attendance-page')">
+                <a href="#" class="menu-item" onclick="navigateToPage('attendance-page')">
                     <i class="fas fa-user-check" style="color: #72D672;"></i>
                     <span>Absensi</span>
                 </a>
-                <a href="#" class="menu-item" onclick="showPage('gmeet-page')">
+                <a href="#" class="menu-item" onclick="navigateToPage('gmeet-page')">
                     <i class="fas fa-video" style="color: #FF6B6B;"></i>
                     <span>Info GMeet</span>
                 </a>
-                <a href="#" class="menu-item" onclick="showPage('articles-page')">
+                <a href="#" class="menu-item" onclick="navigateToPage('articles-page')">
                     <i class="fas fa-newspaper" style="color: #C792EA;"></i>
                     <span>Artikel</span>
                 </a>
@@ -177,19 +177,19 @@
                     <i class="fab fa-whatsapp" style="color: #25D366;"></i>
                     <span>WhatsApp</span>
                 </a>
-                <a href="#" class="menu-item" onclick="showPage('calendar-page')">
+                <a href="#" class="menu-item" onclick="navigateToPage('calendar-page')">
                     <i class="fas fa-calendar-check" style="color: #FBC02D;"></i>
                     <span>Kalender</span>
                 </a>
-                <a href="#" class="menu-item" onclick="showPage('feedback-page')">
+                <a href="#" class="menu-item" onclick="navigateToPage('feedback-page')">
                     <i class="fas fa-lightbulb" style="color: #FFB400;"></i>
                     <span>Kritik & Saran</span>
                 </a>
-                <a href="#" class="menu-item" onclick="showPage('catatan-page')">
+                <a href="#" class="menu-item" onclick="navigateToPage('catatan-page')">
                     <i class="fas fa-id-card" style="color: #00BCD4;"></i>
                     <span>Laporan</span>
                 </a>   
-                <a href="#" class="menu-item" onclick="showPage('transaksi-page')">
+                <a href="#" class="menu-item" onclick="navigateToPage('transaksi-page')">
                     <i class="fas fa-receipt" style="color: #10B981;"></i>
                     <span>Transaksi</span>
                   </a>          
@@ -939,23 +939,23 @@
 
 <!-- Bottom Navbar Gaya iOS 18 -->
 <nav class="ios-navbar">
-  <button onclick="navigateToPage('schedule-page', this)" class="navbar-button">
+  <button onclick="navigateToPage('schedule-page', this)" class="navbar-button" data-target="schedule-page">
     <i class="fas fa-calendar-alt"></i><span>Jadwal</span>
   </button>
-  <button onclick="navigateToPage('activities-page', this)" class="navbar-button">
+  
+  <button onclick="navigateToPage('activities-page', this)" class="navbar-button" data-target="activities-page">
     <i class="fas fa-photo-film"></i><span>Kegiatan</span>
   </button>
 
-  <div class="floating-center">
-    <button onclick="navigateToPage('dashboard-page', this)" class="navbar-button center-button"  data-target="dashboard-page">
+    <button onclick="navigateToPage('dashboard-page', this)" class="navbar-button" data-target="dashboard-page">
       <i class="fas fa-home"></i><span>Beranda</span>
     </button>
-  </div>
 
-  <button onclick="navigateToPage('attendance-page', this)" class="navbar-button">
+  <button onclick="navigateToPage('attendance-page', this)" class="navbar-button" data-target="attendance-page">
     <i class="fas fa-user-check"></i><span>Absensi</span>
   </button>
-  <button onclick="navigateToPage('catatan-page', this)" class="navbar-button">
+  
+  <button onclick="navigateToPage('catatan-page', this)" class="navbar-button" data-target="catatan-page">
     <i class="fas fa-id-card"></i><span>Laporan</span>
   </button>
 </nav>
