@@ -1,139 +1,71 @@
 <!DOCTYPE html>
 <html lang="id">
     <head>
-        <!-- Meta tags for social media preview -->
-        <meta property="og:title" content="Shahaba App">
-        <meta property="og:description" content="Aplikasi portal orang tua Shahaba">
-        <meta property="og:image" content="https://shahaba-hub01.web.app/assets/icons/icon144.png">
-        <meta property="og:url" content="https://shahaba-hub01.web.app/">
+        <meta property="og:title" content="Shahaba">
+        <meta property="og:description" content="Menghubungkan orang tua dengan perkembangan anak — lebih dekat">
+        <meta property="og:image" content="https://shahaba-parents.web.app/public/assets/icons/Icon_biru_round144.png">
+        <meta property="og:url" content="https://shahaba-parents.web.app/">
         <meta property="og:type" content="website">
-        
-        <!-- Twitter Card Meta Tags -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Shahaba App">
-        <meta name="twitter:description" content="Aplikasi portal orang tua Shahaba">
-        <meta name="twitter:image" content="https://shahaba-hub01.web.app/assets/icons/icon144.png">
-        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="apple-touch-icon" href="../assets/icons/icon_round.svg">
-        <title>Shahaba Hub - Portal Orang Tua</title>
-        
-        <!-- Manifest & Icons -->
+        <link rel="apple-touch-icon" href="../assets/icons/Icon_biru_round.svg">
+        <meta name="description" content="Menghubungkan orang tua dengan perkembangan anak — lebih dekat" />
+        <title>Beranda</title>
         <link rel="manifest" href="../manifest.json"> 
-        <link rel="icon" href="../assets/icons/icon_round.svg">
-        
-        <!-- Font Awesome -->
+        <link rel="icon" href="../assets/icons/Icon_biru_round.svg">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        
-        <!-- Google Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-        
-        <!-- CSS Prioritas Tinggi -->
         <link rel="stylesheet" href="../assets/css/styles.css">
-        
-        <!-- Tailwind CSS (Produksi) -->
         <link href="../src/output.css" rel="stylesheet">
-
-        <!-- Load CSS FullCalendar -->
-        <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
-
-        
-        <!-- Script Eksternal -->
+        <link href='../assets/css/main.min.css' rel='stylesheet' />
         <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-        <!-- <script>
-            window.OneSignal = window.OneSignal || [];
-            OneSignal.push(function() {
-                OneSignal.init({
-                appId: "7671df32-41ca-4a59-9a3e-a2e36da5bcda",
-                safari_web_id: "YOUR_SAFARI_WEB_ID", // opsional untuk Safari
-                notifyButton: {
-                    enable: true // tampilkan tombol subscribe
-                },
-                promptOptions: {
-                    /* pengaturan prompt izin */
-                }
-                });
-                
-                // Untuk debugging
-                OneSignal.on('subscriptionChange', function(isSubscribed) {
-                console.log("Status subscription berubah:", isSubscribed);
-                });
-            });
-        </script> -->
-        <script type="module">
-            import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-            import { FCM } from '../assets/js/fcm.js';
-    
-            // Inisialisasi saat DOM ready
-            document.addEventListener('DOMContentLoaded', async () => {
-              try {
-                const initialized = await FCM.init();
-                if (initialized) {
-                  console.log('FCM ready');
-                } else {
-                  const notifButton = document.getElementById('enable-notifications');
-                  if (notifButton) {
-                    notifButton.style.display = 'none';
-                  }
-                }
-              } catch (error) {
-                console.error('Initialization error:', error);
-                const notifButton = document.getElementById('enable-notifications');
-                if (notifButton) {
-                  notifButton.style.display = 'none';
-                }
-              }
-            });
-          </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js" defer></script>
     </head>
 <body>
+<div class="main-content">
     <!-- Header -->
     <div class="header">
         <h1 style="position: relative; z-index: 2;">Shahaba</h1>
         <h2>Portal Orang Tua</h2>
     </div>
-    <button id="enable-notifications">Aktifkan Notifikasi</button>
-
     <!-- Main Content Container -->
     <div class="main-container">
         <!-- Dashboard Page -->
         <div id="dashboard-page" class="page active">
             <div class="dashboard-card">
                 <div class="flex items-center gap-3 mb-3">
-                    <i class="fas fa-school text-white text-2xl"></i>
-                    <h3 class="text-white text-lg font-semibold">Assalamu'alaykum!</h3>
+                    <i class="fas fa-home text-white text-2xl"></i>
+                    <h3 class="shimmer-text">Assalamu'alaykum!</h3>
                 </div>
                 <p class="text-white text-sm opacity-80">Selamat datang di portal orang tua Shahaba. Pilih menu di bawah untuk mengakses fitur.</p>
             </div>
 
         <!-- Tambahkan setelah dashboard-card pertama dan sebelum menu-grid -->
-        <div class="gallery-container mb-4">
+    <div class="gallery-container mb-4">
             <!-- Slider Foto Besar -->
             <div class="featured-slider relative overflow-hidden rounded-lg shadow-md" style="height: 200px;">
                 <!-- Foto 1 -->
                 <div class="featured-slide active">
-                    <img src="../assets/images/prasekolah_belajar1.jpg" alt="Kegiatan Sekolah" class="w-full h-full object-cover">
-                    <div class="slide-caption">Field Trip ke Museum Nasional</div>
+                    <img src="../assets/images/sdk5_informatika.webp" alt="Ekskul Informatika" class="w-full h-full object-cover">
+                    <div class="slide-caption">Ekskul Informatika</div>
                 </div>
                 <!-- Foto 2 -->
                 <div class="featured-slide">
-                    <img src="../assets/images/sd_outing1.jpg" alt="Kegiatan Olahraga" class="w-full h-full object-cover">
-                    <div class="slide-caption">Lomba Olahraga Antar Kelas</div>
+                    <img src="../assets/images/sdk5_kotu.jpg" alt="Outing Class" class="w-full h-full object-cover">
+                    <div class="slide-caption">Outing class Museum Fatahilah</div>
                 </div>
                 <!-- Foto 3 -->
                 <div class="featured-slide">
-                    <img src="../assets/images/sd_karya1.jpg" alt="Kegiatan Sains" class="w-full h-full object-cover">
-                    <div class="slide-caption">Praktikum Sains Kelas 5</div>
+                    <img src="../assets/images/sdk4_karya_pharapan.jpg" alt="Hasil Karya" class="w-full h-full object-cover">
+                    <div class="slide-caption">Membuat Pohon harapan di awal tahun ajaran</div>
                 </div>
             </div>
             
             <!-- Deskripsi Kegiatan -->
-            <div class="activity-description bg-white bg-opacity-90 rounded-lg p-3 mt-2 text-gray-800 text-sm">
-                <p><span class="font-semibold">Kegiatan Terkini:</span> <span id="current-activity">Field Trip ke Museum Nasional</span></p>
+            <div class="activity-description bg-white bg-opacity-90 rounded-lg p-3 text-gray-800 text-sm">
+                <p><span class="font-semibold">Kegiatan Terkini:</span> <span id="current-activity">Ekskul Informatika Kelas V dengan Canva Pro</span></p>
                 <p class="mt-1 text-xs text-gray-600">Lihat lebih banyak foto di menu <strong>Kegiatan</strong></p>
             </div>
 
@@ -141,35 +73,35 @@
         <div class="small-photos-container">
             <div class="small-photos-slider">
                 <div class="small-photo">
-                    <img src="../assets/images/sd_karya2.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
+                    <img src="../assets/images/sd_karya3.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
                 </div>
                 <div class="small-photo">
                     <img src="../assets/images/prasekolah_outing2.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
                 </div>
                 <div class="small-photo">
-                    <img src="../assets/images/sd_karya3.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
+                    <img src="../assets/images/sd_cisadon_air.webp" alt="Foto Kegiatan 3" class="w-full h-full object-cover rounded">
                 </div>
                 <div class="small-photo">
-                    <img src="../assets/images/prasekolah_outing3.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
-                </div>
-                <!-- Duplikat foto untuk efek loop tanpa jeda -->
-                <div class="small-photo">
-                    <img src="../assets/images/sd_karya2.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
+                    <img src="../assets/images/prasekolah_outing3.jpg" alt="Foto Kegiatan 4" class="w-full h-full object-cover rounded">
                 </div>
                 <div class="small-photo">
-                    <img src="../assets/images/prasekolah_outing2.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
+                    <img src="../assets/images/ps_kuntum_sawah.webp" alt="Foto Kegiatan 5" class="w-full h-full object-cover rounded">
                 </div>
                 <div class="small-photo">
-                    <img src="../assets/images/sd_karya3.jpg" alt="Foto Kegiatan 1" class="w-full h-full object-cover rounded">
+                    <img src="../assets/images/sdk2_masjid.webp" alt="Foto Kegiatan 6" class="w-full h-full object-cover rounded">
                 </div>
                 <div class="small-photo">
-                    <img src="../assets/images/prasekolah_outing3.jpg" alt="Foto Kegiatan 2" class="w-full h-full object-cover rounded">
+                    <img src="../assets/images/ps_kelas.jpg" alt="Foto Kegiatan 7" class="w-full h-full object-cover rounded">
                 </div>
+                <div class="small-photo">
+                    <img src="../assets/images/ps_olahraga.webp" alt="Foto Kegiatan 8" class="w-full h-full object-cover rounded">
+                </div>
+                <!-- Duplikat untuk loop -->
             </div>
         </div>
         <!-- Tip slider foto kecil -->
         <p class="mt-4 text-center text-sm text-white mb-2 md:mb-4">
-            Sentuh atau tap untuk menjeda slide foto
+            Geser foto untuk melihat lebih banyak
         </p>
     </div>
     <!-- Tiga titik pembatas foto dan menu -->
@@ -188,75 +120,109 @@
     </div>
      
         <!-- Menu Grid -->
-            <div class="menu-grid">
-                <a href="#" class="menu-item" onclick="showPage('schedule-page')">
-                    <i class="fas fa-calendar-days" style="color: #A8D0FF;"></i>
-                    <span>Jadwal</span>
-                  </a>
-                <a href="#" class="menu-item" onclick="showPage('activities-page')">
-                    <i class="fas fa-photo-film" style="color: #FFD166;"></i>
-                    <span>Kegiatan</span>
-                </a>
-                <a href="#" class="menu-item" onclick="showBankAccountInfo()">
-                    <i class="fas fa-landmark" style="color: #7BDFF2;"></i>
-                    <span>Rekening</span>
-                </a>
-                <a href="#" class="menu-item" onclick="showPage('konsultasi-page')">
-                    <i class="fas fa-comments" style="color: #FFB86B;"></i>
-                    <span>Konsultasi</span>
-                </a>
-                <a href="#" class="menu-item" onclick="showPage('attendance-page')">
-                    <i class="fas fa-user-check" style="color: #72D672;"></i>
-                    <span>Absensi</span>
-                </a>
-                <a href="#" class="menu-item" onclick="showPage('gmeet-page')">
-                    <i class="fas fa-video" style="color: #FF6B6B;"></i>
-                    <span>Info GMeet</span>
-                </a>
-                <a href="#" class="menu-item" onclick="showPage('articles-page')">
-                    <i class="fas fa-newspaper" style="color: #C792EA;"></i>
-                    <span>Artikel</span>
-                </a>
-                <a href="#" class="menu-item" onclick="showWhatsAppModal(); return false;">
-                    <i class="fab fa-whatsapp" style="color: #25D366;"></i>
-                    <span>WhatsApp</span>
-                </a>
-                <a href="#" class="menu-item" onclick="showPage('calendar-page')">
-                    <i class="fas fa-calendar-check" style="color: #FBC02D;"></i>
-                    <span>Kalender</span>
-                </a>
-                <a href="#" class="menu-item" onclick="showPage('feedback-page')">
-                    <i class="fas fa-lightbulb" style="color: #FFB400;"></i>
-                    <span>Kritik & Saran</span>
-                </a>
-                <a href="#" class="menu-item" onclick="showPage('catatan-page')">
-                    <i class="fas fa-id-card" style="color: #00BCD4;"></i>
-                    <span>Laporan</span>
-                </a>   
-                <a href="#" class="menu-item" onclick="showPage('transaksi-page')">
-                    <i class="fas fa-receipt" style="color: #10B981;"></i>
-                    <span>Transaksi</span>
-                  </a>          
-                       
-            </div>
-                <!-- Announcements -->
-            <div class="dashboard-card">
-                    <h3 class="flex items-center gap-2 text-white text-base font-semibold mb-3">
-                        <i class="fas fa-bullhorn"></i>
-                        Pengumuman Terkini
-                    </h3>
-            <div id="announcement-container" class="shimmer" style="min-height: 150px;"></div>
-            </div>
+<div class="menu-grid">
+  <!-- Jadwal -->
+  <button class="menu-item" onclick="navigateToPage('schedule-page')">
+    <img src="../assets/icons/jadwal.png" alt="Logo Jadwal" class="menu-icon">
+    <span>Jadwal</span>
+  </button>
+
+  <!-- Galeri Kegiatan -->
+  <button class="menu-item" onclick="navigateToPage('activities-page')">
+    <img src="../assets/icons/galeri.png" alt="Logo Kegiatan" class="menu-icon">
+    <span>Galeri</span>
+  </button>
+
+  <!-- Rekening -->
+  <button class="menu-item" onclick="showBankAccountInfo()">
+    <img src="../assets/icons/rekening.png" alt="Logo Rekening" class="menu-icon">
+    <span>Rekening</span>
+  </button>
+
+  <!-- Konsultasi -->
+  <button class="menu-item" onclick="navigateToPage('konsultasi-page')">
+    <img src="../assets/icons/konsultasi.png" alt="Logo Konsultasi" class="menu-icon">
+    <span>Konsultasi</span>
+  </button>
+
+  <!-- Absensi -->
+  <button class="menu-item" onclick="navigateToPage('attendance-page')">
+    <img src="../assets/icons/absensi.png" alt="Logo Absensi" class="menu-icon">
+    <span>Absensi</span>
+  </button>
+
+  <!-- Hasil Karya -->
+  <button class="menu-item" onclick="navigateToPage('karya-page')">
+    <img src="../assets/icons/karya.png" alt="Logo Hasil Karya" class="menu-icon">
+    <span>Hasil Karya</span>
+  </button>
+
+  <!-- Artikel -->
+  <button class="menu-item" onclick="navigateToPage('articles-page')">
+    <img src="../assets/icons/artikel.png" alt="Logo Artikel" class="menu-icon">
+    <span>Artikel</span>
+  </button>
+
+  <!-- WhatsApp -->
+  <button class="menu-item" onclick="showWhatsAppModal(); return false;">
+    <img src="../assets/icons/wa.png" alt="Logo WhatsApp" class="menu-icon">
+    <span>WhatsApp</span>
+  </button>
+
+  <!-- Agenda Kegiatan -->
+  <button class="menu-item" onclick="navigateToPage('calendar-page')">
+    <img src="../assets/icons/buku_agenda.png" alt="Logo Agenda" class="menu-icon">
+    <span>Kegiatan</span>
+  </button>
+
+  <!-- Kritik & Saran -->
+  <button class="menu-item" onclick="navigateToPage('feedback-page')">
+    <img src="../assets/icons/kritiksaran.png" alt="Logo Kritik & Saran" class="menu-icon">
+    <span>Kritik & Saran</span>
+  </button>
+
+  <!-- Laporan -->
+  <button class="menu-item" onclick="navigateToPage('catatan-page')">
+    <img src="../assets/icons/laporan.png" alt="Logo Laporan" class="menu-icon">
+    <span>Laporan</span>
+  </button>
+
+  <!-- Transaksi -->
+  <button class="menu-item" onclick="navigateToPage('transaksi-page')">
+    <img src="../assets/icons/transaksi.png" alt="Logo Transaksi" class="menu-icon">
+    <span>Transaksi</span>
+  </button>
+</div>
+
+<!-- App Guide -->
+<div class="dashboard-card" id="guide">
+  <!-- Ilustrasi Utama -->
+<div class="illustration-container" 
+     style="width: 100%; background: rgba(255,255,255,0.03); text-align: center; padding: 0.5rem 0;">
+  <img src="../assets/images/guide.png" 
+       alt="Ilustrasi Panduan"
+       style="max-width: 600px; width: 100%; height: auto; object-fit: contain; display: inline-block;">
+</div>
+  
+<div style="text-align: center; padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border-radius: 8px; margin-bottom: 1rem;">
+  <h3 class="flex items-center justify-center gap-2 text-white text-base font-bold" 
+      style="display: inline-flex;">
+    Panduan Penggunaan Aplikasi
+  </h3>
+</div>
+  
+  <div id="guide-container" class="shimmer" style="min-height: 180px;"></div>
+</div>
                  <!--Floating-->
-                 <button id="announcement-float-btn">
-                        <i class="fas fa-info-circle icon"></i>
-                    <span class="btn-text">Pengumuman</span>
+                 <button id="guide-float-btn">
+                        <i class="fas fa-question-circle icon"></i>
+                    <span class="btn-text">Panduan</span>
                 </button>
         </div> <!--penutup halaman awal-->
 
         <!-- Schedule Page -->
         <div id="schedule-page" class="page">
-            <button class="back-btn" onclick="showPage('dashboard-page')">
+            <button class="back-btn" onclick="navigateToPage('dashboard-page')">
                 <i class="fas fa-arrow-left"></i> Kembali
             </button>
             
@@ -325,7 +291,7 @@
         </div>
         <!-- Activities Page -->
         <div id="activities-page" class="page">
-            <button class="back-btn" onclick="showPage('dashboard-page')">
+            <button class="back-btn" onclick="navigateToPage('dashboard-page')">
               <i class="fas fa-arrow-left"></i> Kembali
             </button>
             
@@ -348,58 +314,78 @@
                 <div class="iphone-gallery">
                     <!-- Item dengan rasio aspek berbeda (landscape, portrait, square) -->
                     <div class="gallery-item" data-category="prasekolah">
-                    <img src="../assets/images/prasekolah_belajar1.jpg" alt="Kegiatan 1" loading="lazy">
-                    <div class="caption">Field Trip</div>
+                    <img src="../assets/images/ps_kelas.jpg" alt="Kegiatan 1" loading="lazy">
+                    <div class="caption">Media belajar Prasekolah</div>
                     </div>
                     
                     <div class="gallery-item" data-category="prasekolah">
-                    <img src="../assets/images/prasekolah_karya1.jpg" alt="Kegiatan 2" loading="lazy">
-                    <div class="caption">Praktikum Sains</div>
+                        <img src="../assets/images/prasekolah_belajar2.jpg" alt="Kegiatan 2" loading="lazy">
+                        <div class="caption">Kelas konsentrasi</div>
                     </div>
                     
                     <div class="gallery-item" data-category="prasekolah">
-                        <img src="../assets/images/prasekolah_belajar2.jpg" alt="Kegiatan 1" loading="lazy">
-                        <div class="caption">Field Trip</div>
-                    </div>
-                    
-                    <div class="gallery-item" data-category="prasekolah">
-                        <img src="../assets/images/prasekolah_outing1.jpg" alt="Kegiatan 2" loading="lazy">
-                        <div class="caption">Praktikum Sains</div>
+                        <img src="../assets/images/prasekolah_karya1.jpg" alt="Kegiatan 3" loading="lazy">
+                        <div class="caption">Menghias gambar</div>
                     </div>
 
                     <div class="gallery-item" data-category="prasekolah">
-                        <img src="../assets/images/prasekolah_outing2.jpg" alt="Kegiatan 1" loading="lazy">
-                        <div class="caption">Field Trip</div>
-                    </div>
-                    
-                    <div class="gallery-item">
-                        <img src="../assets/images/sd_karya2.jpg" alt="Kegiatan 2" loading="lazy">
-                        <div class="caption">Praktikum Sains</div>
+                        <img src="../assets/images/prasekolah_outing1.jpg" alt="Kegiatan 4" loading="lazy">
+                        <div class="caption">Kuntum Farm</div>
                     </div>
 
                     <div class="gallery-item" data-category="prasekolah">
-                        <img src="../assets/images/prasekolah_outing3.jpg" alt="Kegiatan 1" loading="lazy">
-                        <div class="caption">Field Trip</div>
+                        <img src="../assets/images/ps_kuntum_sawah.webp" alt="Kegiatan 5" loading="lazy">
+                        <div class="caption">Mencoba pakai caping</div>
+                    </div>
+
+                                        <div class="gallery-item" data-category="prasekolah">
+                        <img src="../assets/images/prasekolah_outing3.jpg" alt="Kegiatan 6" loading="lazy">
+                        <div class="caption">Memberi makan ikan di Kuntum</div>
                     </div>
                     
                     <div class="gallery-item" data-category="sd">
-                        <img src="../assets/images/sd_karya1.jpg" alt="Kegiatan 2" loading="lazy">
-                        <div class="caption">Praktikum Sains</div>
+                        <img src="../assets/images/sd_karya3.jpg" alt="Kegiatan 7" loading="lazy">
+                        <div class="caption">Cooking class</div>
+                    </div>
+
+                    <div class="gallery-item" data-category="prasekolah">
+                        <img src="../assets/images/prasekolah_outing2.jpg" alt="Kegiatan 8" loading="lazy">
+                        <div class="caption">Memberi makan kelinci di Kuntum</div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="prasekolah">
+                        <img src="../assets/images/ps_olahraga.webp" alt="Kegiatan 9" loading="lazy">
+                        <div class="caption">Serunya olahraga Prasekolah</div>
                     </div>
 
                     <div class="gallery-item" data-category="sd">
-                        <img src="../assets/images/sd_karya2.jpg" alt="Kegiatan 1" loading="lazy">
-                        <div class="caption">Field Trip</div>
+                        <img src="../assets/images/sd_outing3.jpg" alt="Kegiatan 10" loading="lazy">
+                        <div class="caption">Outing class Animalium</div>
                     </div>
                     
                     <div class="gallery-item" data-category="sd">
-                        <img src="../assets/images/sd_outing1.jpg" alt="Kegiatan 2" loading="lazy">
-                        <div class="caption">Praktikum Sains</div>
+                        <img src="../assets/images/sdk2_masjid.webp" alt="Kegiatan 11" loading="lazy">
+                        <div class="caption">Olahraga kelas 2</div>
                     </div>
 
                     <div class="gallery-item" data-category="sd">
-                        <img src="../assets/images/sd_karya3.jpg" alt="Kegiatan 2" loading="lazy">
-                        <div class="caption">Praktikum Sains</div>
+                        <img src="../assets/images/sdk5_informatika.webp" alt="Kegiatan 12" loading="lazy">
+                        <div class="caption">Ekskul Informatika</div>
+                    </div>
+
+                    <div class="gallery-item" data-category="sd">
+                        <img src="../assets/images/sd_cisadon_air.webp" alt="Kegiatan 13" loading="lazy">
+                        <div class="caption">Outing class Cisadon</div>
+                    </div>
+
+                    <div class="gallery-item" data-category="sd">
+                        <img src="../assets/images/sd_cisadon_sungai.webp" alt="Kegiatan 14" loading="lazy">
+                        <div class="caption">Menjelajah Cisadon</div>
+                    </div>
+
+                    <div class="gallery-item" data-category="sd">
+                        <img src="../assets/images/sdk5_kotu.jpg" alt="Kegiatan 15" loading="lazy">
+                        <div class="caption">Menuju Museum Fatahilah</div>
                     </div>
                     <!-- Tambahkan lebih banyak item -->
                 </div>
@@ -407,7 +393,7 @@
         </div>
         <!-- Attendance Page -->
         <div id="attendance-page" class="page">
-            <button class="back-btn" onclick="showPage('dashboard-page')">
+            <button class="back-btn" onclick="navigateToPage('dashboard-page')">
                 <i class="fas fa-arrow-left"></i> Kembali
             </button>
             
@@ -429,7 +415,7 @@
                             <div id="namaDropdown" class="dropdown"></div>
                         </div>
                         
-                        <div class="form-group w-1/4">
+                        <div class="form-group w-1/3">
                             <label for="kelas"><i class="fas fa-chalkboard"></i> Kelas</label>
                             <input type="text" id="kelas" name="kelas" readonly class="form-input">
                         </div>
@@ -455,31 +441,129 @@
                 </form>
             </div>
         </div>
-        <!-- GMeet Info Page -->
-        <div id="gmeet-page" class="page">
-            <button class="back-btn" onclick="showPage('dashboard-page')">
+        <!-- Karya Page -->
+        <div id="karya-page" class="page">
+            <button class="back-btn" onclick="navigateToPage('dashboard-page')">
                 <i class="fas fa-arrow-left"></i> Kembali
             </button>
-            
+
             <div class="dashboard-card">
-                <h3 class="flex items-center gap-2 text-white text-base font-semibold mb-3">
-                    <i class="fas fa-video"></i>
-                    Daftar Guru & Google Meet
-                </h3>
-                
-                <div class="form-group mb-4">
-                    <label for="guruFilter"><i class="fas fa-filter"></i> Filter Guru/Kelas:</label>
-                    <input type="text" id="guruFilter" placeholder="Cari guru/mapel/kelas..." class="form-input">
+                <h1 class="flex items-center gap-2 text-white text-xl font-semibold mb-4">
+                    <i class="fas fa-paint-brush"></i> Karya Ekskul Informatika
+                </h1>
+
+                <!-- Galeri Poster -->
+                <div class="mb-8">
+                    <h2 class="text-white text-lg font-semibold mb-3">Poster</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Poster 1 -->
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 shadow">
+                            <img src="../assets/poster_k4_ied/k4_ied_a.webp" alt="Poster Iedul Adha Karya Siswa A." class="w-full rounded mb-2">
+                            <p class="text-xs text-white/80 mt-1">Kelas 4 - A.</p>
+                            <a href="https://www.canva.com/design/DAGnwGpYVkQ/3ciU3rd8OclRyd-5VTrfyw/edit?utm_content=DAGnwGpYVkQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="text-sm text-blue-200 hover:underline block mt-2">
+                                <i class="fas fa-external-link-alt"></i> Lihat Karya
+                            </a>
+                        </div>
+                        
+                        <!-- Poster 2 -->
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 shadow">
+                            <img src="../assets/poster_k4_ied/k4_ied_ad.webp" alt="Poster Iedul Adha Karya Siswa Ad." class="w-full rounded mb-2">
+                            <p class="text-xs text-white/80 mt-1">Kelas 4 - Ad.</p>
+                            <a href="https://www.canva.com/design/DAGnwGpYVkQ/3ciU3rd8OclRyd-5VTrfyw/edit?utm_content=DAGnwGpYVkQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="text-sm text-blue-200 hover:underline block mt-2">
+                                <i class="fas fa-external-link-alt"></i> Lihat Karya
+                            </a>
+                        </div>
+                        
+                        <!-- Poster 3 -->
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 shadow">
+                            <img src="../assets/poster_k4_ied/k4_ied_m.webp" alt="Poster Iedul Adha Karya Siswa M." class="w-full rounded mb-2">
+                            <p class="text-xs text-white/80 mt-1">Kelas 4 - M.</p>
+                            <a href="https://www.canva.com/design/DAGnwGpYVkQ/3ciU3rd8OclRyd-5VTrfyw/edit?utm_content=DAGnwGpYVkQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="text-sm text-blue-200 hover:underline block mt-2">
+                                <i class="fas fa-external-link-alt"></i> Lihat Karya
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                
-                <div id="guru-list" class="space-y-4">
-                    <!-- Daftar guru akan diisi oleh JavaScript -->
+
+                <!-- Galeri Logo -->
+                <div class="mb-8">
+                    <h2 class="text-white text-lg font-semibold mb-3">Logo</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <!-- Logo 1 -->
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 shadow text-center">
+                            <img src="../assets/logos/logo1-thumb.png" alt="Logo Sekolah" class="w-full rounded mb-2">
+                            <p class="text-xs text-white/80 mt-1">Kelas 5 - D.</p>
+                            <a href="https://www.canva.com/design/logo1" target="_blank" class="text-sm text-blue-200 hover:underline block mt-2">
+                                <i class="fas fa-external-link-alt"></i> Lihat
+                            </a>
+                        </div>
+                        
+                        <!-- Logo 2 -->
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 shadow text-center">
+                            <img src="../assets/logos/logo2-thumb.png" alt="Logo Ekskul" class="w-full rounded mb-2">
+                            <p class="text-xs text-white/80 mt-1">Kelas 5 - I.</p>
+                            <a href="https://www.canva.com/design/logo2" target="_blank" class="text-sm text-blue-200 hover:underline block mt-2">
+                                <i class="fas fa-external-link-alt"></i> Lihat
+                            </a>
+                        </div>
+                        
+                        <!-- Logo 3 -->
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 shadow text-center">
+                            <img src="../assets/logos/logo3-thumb.png" alt="Logo Event" class="w-full rounded mb-2">
+                            <p class="text-xs text-white/80 mt-1">Kelas 6. S.</p>
+                            <a href="https://www.canva.com/design/logo3" target="_blank" class="text-sm text-blue-200 hover:underline block mt-2">
+                                <i class="fas fa-external-link-alt"></i> Lihat
+                            </a>
+                        </div>
+                        
+                        <!-- Logo 4 -->
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 shadow text-center">
+                            <img src="../assets/logos/logo4-thumb.png" alt="Logo Komunitas" class="w-full rounded mb-2">
+                            <p class="text-xs text-white/80 mt-1">Kelas 6 - T.</p>
+                            <a href="https://www.canva.com/design/logo4" target="_blank" class="text-sm text-blue-200 hover:underline block mt-2">
+                                <i class="fas fa-external-link-alt"></i> Lihat
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Galeri Website -->
+                <div class="mb-8">
+                    <h2 class="text-white text-lg font-semibold mb-3">Website</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <!-- Website 1 -->
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 shadow">
+                            <img src="../assets/web/home.webp" alt="Halaman Website Home" class="w-full rounded mb-2">
+                            <p class="text-xs text-white/80 mt-1">Kelas 5 - (inisial siswa).</p>
+                            <a href="https://informatikashahaba.my.canva.site/mobile-web" target="_blank" class="text-sm text-blue-200 hover:underline block mt-2">
+                                <i class="fas fa-external-link-alt"></i> Kunjungi Website
+                            </a>
+                        </div>
+                        
+                        <!-- Website 2 -->
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 shadow">
+                            <img src="../assets/web/logo.webp" alt="Halaman Website Logo" class="w-full rounded mb-2">
+                            <p class="text-xs text-white/80 mt-1">Kelas 5 - (inisial siswa).</p>
+                            <a href="https://informatikashahaba.my.canva.site/mobile-web" target="_blank" class="text-sm text-blue-200 hover:underline block mt-2">
+                                <i class="fas fa-external-link-alt"></i> Kunjungi Website
+                            </a>
+                        </div>
+                        
+                        <!-- Website 3 -->
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 shadow">
+                            <img src="../assets/web/poster.webp" alt="Halaman Website Poster" class="w-full rounded mb-2">
+                            <p class="text-xs text-white/80 mt-1">Kelas 5 - (inisial siswa).</p>
+                            <a href="https://informatikashahaba.my.canva.site/mobile-web" target="_blank" class="text-sm text-blue-200 hover:underline block mt-2">
+                                <i class="fas fa-external-link-alt"></i> Kunjungi Website
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- Konsultasi Page -->
         <div id="konsultasi-page" class="page">
-            <button class="back-btn" onclick="showPage('dashboard-page')">
+            <button class="back-btn" onclick="navigateToPage('dashboard-page')">
                 <i class="fas fa-arrow-left"></i> Kembali
             </button>
             
@@ -635,139 +719,115 @@
         </div>
         <!-- Articles Page -->
         <div id="articles-page" class="page">
-            <button class="back-btn" onclick="showPage('dashboard-page')">
-                <i class="fas fa-arrow-left"></i> Kembali
-            </button>
-            
-            <div class="dashboard-card">
-                <h3 class="flex items-center gap-2 text-white text-base font-semibold mb-3">
-                    <i class="fas fa-newspaper"></i>
-                    Artikel Pendidikan
-                </h3>
-                
-                <div class="space-y-4">
-                    <a href="https://shahaba.com/persiapan-jelang-masuk-sekolah-langkah-awal-menuju-aktivitas-yang-produktif" target="_blank" 
-                    class="article-item bg-white bg-opacity-10 rounded-lg p-4 block cursor-pointer hover:bg-opacity-20 transition">
-                     <h4 class="font-semibold text-white">Persiapan Jelang Masuk Sekolah</h4>
-                     <p class="text-sm text-white text-opacity-80 mt-1">Langkah awal menuju aktivitas yang produktif</p>
-                 </a>
-                 
-                 <a href="https://shahaba.com/sekolah-sd-dengan-kelas-intensif" target="_blank" 
-                    class="article-item bg-white bg-opacity-10 rounded-lg p-4 block cursor-pointer hover:bg-opacity-20 transition">
-                     <h4 class="font-semibold text-white">Sekolah SD dengan Kelas Intensif</h4>
-                     <p class="text-sm text-white text-opacity-80 mt-1">Pendekatan pembelajaran yang lebih fokus</p>
-                 </a>
-                 
-                </div>
-                
-                <div id="article-container" class="mt-6 hidden">
-                    <div class="flex justify-between items-center mb-3">
-                        <h4 id="article-title" class="font-semibold text-white"></h4>
-                        <button onclick="closeArticle()" class="text-white text-opacity-70 hover:text-opacity-100">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <iframe id="article-frame" class="w-full h-96 bg-white rounded-lg" 
-                            frameborder="0" allowfullscreen></iframe>
-                </div>
+        <button class="back-btn" onclick="navigateToPage('dashboard-page')">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </button>
+
+        <div class="dashboard-card">
+            <h3 class="flex items-center gap-2 text-white text-base font-semibold mb-3">
+            <i class="fas fa-newspaper"></i>
+            Artikel Pendidikan & Informasi Sekolah
+            </h3>
+
+            <!-- Kategori: Teknologi & PWA -->
+            <div class="mb-6">
+            <h4 class="text-white font-semibold text-lg mb-2">Teknologi & PWA</h4>
+            <div class="space-y-4">
+                <a href="https://shahaba.com/apa-itu-pwa-shahaba" target="_blank"
+                class="article-item bg-white/10 rounded-lg p-4 block hover:bg-white/20 transition">
+                <h4 class="text-white font-semibold">Apa Itu PWA Shahaba?</h4>
+                <p class="text-sm text-white text-opacity-80 mt-1">Kenali aplikasi Shahaba versi PWA dan fitur-fiturnya</p>
+                </a>
+            </div>
+            </div>
+
+            <!-- Kategori: Parenting Tips -->
+            <div class="mb-6">
+            <h4 class="text-white font-semibold text-lg mb-2">Parenting Tips</h4>
+            <div class="space-y-4">
+                <a href="https://shahaba.com/persiapan-jelang-masuk-sekolah-langkah-awal-menuju-aktivitas-yang-produktif" target="_blank"
+                class="article-item bg-white/10 rounded-lg p-4 block hover:bg-white/20 transition">
+                <h4 class="text-white font-semibold">Persiapan Jelang Masuk Sekolah</h4>
+                <p class="text-sm text-white text-opacity-80 mt-1">Langkah awal menuju aktivitas yang produktif</p>
+                </a>
+            </div>
+            </div>
+
+            <!-- Kategori: Update Kurikulum -->
+            <div class="mb-6">
+            <h4 class="text-white font-semibold text-lg mb-2">Tentang Kurikulum</h4>
+            <div class="space-y-4">
+                <a href="https://shahaba.com/sekolah-sd-dengan-kelas-intensif" target="_blank"
+                class="article-item bg-white/10 rounded-lg p-4 block hover:bg-white/20 transition">
+                <h4 class="text-white font-semibold">Sekolah SD dengan Kelas Intensif</h4>
+                <p class="text-sm text-white text-opacity-80 mt-1">Pendekatan pembelajaran yang lebih fokus</p>
+                </a>
+            </div>
+            </div>
+
+            <!-- Tambahkan kategori lain jika perlu -->
+
+            <!-- Viewer (opsional jika pakai iframe preview artikel internal) -->
+            <div id="article-container" class="mt-6 hidden">
+            <div class="flex justify-between items-center mb-3">
+                <h4 id="article-title" class="font-semibold text-white"></h4>
+                <button onclick="closeArticle()" class="text-white text-opacity-70 hover:text-opacity-100">
+                <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <iframe id="article-frame" class="w-full h-96 bg-white rounded-lg" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
-<!-- Calendar Page -->
-<div id="calendar-page" class="page">
-    <button class="back-btn" onclick="showPage('dashboard-page')">
-        <i class="fas fa-arrow-left"></i> Kembali
-    </button>
-
-    <div class="dashboard-card">
-        <div class="flex justify-between items-center mb-4">
-            <h1 class="flex items-center gap-2 text-xl font-semibold">
-                <i class="fas fa-calendar-check"></i>
-                Kalender Kegiatan Sekolah
-            </h1>
         </div>
+        <!-- Calendar Page -->
+    <div id="calendar-page" class="page">
+        <button class="back-btn" onclick="navigateToPage('dashboard-page')">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </button>
 
-        <!-- Calendar Container -->
-        <div id="calendar-container" class="mb-6 bg-opacity-10 rounded-lg p-3 border border-white border-opacity-20">
-            <div id="calendar"></div>
-            <div id="calendar-legend" class="flex flex-wrap gap-3 justify-center mt-3">
-                <div class="flex items-center">
-                    <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
-                    <span class="text-xs text-gray-300">SD</span>
+        <div class="dashboard-card">
+            <h3 class="calendar-title">
+                <i class="fas fa-calendar-alt"></i> Agenda Bulanan
+            </h3>
+
+            <!-- Month Navigation -->
+            <div class="month-navigation">
+                <button id="prevMonth" class="nav-button"><i class="fas fa-chevron-left"></i></button>
+                <div id="currentMonth" class="month-display">Mei 2025</div>
+                <button id="nextMonth" class="nav-button"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <!-- Calendar Grid -->
+            <div class="calendar-grid">
+                <!-- Weekday headers -->
+                <div class="calendar-header">
+                    <div class="day-header">Min</div>
+                    <div class="day-header">Sen</div>
+                    <div class="day-header">Sel</div>
+                    <div class="day-header">Rab</div>
+                    <div class="day-header">Kam</div>
+                    <div class="day-header">Jum</div>
+                    <div class="day-header">Sab</div>
                 </div>
-                <div class="flex items-center">
-                    <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
-                    <span class="text-xs text-gray-300">SMP</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="w-3 h-3 bg-purple-500 rounded-full mr-2"></span>
-                    <span class="text-xs text-gray-300">Prasekolah</span>
-                </div>
+
+                <!-- Calendar days -->
+                <div id="calendarDays" class="calendar-days"></div>
             </div>
         </div>
 
-        <!-- Events List -->
-        <div class="mb-4 flex justify-between items-center">
-            <h4 class="font-medium text-lg text-white">Daftar Kegiatan</h4>
-            <div id="events-count" class="text-sm bg-blue-500 text-white px-2 py-1 rounded-full"></div>
-        </div>
-        <div id="events-container">
-            <ul id="calendar-list" class="space-y-3"></ul>
+        <!-- Selected day events -->
+        <div class="dashboard-card events-container" id="selectedEvents">
+            <h4 class="events-title" id="selectedDateTitle">
+                <i class="fas fa-calendar-day"></i> Agenda
+            </h4>
+            <div id="eventList" class="events-list">
+                <!-- Sample events will be populated here by JavaScript -->
+            </div>
         </div>
     </div>
-
-<!-- Enhanced Event Detail Modal -->
-<div id="event-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-opacity duration-300">
-    <div class="bg-gradient-to-br from-[#172e69] via-[#0f1c3f] to-[#0a1229] rounded-xl p-6 w-full max-w-md mx-4 border border-blue-400/30 shadow-2xl transform transition-all duration-300 scale-95 hover:scale-100">
-        <div class="flex justify-between items-center mb-5 pb-3 border-b border-blue-400/20">
-            <div class="flex items-center gap-3">
-                <div id="modal-level-badge" class="w-3 h-3 rounded-full"></div>
-                <h3 id="modal-title" class="text-xl font-bold text-white truncate max-w-[250px]"></h3>
-            </div>
-            <button onclick="closeModal()" class="text-gray-300 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10">
-                <i class="fas fa-times text-lg"></i>
-            </button>
-        </div>
-        
-        <div class="space-y-5">
-            <div class="flex items-start gap-4 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
-                <div class="p-2 bg-blue-500/10 rounded-lg text-blue-400">
-                    <i class="fas fa-calendar-day text-lg"></i>
-                </div>
-                <div>
-                    <p class="text-xs font-medium text-blue-400/80 mb-1">TANGGAL & WAKTU</p>
-                    <p id="modal-date" class="font-medium text-white"></p>
-                </div>
-            </div>
-            
-            <div class="flex items-start gap-4 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
-                <div class="p-2 bg-blue-500/10 rounded-lg text-blue-400">
-                    <i class="fas fa-school text-lg"></i>
-                </div>
-                <div>
-                    <p class="text-xs font-medium text-blue-400/80 mb-1">JENJANG PENDIDIKAN</p>
-                    <p id="modal-level" class="font-medium text-white"></p>
-                </div>
-            </div>
-            
-            <div class="pt-4 border-t border-blue-400/20">
-                <p class="text-xs font-medium text-blue-400/80 mb-3">DESKRIPSI KEGIATAN</p>
-                <div id="modal-description" class="prose prose-invert text-gray-300 text-sm max-h-[200px] overflow-y-auto pr-2">
-                    <!-- Content will be inserted here -->
-                </div>
-            </div>
-        </div>
-        
-        <div class="mt-6 flex justify-end gap-3">
-            <button onclick="closeModal()" class="px-4 py-2.5 bg-transparent border border-blue-400/30 text-blue-400 rounded-lg hover:bg-blue-400/10 transition flex items-center gap-2">
-                <i class="fas fa-times"></i> Tutup
-            </button>
-        </div>
-    </div>
-</div>
-</div>
         <!-- Feedback Page -->
         <div id="feedback-page" class="page">
-            <button class="back-btn" onclick="showPage('dashboard-page')">
+            <button class="back-btn" onclick="navigateToPage('dashboard-page')">
                 <i class="fas fa-arrow-left"></i> Kembali
             </button>
 
@@ -800,28 +860,34 @@
                     </div>
 
                     <button type="submit" class="submit-btn">
-                        <i class="fas fa-paper-plane"></i> Kirim Masukan
+                        <i class="fas fa-paper-plane"></i> Kirim
                     </button>
                 </form>
             </div>
         </div>
         <!-- Catatan Page -->
         <div id="catatan-page" class="page">
-            <button class="back-btn" onclick="showPage('dashboard-page')">
+            <button class="back-btn" onclick="navigateToPage('dashboard-page')">
                 <i class="fas fa-arrow-left"></i> Kembali
             </button>
         
             <div class="dashboard-card">
-                <h1 class="flex items-center gap-2 text-white text-xl font-semibold mb-4">
-                    <i class="fas fa-id-card"></i> Laporan Peserta Didik
-                </h1>
-        
+                <div class="flex justify-center mb-4">
+                    <img src="../assets/images/ilustrasi-laporan.webp" alt="Ilustrasi Laporan Peserta Didik" class="w-32 h-auto">
+                </div>
+                <p style="text-align: justify; margin-bottom: 1rem;">Melalui halaman ini, Bapak/Ibu dapat melihat 
+                    laporan kegiatan dan catatan penting terkait perkembangan putra/putri di sekolah. 
+                    Silakan scan kode QR yang ada pada kartu siswa untuk mengakses informasi real-time.
+                    Laporan ini mencakup catatan sikap dan catatan daftar PR yang disampaikan oleh para Fasilitator. 
+                    Semoga informasi ini membantu Bapak/Ibu dalam mendampingi proses belajar anak di rumah.
+                </p>
+                
                 <!-- Kamera Preview -->
                 <div id="qr-reader" style="width: 100%; max-width: 400px; margin: auto; min-height: 300px; background: #222; display: none;"></div>
                 
                 <!-- Status Kamera -->
                 <div id="camera-status" class="text-center text-sm text-gray-400 my-2">
-                    Scan kode QR pada kartu siswa
+                    Akses scanner melalui tombol di bawah ini
                 </div>
                 <div class="text-center mt-4">
                     <button id="refresh-scan-btn" onclick="resetScannerPage()" class="px-4 py-2 bg-blue-600 text-white rounded text-sm font-semibold hidden">
@@ -835,14 +901,13 @@
                 </div>
                 <!-- Tombol Kontrol -->
                 <div class="text-center mt-4 space-x-2">
-                    <button id="start-scan-btn" class="px-4 py-2 bg-green-600 text-white rounded text-sm font-semibold">
+                    <button id="start-scan-btn" class="submit-btn">
                         <i class="fas fa-camera"></i> Scan
                     </button>
                     <button id="stop-scan-btn" class="px-4 py-2 bg-red-600 text-white rounded text-sm font-semibold hidden">
                         <i class="fas fa-stop"></i> Matikan Kamera
                     </button>
                 </div>
-        
                 <!-- Hasil Scan -->
                 <div id="catatan-result" class="mt-6 text-white text-sm space-y-3 hidden">
                     <div id="info-siswa" class="bg-opacity-10 rounded p-3"></div>
@@ -856,25 +921,37 @@
         </div>
         <!-- Transaksi Page -->
         <div id="transaksi-page" class="page">
-            <button class="back-btn" onclick="showPage('dashboard-page')">
+            <button class="back-btn" onclick="navigateToPage('dashboard-page')">
               <i class="fas fa-arrow-left"></i> Kembali
             </button>
           
             <div class="dashboard-card">
-              <h1 class="flex items-center gap-2 text-xl font-semibold mb-4 text-white">
-                <i class="fas fa-wallet"></i> Riwayat Pembayaran
-              </h1>
-          
+                <div class="flex justify-center mb-4">
+                    <img src="../assets/images/ilustrasi-transaksi.webp" alt="Ilustrasi Pembayaran Peserta Didik" class="w-32 h-auto">
+                </div>
+                <p style="text-align: justify; margin-bottom: 1rem;">
+                    Melalui halaman ini, Bapak/Ibu dapat melihat riwayat transaksi peserta didik. 
+                    Silakan masukkan ID yang tertera pada kartu siswa untuk mengakses data. 
+                    Informasi yang ditampilkan mencakup riwayat pembayaran dan tunggakan (jika ada). 
+                    Semoga halaman ini memudahkan Bapak/Ibu dalam memantau administrasi pendidikan anak secara praktis dan transparan. 
+                </p>
+
               <!-- Form Input -->
               <label for="siswa-id" class="form-label">
                 <i class="fas fa-id-card mr-1"></i> Masukkan ID Siswa
               </label>
-              <div class="form-row mt-2 mb-4" style="display: flex; gap: 10px;">
+              <div class="mt-2 mb-4" style="gap: 10px;">
                 <input id="siswa-id" type="text" class="form-input" placeholder="Contoh: 123456789" style="flex:1;">
-                <button onclick="loadTransaksi()" class="btn-primary">
+                <button onclick="loadTransaksi()" class="submit-btn">
                   <i class="fas fa-search"></i> Cari
                 </button>
               </div>
+              <p>
+                Mohon konfirmasi apabila terdapat ketidaksesuaian data kepada admin keuangan dengan 
+                <a href="https://wa.me/6285921101260" target="_blank" style="color: #ffd52e; text-decoration: underline;">
+                        klik di sini
+                </a>. Syukran!
+              </p>
               <!-- Feedback Status -->
                 <div id="transaksi-status" class="form-status text-sm text-gray-500 hidden">
                     <!-- Status info ditampilkan oleh JS -->
@@ -921,96 +998,124 @@
                     <i class="fas fa-money-bill-wave"></i> #NOMINAL#
                   </div>
                   <div class="transaksi-ket"><i class="fas fa-file-alt"></i> #KETERANGAN#</div>
-                  <!-- <div class="transaksi-btn-container mt-2">
-                    <button class="btn-secondary" onclick="downloadKwitansi('#ID_TRANSAKSI#')">
-                      <i class="fas fa-file-download"></i> Unduh Kwitansi
-                    </button>
-                  </div> -->
                 </div>
               </script>
             </div>
-          </div>  
+        </div>  
+          <!-- Notification Page -->
+        <div id="notifications-page" class="page">
+        <button class="back-btn" onclick="navigateToPage('dashboard-page')">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </button>
+
+        <div class="dashboard-card">
+            <h3 class="flex items-center gap-2 text-white text-base font-semibold mb-3">
+            <i class="fas fa-bell"></i>
+            Notifikasi & Pengumuman
+            </h3>
+
+            <div class="space-y-4">
+            <div class="bg-white/10 rounded-lg p-4">
+                <h4 class="font-semibold text-white mb-1">Kenali Aplikasi Shahaba PWA 📱</h4>
+                <p class="text-white/80 text-sm">Pelajari manfaat dan fitur Shahaba PWA agar bisa dimanfaatkan maksimal oleh orang tua dan siswa.</p>
+                <a href="https://shahaba.com/apa-itu-pwa-shahaba" target="_blank" class="text-blue-300 text-sm underline mt-1 inline-block">Baca selengkapnya</a>
+            </div>
+
+            <div class="bg-white/10 rounded-lg p-4">
+                <h4 class="font-semibold text-white mb-1">Kegiatan Terdekat 🗓️</h4>
+                <p class="text-white/80 text-sm">Kegiatan Jumat Ceria akan diadakan tanggal 16 Mei 2025. Jangan lupa membawa bekal dan alat gambar!</p>
+            </div>
+
+            <!-- Tambahkan notifikasi lain sesuai kebutuhan -->
+            </div>
+        </div>
+        </div>
+
 
     <!-- Footer -->
     <div class="footer">
-        <p>© 2025 Shahaba Hub - Portal Orang Tua</p>
+        <p>© 2025 Shahaba Progressive Web App.</p>
     </div>
 
     <!-- WhatsApp Modal -->
-    <div id="whatsapp-modal" class="fixed inset-0 bg-black bg-opacity-10 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg w-full max-w-md mx-4">
-            <div class="bg-green-500 text-white p-4 rounded-t-lg flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <div class="bg-white bg-opacity-20 p-2 rounded-full">
-                        <i class="fab fa-whatsapp text-green-500"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold">Kirim Pesan ke Shahaba</h3>
-                        <p class="text-sm opacity-90">Pesan akan dikirim via WhatsApp</p>
-                    </div>
-                </div>
-                <button onclick="hideWhatsAppModal()" class="text-white">
-                    <i class="fas fa-times"></i>
-                </button>
+    <div id="whatsapp-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-2xl w-full max-w-md mx-4 shadow-xl animate-fadeInUp">
+        <div class="bg-green-500 text-white p-4 rounded-t-2xl flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="bg-white/30 p-2 rounded-full">
+            <i class="fab fa-whatsapp text-white"></i>
             </div>
-            
-            <div class="p-4">
-                <div class="mb-4">
-                    <label for="whatsapp-message" class="block text-gray-700 mb-2">Isi Pesan:</label>
-                    <textarea id="whatsapp-message" style="color: #4a4a4a;" class="w-full border border-gray-300 rounded p-2 h-32" 
-                              placeholder="Contoh: Assalamu'alaikum, saya orang tua dari [Nama Siswa]..."></textarea>
-                    <p class="text-xs text-gray-500 mt-1 text-right">
-                        <span id="char-count">0</span>/500 karakter
-                    </p>
-                </div>
-                
-                <div class="mb-4">
-                    <label for="recipient" class="block text-gray-700 mb-2">Pilih Tujuan:</label>
-                    <select id="recipient" class="w-full border border-gray-300 rounded p-2">
-                        <option value="6285951589760">Admin Utama</option>
-                        <option value="6285921101260">Admin Keuangan</option>
-                        <option value="6285710006577">Prasekolah (Ibu Nurhayati)</option>
-                        <option value="6281227122410">SD (Pak Dwi Indo)</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-200 p-4 flex justify-end gap-2">
-                <button onclick="hideWhatsAppModal()" class="px-4 py-2 text-gray-600 rounded">
-                    Batal
-                </button>
-                <button onclick="sendWhatsAppMessage()" class="px-4 py-2 bg-green-500 text-white rounded flex items-center gap-2">
-                    <i class="fab fa-whatsapp"></i> Buka WhatsApp
-                </button>
+            <div>
+            <h3 class="font-bold text-lg">Kirim Pesan ke Shahaba</h3>
+            <p class="text-sm opacity-90">Pesan akan dikirim via WhatsApp</p>
             </div>
         </div>
+        <button onclick="hideWhatsAppModal()" class="hover:text-gray-200 transition">
+            <i class="fas fa-times"></i>
+        </button>
+        </div>
+
+        <div class="p-4 space-y-4">
+        <div>
+            <label for="whatsapp-message" class="block text-gray-700 mb-1 font-medium">Isi Pesan:</label>
+            <textarea id="whatsapp-message" maxlength="500"
+            class="w-full border border-gray-300 rounded-lg p-3 h-32 focus:outline-none focus:ring-2 focus:ring-green-300 text-gray-800"
+            placeholder="Contoh: Assalamu'alaikum, saya orang tua dari [Nama Siswa]..."></textarea>
+            <p class="text-xs text-gray-500 mt-1 text-right">
+            <span id="char-count">0</span>/500 karakter
+            </p>
+        </div>
+
+        <div>
+            <label for="recipient" class="block text-gray-700 mb-1 font-medium">Pilih Tujuan:</label>
+            <select id="recipient"
+            class="w-full border border-gray-300 rounded-lg p-3 text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-green-300 appearance-none"
+            style="background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'black\'%3e%3cpath d=\'M7 10l5 5 5-5z\'/%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem;">
+            <option value="6285951589760">Admin Utama</option>
+            <option value="6285921101260">Admin Keuangan</option>
+            <option value="6285710006577">Prasekolah (Ibu Nurhayati)</option>
+            <option value="6281227122410">SD (Pak Dwi Indo)</option>
+            </select>
+        </div>
+        </div>
+
+        <div class="border-t border-gray-200 p-4 flex justify-end gap-3">
+        <button onclick="hideWhatsAppModal()" class="px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-100 transition">
+            Batal
+        </button>
+        <button onclick="sendWhatsAppMessage()" class="px-4 py-2 bg-green-500 text-white rounded-lg flex items-center gap-2 hover:bg-green-600 transition">
+            <i class="fab fa-whatsapp"></i> Buka WhatsApp
+        </button>
+        </div>
+    </div>
     </div>
 
-<!-- Bottom Navbar Gaya iOS 18 -->
-<nav class="ios-navbar">
-    <button id="nav-schedule" onclick="navigateToPage('schedule-page', this)" class="navbar-button">
-      <i class="fas fa-calendar-alt"></i>
-      <span>Jadwal</span>
-    </button>
-    <button id="nav-activities" onclick="navigateToPage('activities-page', this)" class="navbar-button">
-      <i class="fas fa-photo-film"></i>
-      <span>Kegiatan</span>
-    </button>
-  
-    <button id="nav-dashboard" onclick="navigateToPage('dashboard-page', this)" class="navbar-button">
-      <i class="fas fa-home"></i>
-      <span>Beranda</span>
-    </button>
-  
-    <button id="nav-attendance" onclick="navigateToPage('attendance-page', this)" class="navbar-button">
-      <i class="fas fa-user-check"></i>
-      <span>Absensi</span>
-    </button>
-    <button id="nav-articles" onclick="navigateToPage('catatan-page', this)" class="navbar-button">
-      <i class="fas fa-id-card"></i>
-      <span>Laporan</span>
-    </button>
-</nav>
+    <!-- Bottom Navbar Gaya iOS 18 -->
+    <nav class="ios-navbar">
+        <button onclick="navigateToPage('schedule-page', this)" class="navbar-button" data-target="schedule-page">
+            <i class="fas fa-calendar-alt"></i><span>Jadwal</span>
+        </button>
+    
+        <button onclick="handleNotificationClick()" class="navbar-button">
+        <div class="icon-container">
+            <i class="fas fa-bell"></i>
+            <span id="notif-badge" class="notification-badge hidden">!</span>
+        </div>
+        <span class="button-label">Notifikasi</span>
+        </button>
+
+        <button onclick="navigateToPage('dashboard-page', this)" class="navbar-button" data-target="dashboard-page">
+        <i class="fas fa-home"></i><span>Beranda</span>
+        </button>
+
+        <button onclick="navigateToPage('attendance-page', this)" class="navbar-button" data-target="attendance-page">
+            <i class="fas fa-user-check"></i><span>Absensi</span>
+        </button>
+    
+        <button onclick="navigateToPage('catatan-page', this)" class="navbar-button" data-target="catatan-page">
+            <i class="fas fa-id-card"></i><span>Laporan</span>
+        </button>
+    </nav>
 <script>
 // Auto tampil jika ada ?id=A001
 document.addEventListener("DOMContentLoaded", () => {
@@ -1032,88 +1137,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 </script>
-<script>
-    let deferredPrompt;
-  
-    window.addEventListener('beforeinstallprompt', (e) => {
-      // Mencegah prompt default
-      e.preventDefault();
-      deferredPrompt = e;
-  
-      // Buat elemen banner custom
-      const installBanner = document.createElement('div');
-      installBanner.id = 'installBanner';
-      installBanner.className = 'install-banner';
-      installBanner.innerHTML = `
-        <span class="banner-text">Install aplikasi untuk pengalaman lebih baik</span>
-        <div class="banner-buttons">
-          <button id="installButton" class="install-btn">Install Sekarang</button>
-          <button id="dismissButton" class="dismiss-btn">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-      `;
-  
-      // Tambahkan ke halaman
-      document.body.appendChild(installBanner);
-  
-      // Tombol install diklik
-      document.getElementById('installButton').addEventListener('click', async () => {
-        installBanner.remove();
-        deferredPrompt.prompt();
-  
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log('Hasil prompt install:', outcome);
-        deferredPrompt = null;
-      });
-  
-      // Tombol tutup diklik
-      document.getElementById('dismissButton').addEventListener('click', () => {
-        installBanner.remove();
-      });
-    });
-  
-    // Jika sudah diinstall
-    window.addEventListener('appinstalled', () => {
-      console.log('Aplikasi berhasil diinstall, syukran');
-    });
-  </script>
-  <!-- Load Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js"></script>
-
-<!-- Load konfigurasi -->
-<script src="../assets/js/firebase-config.js" type="module"></script>
-<script type="module" src="../assets/js/fcm.js"></script>
-<script type="module" src="../assets/js/notif.js"></script>
 <script src="../assets/js/script.js"></script> <!--Ubah pengumuman di sini-->
-<script src="../assets/js/jadwal.js"></script>
-<script src="../assets/js/izin-pd.js"></script>
-<script src="../assets/js/gmeet.js"></script>
-<script src="../assets/js/kritiksaran.js"></script>
-<script src="https://unpkg.com/html5-qrcode"></script>
-<script src="../assets/js/cat-pesdik.js"></script>
-<!-- <script src="../app.js" type="module"></script> -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
-<script src="../assets/js/transaksi.js"></script>
-<!-- Load JavaScript FullCalendar -->
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/id.min.js'></script>
-
-<!-- Load File JS Terpisah -->
+<script src="../assets/js/jadwal.js" defer></script>
+<script src="../assets/js/izin-pd.js" defer></script>
+<script src="../assets/js/kritiksaran.js" defer></script>
+<script src="../assets/js/html5-qrcode.min.js" defer></script>
+<script src="../assets/js/cat-pesdik.js" defer></script>
+<script src="../assets/js/transaksi.js" defer></script>
+<script src="../assets/js/info_notif.js"></script>
+<script src='../assets/js/main.min.js' defer></script>
+<script src='../assets/js/locales/id.js' defer></script>
 <script src="../assets/js/kal-kegiatan.js" defer></script>
-<!-- <script>
-  window.jsPDF = window.jspdf.jsPDF;
-  // Inisialisasi lainnya
-</script> -->
-<div id="notif-status" style="color: green; font-size: 0.9rem; padding: 8px;"></div>
 <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 <script> // Onesignal
     window.OneSignal = window.OneSignal || [];
     OneSignal.push(function() {
       OneSignal.init({
-        appId: "7671df32-41ca-4a59-9a3e-a2e36da5bcda",
+        appId: "8b4f1569-fc38-4da0-b296-073835dffc3e",
         serviceWorkerPath: "../OneSignalSDKWorker.js",
         serviceWorkerUpdaterPath: "../OneSignalSDKUpdaterWorker.js",
         notifyButton: {
@@ -1127,5 +1167,64 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   </script>
+<script>
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Cegah prompt default
+    e.preventDefault();
+    deferredPrompt = e;
+
+    // Cek apakah banner sudah ada
+    if (document.getElementById('installBanner')) return;
+
+    // Cek jika sudah diinstall (opsional, bisa juga simpan di localStorage)
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      console.log('Aplikasi sudah dalam mode standalone.');
+      return;
+    }
+
+    // Buat banner custom
+    const installBanner = document.createElement('div');
+    installBanner.id = 'installBanner';
+    installBanner.className = 'install-banner';
+    installBanner.innerHTML = `
+    <div class="banner-inner">
+        <i class="fas fa-mobile-alt banner-icon"></i>
+        <span class="banner-text">Install aplikasi ini</span>
+        <div class="banner-actions">
+        <button id="installButton" class="install-btn">Install</button>
+        <button id="dismissButton" class="dismiss-btn" aria-label="Tutup">
+            <i class="fas fa-times"></i>
+        </button>
+        </div>
+    </div>
+    `;
+
+    // Tambahkan ke halaman
+    document.body.appendChild(installBanner);
+
+    // Tombol install diklik
+    document.getElementById('installButton').addEventListener('click', async () => {
+      installBanner.remove();
+      deferredPrompt.prompt();
+
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log('Hasil prompt install:', outcome);
+      deferredPrompt = null;
+    });
+
+    // Tombol tutup diklik
+    document.getElementById('dismissButton').addEventListener('click', () => {
+      installBanner.remove();
+    });
+  });
+
+  // Saat aplikasi berhasil diinstall
+  window.addEventListener('appinstalled', () => {
+    console.log('Aplikasi berhasil diinstall!, syukran!');
+  });
+</script>
+</div>
 </body>
 </html>

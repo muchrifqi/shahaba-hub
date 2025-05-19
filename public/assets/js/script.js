@@ -8,13 +8,16 @@ function showPage(pageId) {
 
 // WhatsApp Modal
 function showWhatsAppModal() {
-    document.getElementById('whatsapp-modal').classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
+  const modal = document.getElementById('whatsapp-modal');
+  modal.classList.add('show');
 }
 
 function hideWhatsAppModal() {
-    document.getElementById('whatsapp-modal').classList.add('hidden');
-    document.body.style.overflow = 'auto';
+  const modal = document.getElementById('whatsapp-modal');
+  modal.classList.remove('show');
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 300);
 }
 
 // Character Count for WhatsApp Message
@@ -149,49 +152,115 @@ function submitAttendance() {
     });
 }
 
-// Load Announcements
-function loadAnnouncements() {
-    // Simulate API call delay
-    setTimeout(() => {
-        const container = document.getElementById('announcement-container');
-        container.classList.remove('shimmer');
-        container.innerHTML = `
-            <div class="announcement-item">
-                <h4 class="text-yellow-300">
-                    <i class="fas fa-exclamation-circle"></i> Pengumuman Penting!
-                </h4>
-                <p>Jadwal Ujian Tengah Semester akan dimulai minggu depan. Mohon persiapkan putra/putri Anda.</p>
-                <small>20 Maret 2024</small>
-            </div>
-            <div class="announcement-item">
-                <h4>
-                    <i class="fas fa-info-circle"></i> Info Kegiatan
-                </h4>
-                <p>Kegiatan ekstrakurikuler akan diliburkan selama masa ujian.</p>
-                <small>19 Maret 2024</small>
-            </div>
-            <div class="announcement-item">
-                <h4>
-                    <i class="fas fa-calendar-day"></i> Parent's Day
-                </h4>
-                <p>Pertemuan orang tua dengan wali kelas akan dilaksanakan pada tanggal 25 Maret 2024.</p>
-                <small>18 Maret 2024</small>
-            </div>
-        `;
-    }, 1500);
+function loadAppGuide() {
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+  const guideHTML = `
+    <div class="accordion-group">
+      <div class="accordion active">
+        <div class="accordion-header">
+          <i class="fas fa-info-circle"></i>
+          <h3>Apa itu Shahaba PWA?</h3>
+          <i class="fas fa-chevron-down accordion-icon"></i>
+        </div>
+        <div class="accordion-content">
+          <p style="color: #ffffff; line-height: 1.6;">
+            <strong>Shahaba - Progressive Web App</strong> Aplikasi berbasis web yang dirancang untuk memperkuat komunikasi dan kolaborasi antara sekolah dan orang tua. 
+            Sebagai aplikasi PWA, Shahaba dapat diakses langsung melalui browser di ponsel tanpa perlu diunduh dari Play Store atau App Store. 
+            Aplikasi ini ringan, cepat, dan dapat digunakan seperti aplikasi pada umumnya — bahkan bisa disimpan di layar utama ponsel untuk akses yang lebih mudah.
+          </p>
+          <p style="color: #ccc; font-size: 0.85rem;">Versi 1.0.0 – Dirilis 1 Mei 2025</p>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header">
+          <i class="fas fa-lightbulb"></i>
+          <h3>Tips Penggunaan</h3>
+          <i class="fas fa-chevron-down accordion-icon"></i>
+        </div>
+        <div class="accordion-content">
+          <ul style="list-style-type: disc; padding-left: 1.2rem; color:rgb(255, 255, 255); line-height: 1.6;">
+            ${isIOS ? `
+              <li>Untuk pengguna iOS, silakan tambahkan aplikasi ke layar utama melalui Safari → Bagikan → Tambah ke Layar Utama.</li>
+            ` : ''}
+            <li>Pastikan perangkat Bapak/Ibu terhubung dengan koneksi internet yang stabil untuk memastikan kelancaran akses.</li>
+            <li>Silakan lakukan *refresh* atau mulai ulang aplikasi apabila data tidak tampil dengan sempurna.</li>
+            <div style="margin-bottom: 1rem; margin-top: 1rem; text-align: center;">
+              <button onclick="location.reload()" style="
+                padding: 8px 16px;
+                background-color: var(--accent-color);
+                border: none;
+                border-radius: var(--border-radius);
+                cursor: pointer;
+                font-weight: bold;
+                font-family: inherit;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                transition: background-color 0.3s ease;
+                "onmouseover="this.style.backgroundColor='#e6c737'" onmouseout="this.style.backgroundColor='var(--accent-color, #f7db4f)'">
+                <i class="fas fa-rotate-right"></i>
+                Muat Ulang Aplikasi
+              </button>
+          </div>
+            ${!isIOS ? `
+              <li>Untuk pengalaman yang lebih cepat dan optimal, Bapak/Ibu dapat menginstal aplikasi Shahaba melalui tombol "Install" yang tersedia di bagian bawah layar.</li>
+            ` : ''}
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header">
+          <i class="fab fa-whatsapp"></i>
+          <h3>Bantuan & Kontak</h3>
+          <i class="fas fa-chevron-down accordion-icon"></i>
+        </div>
+        <div class="accordion-content">
+          <p style="color: #ffffff; line-height: 1.6;">
+            Apabila Bapak/Ibu mengalami kendala teknis atau memiliki pertanyaan seputar penggunaan aplikasi Shahaba, silakan menghubungi admin melalui WhatsApp pada tautan berikut:
+          </p>
+          <a href="https://wa.me/6285695384530" target="_blank" style="color:rgb(247, 219, 79); text-decoration: underline;">
+            Klik di sini untuk menghubungi via WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const container = document.getElementById('guide-container');
+  setTimeout(() => {
+    container.classList.remove('shimmer');
+    container.innerHTML = guideHTML;
+    
+    // Tambahkan event listener untuk accordion
+    const accordionHeaders = container.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        const accordion = header.parentElement;
+        const isActive = accordion.classList.contains('active');
+        
+        // Tutup semua accordion terlebih dahulu
+        document.querySelectorAll('.accordion').forEach(acc => {
+          acc.classList.remove('active');
+        });
+        
+        // Buka accordion yang diklik jika sebelumnya tidak aktif
+        if (!isActive) {
+          accordion.classList.add('active');
+        }
+      });
+    });
+  }, 1000);
 }
 
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    loadAnnouncements();
-    
-    // Set default date for attendance form
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('tanggal').value = today;
+document.addEventListener('DOMContentLoaded', function () {
+  loadAppGuide();
 });
 
 // Inisialisasi EmailJS
-emailjs.init('XCyDgWPI6c1YEq8Hg'); // Ganti dengan User ID EmailJS Anda
+emailjs.init('XCyDgWPI6c1YEq8Hg'); // User ID EmailJS
 
 // Fungsi Handle Submit
 function handleSubmit(event) {
@@ -300,13 +369,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('deskripsi').closest('.form-group').style.display = 'none';
 });
 
-// Slider Otomatis untuk Foto Besar
+// Slider Otomatis untuk Foto Besar. Sesuaikan current-activity di sini
 let currentSlide = 0;
 const slides = document.querySelectorAll('.featured-slide');
 const activityTexts = [
-    "Field Trip ke Museum Nasional",
-    "Lomba Olahraga Antar Kelas", 
-    "Praktikum Sains Kelas 5"
+    "Ekskul Informatika Kelas V dengan Canva Pro",
+    "Outing Class ke Museum Fatahillah", 
+    "Pohon harapan di awal tahun ajaran"
 ];
 
 function showSlide(n) {
@@ -339,21 +408,119 @@ showSlide(0);
 // Slider foto kecil
 document.addEventListener('DOMContentLoaded', function() {
     const slider = document.querySelector('.small-photos-slider');
-    
-    // Clone foto untuk efek loop tanpa jeda
-    const photos = document.querySelectorAll('.small-photo:not(:nth-child(n+3)');
+    const photos = document.querySelectorAll('.small-photo');
+    const container = document.querySelector('.small-photos-container');
+    let idleTimer;
+    const idleTimeout = 3000;
+    let lastPosition = 0;
+    let animation; // Variabel untuk menyimpan instance animasi GSAP
+
+    // Clone elements dengan optimasi performa
+    const fragment = document.createDocumentFragment();
     photos.forEach(photo => {
         const clone = photo.cloneNode(true);
-        slider.appendChild(clone);
+        fragment.appendChild(clone);
     });
+    slider.appendChild(fragment);
+
+    // Fungsi auto-slide yang lebih presisi
+    function startAutoSlide() {
+        // Hentikan animasi sebelumnya jika ada
+        if (animation) animation.kill();
+        
+        // Hitung total width untuk infinite loop
+        const photoWidth = photos[0].offsetWidth + 12;
+        const totalWidth = photoWidth * photos.length;
+        
+        animation = gsap.to(slider, {
+            x: lastPosition - totalWidth,
+            duration: 70, // Mengatur kecepatan slide foto kecil
+            ease: "none",
+            modifiers: {
+                x: x => {
+                    x = parseFloat(x);
+                    // Handle infinite loop
+                    if (x < -totalWidth) x += totalWidth;
+                    if (x > 0) x -= totalWidth;
+                    lastPosition = x;
+                    return x + 'px';
+                }
+            },
+            onComplete: () => {
+                // Restart animasi untuk loop continuous
+                startAutoSlide();
+            }
+        });
+        
+        slider.classList.add('playing');
+        slider.classList.remove('paused');
+    }
+
+    // Fungsi pause sementara
+    function pauseSlide() {
+        slider.classList.add('paused');
+        slider.classList.remove('playing');
+        resetIdleTimer();
+    }
+
+    // Timer untuk kembali auto-play
+    function resetIdleTimer() {
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+            if (!slider.classList.contains('grabbing')) {
+                startAutoSlide();
+            }
+        }, idleTimeout);
+    }
+
+    // Inisialisasi Draggable
+    const draggable = Draggable.create(slider, {
+        type: "x",
+        inertia: true,
+        bounds: {
+            minX: -(photos[0].offsetWidth * photos.length) + container.offsetWidth,
+            maxX: 0
+        },
+        onPress: function() {
+            if (animation) animation.pause();
+            slider.classList.add('grabbing');
+            clearTimeout(idleTimer);
+        },
+        onDrag: function() {
+            lastPosition = this.x;
+        },
+        onThrowComplete: function() {
+            resetIdleTimer();
+        }
+    })[0];
+
+    // Event listeners untuk interaksi
+    slider.addEventListener('mouseenter', pauseSlide);
+    slider.addEventListener('touchstart', pauseSlide);
     
-    // Reset animasi saat selesai untuk loop mulus
-    slider.addEventListener('animationiteration', () => {
-        slider.style.transition = 'none';
-        slider.style.transform = 'translateX(0)';
-        setTimeout(() => {
-            slider.style.transition = 'transform 50s linear';
-        }, 10);
+    slider.addEventListener('mouseleave', () => {
+        if (!draggable.isDragging) {
+            resetIdleTimer();
+        }
+    });
+
+    // Klik di luar container untuk lanjutkan auto-play
+    document.addEventListener('click', function(e) {
+        if (!container.contains(e.target)) {
+            startAutoSlide();
+        }
+    });
+
+    // Mulai auto-slide pertama kali
+    startAutoSlide();
+
+    // Handle visibilitas halaman (tab tidak aktif)
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+            startAutoSlide();
+        } else {
+            pauseSlide();
+        }
     });
 });
 
@@ -398,7 +565,7 @@ galleryItems.forEach(item => {
 });
 
 // Float
-const floatBtn = document.getElementById('announcement-float-btn');
+const floatBtn = document.getElementById('guide-float-btn');
 
 // Step 1: Initial attention grab
 floatBtn.classList.add('animate');
@@ -424,14 +591,14 @@ setTimeout(() => {
 
 // Scroll function
 floatBtn.addEventListener('click', () => {
-  document.getElementById('announcement-container').scrollIntoView({ 
+  document.getElementById('guide').scrollIntoView({ 
     behavior: 'smooth' 
   });
 });
 
 // Fungsi untuk mengecek dan menyembunyikan floating button
 function updateButtonVisibility() {
-    const floatBtn = document.getElementById('announcement-float-btn');
+    const floatBtn = document.getElementById('guide-float-btn');
     const currentPage = document.querySelector('.page.active').id;
     
     // Sembunyikan jika bukan di halaman dashboard
@@ -455,7 +622,7 @@ function updateButtonVisibility() {
   }
   // Jaga posisi konstan
 function setFixedPosition() {
-    const btn = document.getElementById('announcement-float-btn');
+    const btn = document.getElementById('guide-float-btn');
     const viewportHeight = window.innerHeight;
     btn.style.bottom = (viewportHeight * 0.85) + 'px'; // Selalu % dari viewport
   }
@@ -502,7 +669,6 @@ function setIOSBackground() {
 // Fungsi khusus untuk iOS
 function iOSSpecificFunction() {
   console.log('Perangkat iOS terdeteksi, menjalankan fungsi khusus...');
-  // Tambahkan kode khusus iOS Anda di sini
   
   // Contoh: Tampilkan instruksi instalasi
   const prompt = document.createElement('div');
@@ -755,24 +921,47 @@ function iOSSpecificFunction() {
   
   document.body.appendChild(prompt);
   
-  // ✅ Pasang event listener di sini, setelah tombol sudah ada di DOM
   document.getElementById('understand-btn').addEventListener('click', function () {
+    // Simpan waktu terakhir prompt ditampilkan
+    localStorage.setItem('lastIOSPromptShown', Date.now());
     document.getElementById('ios-install-prompt').remove();
   });
 }
+
+// Fungsi untuk mengecek apakah sudah waktunya menampilkan prompt
+function shouldShowIOSPrompt() {
+  const lastShown = localStorage.getItem('lastIOSPromptShown');
   
-  // Jalankan saat DOM sudah siap
-  window.addEventListener('DOMContentLoaded', () => {
-    if (isIOSDevice()) {
+  // Jika belum pernah ditampilkan, tampilkan sekarang
+  if (!lastShown) {
+    return true;
+  }
+  
+  // Hitung selisih waktu dalam milidetik
+  const now = Date.now();
+  const oneWeekInMs = 7 * 24 * 60 * 60 * 1000; // 1 minggu dalam milidetik
+  
+  // Jika sudah lebih dari 1 minggu sejak terakhir ditampilkan, tampilkan lagi
+  return (now - parseInt(lastShown)) > oneWeekInMs;
+}
+
+// Jalankan saat DOM sudah siap
+window.addEventListener('DOMContentLoaded', () => {
+  if (isIOSDevice()) {
+    setIOSBackground(); // Jalankan selalu untuk iOS
+
+    if (shouldShowIOSPrompt()) {
       setTimeout(() => {
-        setIOSBackground();  // Mengatur background untuk iOS
-        iOSSpecificFunction();  // Menampilkan popup
+        iOSSpecificFunction(); // Popup hanya seminggu sekali
+        localStorage.setItem('lastIOSPromptShown', Date.now());
       }, 3000);
     }
-  });
+  }
+});
+
   
 // Navbar
-function navigateToPage(pageId, button = null) {
+function navigateToPage(pageId, button = null, push = true) {
   // Tampilkan hanya halaman yang dipilih
   document.querySelectorAll('.page').forEach(page => {
     page.classList.remove('active');
@@ -782,21 +971,45 @@ function navigateToPage(pageId, button = null) {
     targetPage.classList.add('active');
   }
 
-  // Update tombol aktif
+  // Update tombol navbar aktif
   document.querySelectorAll('.navbar-button').forEach(btn => {
     btn.classList.remove('active');
   });
   if (button) {
     button.classList.add('active');
   } else {
-    // Auto-aktifkan tombol berdasarkan pageId
+    // Auto aktif berdasarkan data-target
     const targetButton = document.querySelector(`.navbar-button[data-target="${pageId}"]`);
     if (targetButton) {
       targetButton.classList.add('active');
     }
   }
 
-  // Optional: Ubah hash URL untuk tracking (jika butuh "back" support)
-  window.location.hash = pageId;
+  // Perbarui hash dan riwayat jika diizinkan
+  if (push) {
+    history.pushState({ pageId }, '', `#${pageId}`);
+  }
 }
 
+// Saat halaman pertama kali dimuat
+window.addEventListener('DOMContentLoaded', () => {
+  // Replace awal supaya gesture back tetap ke dashboard
+  history.replaceState({ pageId: 'dashboard-page' }, '', '#dashboard-page');
+  navigateToPage('dashboard-page', null, false);
+});
+
+// Saat gesture back / tombol back ditekan
+window.addEventListener('popstate', (event) => {
+  const pageId = event.state?.pageId || 'dashboard-page';
+  navigateToPage(pageId, null, false);
+});
+
+// Perbaiki height untuk mobile viewport
+function setVH() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Panggil saat load dan resize
+window.addEventListener('load', setVH);
+window.addEventListener('resize', setVH);

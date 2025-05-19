@@ -1,3 +1,5 @@
+/* ========== CORE STYLES ========== */
+
 :root {
     --primary-color: #172e69;
     --secondary-color: #2b2b2b;
@@ -87,22 +89,10 @@ html {
 }
 
 /* Style untuk Mobile Non-iOS */
-@media (max-width: 767px) {
-  html:not(.ios-device) {
-    background: 
-      url('../images/bg_ver.webp') no-repeat center center,
-      var(--background-gradient);
-    background-attachment: fixed;
-    background-size: cover;
-  }
-}
+
 
 /* Responsive Adjustment */
-@media (max-width: 768px) {
-  html, .ios-device::before {
-    background-position: center top;
-  }
-}
+
 .main-content{
   padding-bottom: 100px;
 }
@@ -122,16 +112,7 @@ html {
   animation: fadeInUp 0.3s ease-out;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+
 
 .banner-inner {
   display: flex;
@@ -201,11 +182,7 @@ body {
   color: var(--text-color);
 }
 /* Untuk HP (lebar layar max 768px)
-@media only screen and (max-width: 768px) {
-  body {
-    background-image: url("background-mobile.jpg");
-  }
-} */
+ */
 /* Header */
 .header {
   background: linear-gradient(to bottom, #ffffff, #ffffff,#ffffff,#ffffff,#ffffff, #c1c1c1);
@@ -329,12 +306,7 @@ border-radius: 4px;
 }
 
 /* Responsive */
-@media (max-width: 480px) {
-#levelSelector {
-font-size: 0.9rem;
-padding: 0.65rem;
-}
-}
+
 /* Menu Grid */
 .menu-grid {
     display: grid;
@@ -687,16 +659,7 @@ padding: 0.65rem;
     padding: 0.5rem;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+
 
 #whatsapp-modal.show {
   display: flex !important;
@@ -714,39 +677,10 @@ padding: 0.65rem;
 }
 
 /* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+
 
 /* Responsive Adjustments */
-@media (max-width: 480px) {
-    .menu-grid {
-        grid-template-columns: repeat(3, 1fr); /* Ubah dari 1fr menjadi 3 kolom */
-        gap: 1rem; 
-    }
-    .menu-item {
-        padding: 0.75rem 0.25rem;
-    }
-    
-    .menu-item i {
-        font-size: 1.9rem;
-        margin-bottom: 0.25rem;
-    }
-    
-    .menu-item span {
-        font-size: 0.7rem;
-    }
 
-    .activity-item {
-        flex-direction: column;
-    }
-    
-    .activity-image {
-        width: 100%;
-        height: 150px;
-    }
-}
 
 /* SweetAlert Customizations */
 .swal2-popup {
@@ -886,10 +820,7 @@ padding: 0.65rem;
     animation: shimmer 1.5s infinite;
 }
 
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
+
 
 /* Add to the existing style section */
 .form-control {
@@ -1207,16 +1138,7 @@ transform: translateY(-1px);
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-.gmeet-actions {
-flex-direction: column;
-}
 
-.join-btn {
-width: 100%;
-justify-content: center;
-}
-}
 
 /* Konsultasi Form Styles */
 .topik-options {
@@ -1368,10 +1290,7 @@ margin-right: 10px;
     animation: slideAnimation 50s linear infinite;
 }
 
-@keyframes slideAnimation {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
+
 
 .small-photos-slider.grabbing {
     cursor: grabbing;
@@ -1440,37 +1359,9 @@ margin-right: 10px;
 }
 
 /* Responsive Adjustments */
-@media (min-width: 768px) {
-    .small-photo {
-        flex: 0 0 180px;
-        height: 120px;
-    }
-    
-    .slider-nav button {
-        width: 44px;
-        height: 44px;
-    }
-}
 
-@media (max-width: 480px) {
-    .featured-slider {
-        height: 200px !important;
-        aspect-ratio: 1/1;
-    }
-    
-    .small-photo {
-        flex: 0 0 120px;
-        height: 80px;
-    }
-    
-    .small-photos-container {
-        padding: 0.2rem 0;
-    }
-    
-    .small-photos-slider {
-        gap: 8px;
-    }
-}
+
+
 
 /* Hide scrollbar */
 .small-photos-slider::-webkit-scrollbar {
@@ -1555,11 +1446,7 @@ color: white;
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-.iphone-gallery {
-grid-template-columns: repeat(2, 1fr);
-}
-}
+
 /* Article Item Styling */
 .article-item {
 border: 1px solid rgba(255, 255, 255, 0.221);
@@ -1650,11 +1537,7 @@ border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Sembunyikan di layar besar */
-@media (min-width: 1024px) {
-  .ios-navbar {
-    display: none !important;
-  }
-}
+
 .page {
   display: none;
   opacity: 0;
@@ -1730,19 +1613,9 @@ border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   /* Animations */
-  @keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-    50% { transform: scale(1.1); box-shadow: 0 8px 30px rgba(244, 244, 66, 0.425); }
-    100% { transform: scale(1); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-  }
   
-  @keyframes attention-grab {
-    0% { transform: translateY(0) rotate(0); }
-    20% { transform: translateY(-8px) rotate(5deg); }
-    40% { transform: translateY(0) rotate(-5deg); }
-    60% { transform: translateY(-5px) rotate(0); }
-    100% { transform: translateY(0) rotate(0); }
-  }
+  
+  
   
   /* Hover Effects */
   #guide-float-btn:hover {
@@ -1755,28 +1628,7 @@ border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   /* Responsive */
-  @media (max-width: 768px) {
-    #guide-float-btn {
-      width: 36px;
-      height: 36px;
-      bottom: 16px;
-      right: 16px;
-    }
-    
-    #guide-float-btn .icon {
-      font-size: 22px;
-    }
-    
-    #guide-float-btn.show-text {
-      padding: 0 12px;
-    }
-    
-    #guide-float-btn.show-text .btn-text {
-      width: 60px;
-      font-size: 14px;
-      margin-left: 3px;
-    }
-  }
+  
   #guide-float-btn.hidden {
     display: none;
     transition: opacity 0.3s ease;
@@ -1805,10 +1657,7 @@ border: 1px solid rgba(255, 255, 255, 0.1);
     animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+
 
 /* Tombol yang lebih responsif */
 button {
@@ -1971,40 +1820,12 @@ button:disabled {
     margin-right: 8px;
 }
 /* Expanded PR Section - Mobile */
-@media (max-width: 768px) {
-    .pr-expanded {
-        display: none;
-        padding: 12px;
-    }
-    .note-card.expanded .pr-expanded {
-        display: block;
-        animation: fadeIn 0.3s ease;
-    }
-    .clickable-pr {
-        cursor: pointer;
-    }
-    .note-card.expanded {
-        padding-bottom: 12px;
-    }
-}
+
 
 /* Expanded PR Section - Desktop */
-@media (min-width: 769px) {
-    .pr-expanded {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-    }
-    .note-card:hover .pr-expanded {
-        max-height: 500px;
-        padding: 12px;
-    }
-}
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+
+
 #refresh-scan-btn {
     margin-top: 16px;
 }
@@ -2123,10 +1944,7 @@ button:disabled {
     font-weight: 500;
   }
   
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+  
   
   .hidden {
     display: none !important;
@@ -2167,10 +1985,7 @@ button:disabled {
     z-index: 2;
   }
   
-  @keyframes borderMove {
-    0% { left: -50%; }
-    100% { left: 100%; }
-  }
+  
   .ios-prompt {
     position: fixed;
     bottom: 20px;
@@ -2189,16 +2004,7 @@ button:disabled {
     animation: slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
   
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translate(-50%, 20px);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-  }
+  
   
   .ios-prompt-header {
     display: flex;
@@ -2285,33 +2091,186 @@ button:disabled {
   }
   
   /* Dark Mode */
-  @media (prefers-color-scheme: dark) {
-    .ios-prompt {
-      background: rgba(28, 28, 30, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
   
-    .ios-prompt-header h3,
-    .ios-step p {
-      color: #f2f2f7;
-    }
-  
-    .ios-step strong {
-      color: #0a84ff;
-    }
-  
-    .ios-prompt-icon {
-      color: #0a84ff;
-    }
-  
-    .ios-prompt-button {
-      background-color: #0a84ff;
-    }
-  
-    .ios-prompt-button:hover {
-      background-color: #007aff;
-    }
-  }
+  /* Fullcalendar */
+/* ========== FULLCALENDAR CUSTOM STYLING ========== */
+
+/* Struktur utama kalender */
+.fc .fc-scrollgrid {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px 12px 0 0 !important;
+  overflow: hidden;
+}
+
+/* Toolbar navigasi atas */
+.fc .fc-toolbar {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.fc .fc-button {
+  background: #ffffff !important;
+  border: 2px solid !important;
+  color: #878787 !important;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 12px !important;
+  cursor: pointer;
+}
+
+.fc .fc-button:hover {
+  background: #1d4ed8;
+}
+
+/* Header kolom hari */
+.fc-theme-standard .fc-col-header-cell {
+  background: #f3f3f3;
+  color: #172e69 !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  padding: 8px 4px;
+  border-radius: 0;
+}
+
+.fc-theme-standard .fc-col-header-cell-cushion {
+  padding: 8px 4px;
+  font-weight: 500;
+}
+
+/* Sel tanggal */
+.fc .fc-daygrid-day {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+.fc .fc-daygrid-day-frame {
+  min-height: 85px;
+  height: 100%;
+  border-radius: 6px;
+  padding: 4px;
+  transition: background 0.3s;
+}
+
+/* Nomor tanggal */
+.fc .fc-daygrid-day-number {
+  font-weight: 500;
+  padding: 4px;
+  font-size: 0.9rem;
+  color: #656565;
+}
+
+.fc .fc-daygrid-more-link {
+    position: relative;
+    z-index: 4;
+    cursor: pointer;
+    color: #656565;
+    font-size: 0.7rem;
+}
+
+/* Hover tanggal */
+.fc .fc-daygrid-day:hover {
+  background: #f9fafb;
+  cursor: pointer;
+}
+
+/* Hari ini */
+.fc .fc-day-today {
+  background: #e0feec !important;
+  border: 1px solid #549c5f !important;
+}
+
+/* Weekend */
+.fc .fc-day-sat,
+.fc .fc-day-sun {
+  background: #ffe3e3;
+}
+
+/* Event */
+.fc .fc-daygrid-event {
+  border-radius: 4px;
+  padding: 2px 4px;
+  background: #2563eb;
+  color: rgb(65, 65, 65);
+  font-size: 0.75rem;
+  margin-top: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Legend */
+.calendar-legend {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 0.75rem;
+  background: #f9fafb;
+  border-radius: 0 0 12px 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  margin-right: 6px;
+}
+
+/* Loading */
+.calendar-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  color: rgba(0,0,0,0.5);
+  font-size: 0.9rem;
+}
+
+/* Popover */
+.fc-theme-standard .fc-popover {
+  background-color: #ffffff !important;
+  color: #172e69;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: fixed;
+}
+
+.fc-popover-header {
+  background-color: #e5e7eb !important;
+  border-radius: 12px 12px 0 0;
+}
+
+/* Jenjang warna khusus */
+.event-sd .fc-daygrid-day {
+  background: rgba(59, 131, 246, 0.15);
+}
+.event-smp .fc-daygrid-day {
+  background: rgba(16, 185, 129, 0.15);
+}
+.event-prasekolah .fc-daygrid-day {
+  background: rgba(139, 92, 246, 0.15);
+}
+
+/* Responsif Mobile */
+
+
+
 
     .shimmer-text {
         background: linear-gradient(
@@ -2330,14 +2289,7 @@ button:disabled {
         font-size: 1.125rem;
     }
 
-    @keyframes shimmer-text {
-        0% {
-            background-position: -200% center;
-        }
-        100% {
-            background-position: 200% center;
-        }
-    }
+    
 /* Badge Notifikasi */
   .notification-badge {
     position: absolute;
@@ -2358,17 +2310,8 @@ button:disabled {
     animation: natural-bounce 5s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
   }
 
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-  }
-  @keyframes natural-bounce {
-  0%, 100% { transform: translateY(0); }
-  25% { transform: translateY(-8px); }
-  50% { transform: translateY(0); }
-  75% { transform: translateY(-4px); }
-}
+  
+  
 .app-guide {
   background-color: #ffffff;
   padding: 24px;
@@ -2431,255 +2374,432 @@ button:disabled {
   margin-top: 6px;
   font-size: 12px;
 }
-/* Calendar Page Styles */
-#calendar-page {
-    padding: 15px;
-    max-width: 100%;
-    box-sizing: border-box;
-    min-height: 100vh;
+
+
+/* ========== KEYFRAME ANIMATIONS ========== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.calendar-title {
-    color: white;
-    font-size: 20px;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 600;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Month Navigation */
-.month-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    color: white;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 12px 16px;
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.nav-button {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }
 
-.nav-button:hover {
-    background: rgba(255, 255, 255, 0.2);
+@keyframes slideAnimation {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
-.month-display {
-    font-size: 18px;
-    font-weight: 600;
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+    50% { transform: scale(1.1); box-shadow: 0 8px 30px rgba(244, 244, 66, 0.425); }
+    100% { transform: scale(1); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+  }
+
+@keyframes attention-grab {
+    0% { transform: translateY(0) rotate(0); }
+    20% { transform: translateY(-8px) rotate(5deg); }
+    40% { transform: translateY(0) rotate(-5deg); }
+    60% { transform: translateY(-5px) rotate(0); }
+    100% { transform: translateY(0) rotate(0); }
+  }
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-/* Calendar Grid */
-.calendar-grid {
-    color: white;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.calendar-header {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    font-size: 14px;
-    font-weight: 500;
-    opacity: 0.8;
-    margin-bottom: 10px;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+@keyframes borderMove {
+    0% { left: -50%; }
+    100% { left: 100%; }
+  }
+
+@keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 20px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
+@keyframes shimmer-text {
+        0% {
+            background-position: -200% center;
+        }
+        100% {
+            background-position: 200% center;
+        }
+    }
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+@keyframes natural-bounce {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-8px); }
+  50% { transform: translateY(0); }
+  75% { transform: translateY(-4px); }
 }
 
-.day-header {
-    padding: 8px 0;
+
+/* ========== MEDIA QUERIES ========== */
+
+@media (max-width: 767px) {
+  html:not(.ios-device) {
+    background: 
+      url('../images/bg_ver.webp') no-repeat center center,
+      var(--background-gradient);
+    background-attachment: fixed;
+    background-size: cover;
+  }
 }
 
-.calendar-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
+@media (max-width: 768px) {
+  html, .ios-device::before {
+    background-position: center top;
+  }
 }
 
-.calendar-day {
-    aspect-ratio: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    border-radius: 12px;
-    cursor: pointer;
-    padding: 8px;
-    position: relative;
-    transition: all 0.2s ease;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid transparent;
+@media only screen and (max-width: 768px) {
+  body {
+    background-image: url("background-mobile.jpg");
+  }
 }
 
-.calendar-day:hover {
-    background: rgba(255, 255, 255, 0.1);
+@media (max-width: 480px) {
+#levelSelector {
+font-size: 0.9rem;
+padding: 0.65rem;
+}
 }
 
-.calendar-day.today {
-    background: rgba(59, 130, 246, 0.3);
-    font-weight: bold;
-    border-color: rgba(59, 130, 246, 0.5);
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-}
+@media (max-width: 480px) {
+    .menu-grid {
+        grid-template-columns: repeat(3, 1fr); /* Ubah dari 1fr menjadi 3 kolom */
+        gap: 1rem; 
+    }
+    .menu-item {
+        padding: 0.75rem 0.25rem;
+    }
+    
+    .menu-item i {
+        font-size: 1.9rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .menu-item span {
+        font-size: 0.7rem;
+    }
 
-.calendar-day.selected {
-    background: rgba(59, 130, 246, 0.5);
-    font-weight: bold;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
-}
-
-.calendar-day.other-month {
-    opacity: 0.4;
-}
-
-/* Events Section */
-.events-container {
-    display: none;
-    margin-top: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.events-title {
-    color: white;
-    font-size: 18px;
-    margin-bottom: 12px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.events-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.event-item {
-    background: rgba(255, 255, 255, 0.08);
-    border-left: 4px solid #3b82f6;
-    padding: 14px;
-    border-radius: 12px;
-    transition: all 0.2s ease;
-}
-
-.event-item:hover {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateY(-2px);
-}
-
-.event-title {
-    color: white;
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 4px;
-}
-
-.event-time {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* Event Indicators */
-.event-indicators {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    margin-top: 4px;
-}
-
-.event-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-}
-
-/* Event Type Colors */
-.event-umum {
-    background-color: #3b82f6;
-}
-.event-ujian {
-    background-color: #ef4444;
-}
-.event-kegiatan {
-    background-color: #10b981;
-}
-.event-libur {
-    background-color: #f59e0b;
-}
-
-/* Event Level Colors */
-.event-all {
-    border-left-color: #94a3b8;
-}
-.event-sd {
-    border-left-color: #3b82f6;
-}
-.event-smp {
-    border-left-color: #10b981;
-}
-.event-prasekolah {
-    border-left-color: #8b5cf6;
-}
-
-.event-description {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.7);
-    margin-top: 8px;
-    line-height: 1.4;
-}
-
-/* Back button */
-.back-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    padding: 10px 16px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.back-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.dashboard-card {
-    margin-bottom: 20px;
-}
-@media (max-width: 600px) {
-    .calendar-day {
-        font-size: 14px; /* Perkecil font di mobile */
-        padding: 2px; /* Kurangi padding di mobile */
+    .activity-item {
+        flex-direction: column;
+    }
+    
+    .activity-image {
+        width: 100%;
+        height: 150px;
     }
 }
+
+@media (max-width: 768px) {
+.gmeet-actions {
+flex-direction: column;
+}
+
+.join-btn {
+width: 100%;
+justify-content: center;
+}
+}
+
+@media (min-width: 768px) {
+    .small-photo {
+        flex: 0 0 180px;
+        height: 120px;
+    }
+    
+    .slider-nav button {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    .featured-slider {
+        height: 200px !important;
+        aspect-ratio: 1/1;
+    }
+    
+    .small-photo {
+        flex: 0 0 120px;
+        height: 80px;
+    }
+    
+    .small-photos-container {
+        padding: 0.2rem 0;
+    }
+    
+    .small-photos-slider {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+.iphone-gallery {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+
+@media (min-width: 1024px) {
+  .ios-navbar {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+    #guide-float-btn {
+      width: 36px;
+      height: 36px;
+      bottom: 16px;
+      right: 16px;
+    }
+    
+    #guide-float-btn .icon {
+      font-size: 22px;
+    }
+    
+    #guide-float-btn.show-text {
+      padding: 0 12px;
+    }
+    
+    #guide-float-btn.show-text .btn-text {
+      width: 60px;
+      font-size: 14px;
+      margin-left: 3px;
+    }
+  }
+
+@media (max-width: 768px) {
+    .pr-expanded {
+        display: none;
+        padding: 12px;
+    }
+    .note-card.expanded .pr-expanded {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+    .clickable-pr {
+        cursor: pointer;
+    }
+    .note-card.expanded {
+        padding-bottom: 12px;
+    }
+}
+
+@media (min-width: 769px) {
+    .pr-expanded {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    .note-card:hover .pr-expanded {
+        max-height: 500px;
+        padding: 12px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .ios-prompt {
+      background: rgba(28, 28, 30, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  
+    .ios-prompt-header h3,
+    .ios-step p {
+      color: #f2f2f7;
+    }
+  
+    .ios-step strong {
+      color: #0a84ff;
+    }
+  
+    .ios-prompt-icon {
+      color: #0a84ff;
+    }
+  
+    .ios-prompt-button {
+      background-color: #0a84ff;
+    }
+  
+    .ios-prompt-button:hover {
+      background-color: #007aff;
+    }
+  }
+
+@media (max-width: 640px) {
+  .fc .fc-toolbar {
+    gap: 0.3rem;
+    padding: 0.5rem;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+  }
+
+  .fc .fc-col-header-cell {
+    padding: 4px 2px;
+  }
+
+  .fc .fc-col-header-cell-cushion {
+    font-size: 0.9rem;
+    padding: 2px;
+    white-space: nowrap;
+  }
+
+  .fc .fc-daygrid-day-frame {
+    min-height: 40px !important;
+  }
+
+  .fc .fc-daygrid-day-number {
+    font-size: 0.8rem;
+    padding: 2px;
+  }
+
+  .fc-event {
+    font-size: 0.6rem !important;
+    padding: 0 2px;
+  }
+
+  .fc-event-title {
+    display: none;
+  }
+
+  .fc .fc-button {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .fc .fc-col-header-cell-cushion {
+    font-size: 0.6rem;
+  }
+
+  .fc .fc-daygrid-day-number {
+    font-size: 0.6rem;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 1rem;
+  }
+}
+
+        /* Calendar Specific Styles */
+        #calendar-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.25rem;
+        }
+
+        #days-grid > div {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: white;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        #days-grid > div:hover:not(.text-gray-500) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .event-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .event-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Color coding for school levels */
+        .border-blue-500 { border-color: #3b82f6; }
+        .border-green-500 { border-color: #10b981; }
+        .border-purple-500 { border-color: #8b5cf6; }
+        .bg-blue-500 { background-color: #3b82f6; }
+        .bg-green-500 { background-color: #10b981; }
+        .bg-purple-500 { background-color: #8b5cf6; }
+        .text-blue-400 { color: #60a5fa; }
+        .text-green-400 { color: #34d399; }
+        .text-purple-400 { color: #a78bfa; }
+        .bg-blue-500\/20 { background-color: rgba(59, 130, 246, 0.2); }
+        .bg-green-500\/20 { background-color: rgba(16, 185, 129, 0.2); }
+        .bg-purple-500\/20 { background-color: rgba(139, 92, 246, 0.2); }
+
+        /* Modal Styles */
+        #event-modal {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #event-modal:not(.hidden) {
+            opacity: 1;
+        }

@@ -1,16 +1,18 @@
-importScripts('https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js');
-const CACHE_NAME = 'shahaba-app-v2';
+const CACHE_NAME = 'shahaba-app-v3.1.4';
 const ASSETS_TO_CACHE = [
     '/',
     'index.html',
+    '404.html',
     'content/main.html',
     'src/output.css', 
     'assets/css/styles.css',
     'assets/js/script.js',
-    'assets/images/background-ios-vertical-lg.png',
-    'assets/images/background-vertical-lg.png',
-    'assets/icons/icon.svg',
-    'assets/icons/icon144.png'
+    'assets/images/bg_ver.webp',
+    'assets/images/bg_ver_ios.webp',
+    'assets/images/bg_ver_cover.webp',
+    'assets/images/bg_desk_tr.webp',
+    'assets/icons/icon_b144.png',
+    'assets/icons/icon_b180_ios.png'
 ];
 
 // Install Service Worker

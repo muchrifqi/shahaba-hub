@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Calendar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Calendar Page Styles */
+        #calendar-page {
+            padding: 15px;
+            max-width: 100%;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            min-height: 100vh;
+        }
+
+        .calendar-title {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        /* Month Navigation */
+        .month-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 16px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .month-display {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* Calendar Grid */
+        .calendar-grid {
+            color: white;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .calendar-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .day-header {
+            padding: 8px 0;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            padding: 8px;
+            position: relative;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid transparent;
+        }
+
+        .calendar-day:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .calendar-day.today {
+            background: rgba(59, 130, 246, 0.3);
+            font-weight: bold;
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        .calendar-day.selected {
+            background: rgba(59, 130, 246, 0.5);
+            font-weight: bold;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
+
+        .calendar-day.other-month {
+            opacity: 0.4;
+        }
+
+        /* Events Section */
+        .events-container {
+            display: none;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .events-title {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .event-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-left: 4px solid #3b82f6;
+            padding: 14px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .event-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .event-title {
+            color: white;
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .event-time {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Event Indicators */
+        .event-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-top: 4px;
+        }
+
+        .event-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        /* Event Type Colors */
+        .event-umum {
+            background-color: #3b82f6;
+        }
+        .event-ujian {
+            background-color: #ef4444;
+        }
+        .event-kegiatan {
+            background-color: #10b981;
+        }
+        .event-libur {
+            background-color: #f59e0b;
+        }
+
+        /* Event Level Colors */
+        .event-all {
+            border-left-color: #94a3b8;
+        }
+        .event-sd {
+            border-left-color: #3b82f6;
+        }
+        .event-smp {
+            border-left-color: #10b981;
+        }
+        .event-prasekolah {
+            border-left-color: #8b5cf6;
+        }
+
+        .event-description {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+
+        /* Back button */
+        .back-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .dashboard-card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="calendar-page" class="page">
+        <button class="back-btn" onclick="navigateToPage('dashboard-page')">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </button>
+
+        <div class="dashboard-card">
+            <h3 class="calendar-title">
+                <i class="fas fa-calendar-alt"></i> Agenda Bulanan
+            </h3>
+
+            <!-- Month Navigation -->
+            <div class="month-navigation">
+                <button id="prevMonth" class="nav-button"><i class="fas fa-chevron-left"></i></button>
+                <div id="currentMonth" class="month-display">Mei 2025</div>
+                <button id="nextMonth" class="nav-button"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <!-- Calendar Grid -->
+            <div class="calendar-grid">
+                <!-- Weekday headers -->
+                <div class="calendar-header">
+                    <div class="day-header">Min</div>
+                    <div class="day-header">Sen</div>
+                    <div class="day-header">Sel</div>
+                    <div class="day-header">Rab</div>
+                    <div class="day-header">Kam</div>
+                    <div class="day-header">Jum</div>
+                    <div class="day-header">Sab</div>
+                </div>
+
+                <!-- Calendar days -->
+                <div id="calendarDays" class="calendar-days"></div>
+            </div>
+        </div>
+
+        <!-- Selected day events -->
+        <div class="dashboard-card events-container" id="selectedEvents">
+            <h4 class="events-title" id="selectedDateTitle">
+                <i class="fas fa-calendar-day"></i> Agenda
+            </h4>
+            <div id="eventList" class="events-list">
+                <!-- Sample events will be populated here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for demonstration
+        const sampleEvents = {
+            "2025-05-15": [
+                {
+                    title: "Ujian Tengah Semester",
+                    time: "08:00 - 12:00",
+                    type: "ujian",
+                    level: "all",
+                    description: "Ujian tengah semester untuk semua kelas"
+                },
+                {
+                    title: "Rapat Guru",
+                    time: "13:00 - 15:00",
+                    type: "kegiatan",
+                    level: "all",
+                    description: "Rapat evaluasi pembelajaran"
+                }
+            ],
+            "2025-05-20": [
+                {
+                    title: "Field Trip SD",
+                    time: "09:00 - 14:00",
+                    type: "kegiatan",
+                    level: "sd",
+                    description: "Kunjungan ke museum untuk kelas 4-6 SD"
+                }
+            ],
+            "2025-05-25": [
+                {
+                    title: "Hari Libur Nasional",
+                    time: "00:00 - 23:59",
+                    type: "libur",
+                    level: "all",
+                    description: "Libur nasional memperingati Hari Raya"
+                }
+            ],
+            "2025-05-10": [
+                {
+                    title: "Pembagian Raport",
+                    time: "10:00 - 12:00",
+                    type: "umum",
+                    level: "smp",
+                    description: "Pembagian raport tengah semester untuk SMP"
+                }
+            ]
+        };
+
+        // Initialize calendar
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentDate = new Date();
+            let currentMonth = currentDate.getMonth();
+            let currentYear = currentDate.getFullYear();
+
+            // Display current month
+            updateCalendar(currentMonth, currentYear);
+
+            // Navigation buttons
+            document.getElementById('prevMonth').addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                updateCalendar(currentMonth, currentYear);
+            });
+
+            document.getElementById('nextMonth').addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                updateCalendar(currentMonth, currentYear);
+            });
+        });
+
+        function updateCalendar(month, year) {
+            const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                               "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            
+            // Update month display
+            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+            
+            // Get first day of month and total days
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Get days from previous month to display
+            const prevMonthDays = new Date(year, month, 0).getDate();
+            
+            // Clear calendar
+            const calendarDays = document.getElementById('calendarDays');
+            calendarDays.innerHTML = '';
+            
+            // Add days from previous month
+            for (let i = firstDay > 0 ? firstDay - 1 : 6; i > 0; i--) {
+                const dayElement = createDayElement(prevMonthDays - i + 1, true);
+                calendarDays.appendChild(dayElement);
+            }
+            
+            // Add days from current month
+            const today = new Date();
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayElement = createDayElement(i, false);
+                
+                // Highlight today
+                if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    dayElement.classList.add('today');
+                }
+                
+                calendarDays.appendChild(dayElement);
+            }
+            
+            // Calculate remaining cells to fill the grid (42 cells total)
+            const totalCells = firstDay + daysInMonth;
+            const remainingCells = totalCells > 35 ? 42 - totalCells : 35 - totalCells;
+            
+            // Add days from next month
+            for (let i = 1; i <= remainingCells; i++) {
+                const dayElement = createDayElement(i, true);
+                calendarDays.appendChild(dayElement);
+            }
+        }
+
+        function createDayElement(day, isOtherMonth) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day';
+            dayElement.textContent = day;
+            
+            if (isOtherMonth) {
+                dayElement.classList.add('other-month');
+            }
+            
+            // Add event indicators if there are events for this day
+            const currentMonth = document.getElementById('currentMonth').textContent;
+            const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                               "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            const month = monthNames.indexOf(currentMonth.split(' ')[0]);
+            const year = parseInt(currentMonth.split(' ')[1]);
+            
+            const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            
+            if (sampleEvents[dateKey]) {
+                const eventIndicators = document.createElement('div');
+                eventIndicators.className = 'event-indicators';
+                
+                // Get unique event types for this day
+                const eventTypes = [...new Set(sampleEvents[dateKey].map(event => event.type))];
+                
+                eventTypes.forEach(type => {
+                    const dot = document.createElement('div');
+                    dot.className = `event-dot event-${type}`;
+                    eventIndicators.appendChild(dot);
+                });
+                
+                dayElement.appendChild(eventIndicators);
+            }
+            
+            // Add click event to show events for this day
+            dayElement.addEventListener('click', function() {
+                // Remove selected class from all days
+                document.querySelectorAll('.calendar-day').forEach(day => {
+                    day.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked day
+                this.classList.add('selected');
+                
+                // Show events for this day
+                showEventsForDay(day, month, year);
+            });
+            
+            return dayElement;
+        }
+
+        function showEventsForDay(day, month, year) {
+            const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            const eventsContainer = document.getElementById('selectedEvents');
+            const eventList = document.getElementById('eventList');
+            
+            // Update date title
+            const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                               "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            document.getElementById('selectedDateTitle').innerHTML = `
+                <i class="fas fa-calendar-day"></i> Agenda ${day} ${monthNames[month]} ${year}
+            `;
+            
+            // Clear existing events
+            eventList.innerHTML = '';
+            
+            // Show events if available
+            if (sampleEvents[dateKey]) {
+                sampleEvents[dateKey].forEach(event => {
+                    const eventItem = document.createElement('div');
+                    eventItem.className = `event-item event-${event.level}`;
+                    
+                    eventItem.innerHTML = `
+                        <div class="event-title">${event.title}</div>
+                        <div class="event-time">
+                            <i class="far fa-clock"></i> ${event.time}
+                        </div>
+                        <div class="event-description">${event.description}</div>
+                    `;
+                    
+                    eventList.appendChild(eventItem);
+                });
+                
+                eventsContainer.style.display = 'block';
+            } else {
+                eventList.innerHTML = '<div style="color: rgba(255,255,255,0.6); text-align: center; padding: 20px;">Tidak ada agenda untuk hari ini</div>';
+                eventsContainer.style.display = 'block';
+            }
+        }
+
+        // For demo purposes
+        function navigateToPage(page) {
+            alert(`Navigating to ${page}`);
+        }
+    </script>
+</body>
+</html>

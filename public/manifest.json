@@ -1,27 +1,40 @@
 {
-  "name": "Shahaba - Portal Orang Tua",
+  "name": "Shahaba - Progressive Web App",
   "short_name": "Shahaba",
-  "description": "Aplikasi untuk memantau perkembangan anak - lebih dekat dengan Shahaba",
+  "description": "Menghubungkan orang tua dengan perkembangan anak — lebih dekat",
   "start_url": "index.html",
-  "gcm_sender_id": "482941778795",
-  "gcm_sender_id_comment": "Ini adalah ID default OneSignal, tidak perlu diganti",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "assets/icons/icon144.png",
+      "src": "assets/icons/icon_biru_round48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon_biru_round72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon_b144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "assets/icons/icon192.png",
+      "src": "assets/icons/icon_b180_ios.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon_b192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "assets/icons/icon512.png",
+      "src": "assets/icons/icon_biru_round512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
